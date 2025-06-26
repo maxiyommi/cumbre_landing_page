@@ -1798,7 +1798,7 @@ body {
     }
 
     .hero__title {
-        font-size: clamp(3rem, 6vw, 2.25rem);
+        font-size: clamp(2rem, 6vw, 2.25rem);
         line-height: 1.2;
         margin-bottom: clamp(2rem, 2vw, 1.5rem);
         width: fit-content;
@@ -2070,6 +2070,102 @@ body {
         padding: 0.75rem 1.25rem;
         font-size: 0.9rem;
         min-height: 44px;
+    }
+}
+
+/* Moto G51 5G - 412px */
+@media (max-width: 412px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero__content {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
+    .hero__title {
+        font-size: clamp(1.7rem, 7.5vw, 2.1rem);
+        line-height: 1.15;
+        margin-bottom: clamp(1rem, 3vw, 1.25rem);
+        text-align: center;
+    }
+
+    .hero__subtitle {
+        font-size: clamp(0.9rem, 3.8vw, 1.05rem);
+        line-height: 1.4;
+        margin-bottom: clamp(1rem, 3vw, 1.25rem);
+        text-align: center;
+    }
+
+    .features__content h2 {
+        font-size: clamp(1.4rem, 6.5vw, 1.65rem);
+    }
+
+    .features__content p {
+        font-size: clamp(0.9rem, 3.2vw, 1rem);
+    }
+
+    .feature-card {
+        padding: 1.1rem;
+    }
+
+    .feature-card__title {
+        font-size: 1rem;
+    }
+
+    .feature-card__description {
+        font-size: 0.9rem;
+    }
+
+    .services__header h2 {
+        font-size: clamp(1.4rem, 6.5vw, 1.65rem);
+    }
+
+    .contact__title-style {
+        font-size: clamp(1.9rem, 7.5vw, 2.1rem);
+    }
+
+    .contact__card {
+        padding: 1.75rem;
+    }
+
+    .faq__question {
+        font-size: 0.95rem;
+        padding: 1rem 1.1rem;
+    }
+
+    .faq__answer {
+        font-size: 0.85rem;
+        padding: 1rem 1.1rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.3rem;
+        font-size: 0.95rem;
+        min-height: 46px;
+    }
+
+    .scroll-indicator {
+        bottom: 1.5rem;
+    }
+
+    .scroll-indicator__label {
+        font-size: 0.8rem;
+    }
+
+    .scroll-indicator__mouse {
+        width: 26px;
+        height: 42px;
+    }
+
+    .header__logo {
+        font-size: 1.15rem;
+    }
+
+    .mountain-icon {
+        width: 28px;
+        height: 28px;
     }
 }
 
