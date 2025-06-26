@@ -39,16 +39,40 @@ class AILandingPage {
         const menuToggle = document.querySelector('.header__menu-toggle');
         const nav = document.querySelector('.header__nav');
         if (menuToggle && nav) {
-            menuToggle.addEventListener('click', () => {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
                 nav.classList.toggle('open');
                 menuToggle.setAttribute('aria-label', nav.classList.contains('open') ? 'Cerrar menú' : 'Abrir menú');
             });
+            
             // Cerrar menú al hacer click en un link
             nav.querySelectorAll('.header__nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     nav.classList.remove('open');
                     menuToggle.setAttribute('aria-label', 'Abrir menú');
                 });
+            });
+            
+            // Prevenir que clicks dentro del nav cierren el menú
+            nav.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+            
+            // Cerrar menú al hacer click fuera de él
+            document.addEventListener('click', (e) => {
+                if (nav.classList.contains('open') && !nav.contains(e.target) && !menuToggle.contains(e.target)) {
+                    nav.classList.remove('open');
+                    menuToggle.setAttribute('aria-label', 'Abrir menú');
+                }
+            });
+            
+            // Cerrar menú con tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    menuToggle.focus(); // Retornar foco al botón
+                }
             });
         }
 
