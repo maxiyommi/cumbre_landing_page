@@ -4,16 +4,15 @@ class AILandingPage {
         this.initializeComponents();
         this.setupEventListeners();
         this.setupIntersectionObserver();
-        this.setupParallax();
         this.initializeAnimations();
         this.handleNavbarVisibility(); // inicializa visibilidad
+        this.handleScrollIndicator(); // inicializa estado del indicador
     }
 
     initializeComponents() {
         this.header = document.querySelector('.header');
         this.navLinks = document.querySelectorAll('.header__nav-link');
         this.sections = document.querySelectorAll('.section');
-        this.contactForm = document.querySelector('.contact__form');
         this.animatedElements = document.querySelectorAll('.glass-card, .feature-card, .service-card');
         // No bind aquí, los métodos ya son flecha o usan this correctamente
     }
@@ -23,7 +22,7 @@ class AILandingPage {
         window.addEventListener('scroll', this.throttle(() => {
             this.handleScroll();
             this.handleNavbarVisibility();
-            this.handleScrollIndicator(); // nuevo
+            this.handleScrollIndicator();
         }, 16));
         
         // Navigation clicks
@@ -31,22 +30,10 @@ class AILandingPage {
             link.addEventListener('click', this.handleNavClick.bind(this));
         });
 
-        // Form submission
-        if (this.contactForm) {
-            this.contactForm.addEventListener('submit', this.handleFormSubmit.bind(this));
-        }
-
-        // Button interactions
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mouseenter', this.handleButtonHover.bind(this));
-            btn.addEventListener('mouseleave', this.handleButtonLeave.bind(this));
-        });
 
         // Keyboard navigation
         document.addEventListener('keydown', this.handleKeyboardNav.bind(this));
 
-        // Resize handling
-        window.addEventListener('resize', this.throttle(this.handleResize.bind(this), 250));
 
         // Mobile menu toggle
         const menuToggle = document.querySelector('.header__menu-toggle');
@@ -64,23 +51,46 @@ class AILandingPage {
                 });
             });
         }
+
+        // Logo scroll to top functionality
+        const logo = document.querySelector('.header__logo');
+        if (logo) {
+            logo.addEventListener('click', () => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        }
     }
+
     handleScrollIndicator() {
-        // Solo mostrar en #inicio y solo si no se ha hecho scroll
+        // Mostrar en #inicio y desvanecer al hacer scroll
         const indicator = document.querySelector('.scroll-indicator');
         const hero = document.getElementById('inicio');
         if (!indicator || !hero) return;
+        
         const scrollY = window.scrollY || window.pageYOffset;
         const heroRect = hero.getBoundingClientRect();
-        // Solo visible si estamos en la pantalla de inicio (parte visible del hero)
-        const inHero = heroRect.top <= 0 && heroRect.bottom > window.innerHeight / 2;
-        // Ocultar si se ha hecho scroll (>40px) o no estamos en hero
-        if (scrollY > 40 || !inHero) {
-            indicator.classList.add('hide');
-        } else {
-            indicator.classList.remove('hide');
+        
+        // Calcular opacidad basada en la posición de scroll
+        // Visible al 100% al inicio, se desvanece gradualmente
+        const fadeStart = 50; // Punto donde empieza a desvanecerse
+        const fadeEnd = 300; // Punto donde desaparece completamente
+        
+        let opacity = 0.7; // Opacidad inicial
+        
+        if (scrollY >= fadeStart) {
+            const fadeRange = fadeEnd - fadeStart;
+            const fadeProgress = Math.min((scrollY - fadeStart) / fadeRange, 1);
+            opacity = 0.7 * (1 - fadeProgress);
+        }
+        
+        indicator.style.opacity = opacity;
+        
+        // Ocultar completamente si está fuera del hero
+        if (heroRect.bottom < 0) {
+            indicator.style.opacity = '0';
         }
     }
+
     setupIntersectionObserver() {
         const observerOptions = {
             threshold: 0.1,
@@ -108,42 +118,7 @@ class AILandingPage {
         });
     }
 
-    setupParallax() {
-        const orbs = document.querySelectorAll('.hero__orb');
-        
-        window.addEventListener('mousemove', this.throttle((e) => {
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-
-            orbs.forEach((orb, index) => {
-                const speed = (index + 1) * 0.5;
-                const xMove = x * speed * 20;
-                const yMove = y * speed * 20;
-                
-                orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
-            });
-        }, 16));
-
-        // Reset on mouse leave
-        document.addEventListener('mouseleave', () => {
-            orbs.forEach(orb => {
-                orb.style.transform = '';
-            });
-        });
-    }
-
     initializeAnimations() {
-        // Stagger animation for service cards
-        this.staggerAnimateElements('.service-card', 100);
-        this.staggerAnimateElements('.feature-card', 150);
-
-        // Loading animation
-        document.body.style.opacity = '0';
-        window.addEventListener('load', () => {
-            document.body.style.transition = 'opacity 0.5s ease';
-            document.body.style.opacity = '1';
-        });
-        this.handleScrollIndicator(); // inicializa estado del indicador
     }
 
     handleScroll() {
@@ -192,120 +167,6 @@ class AILandingPage {
         });
     }
 
-    handleFormSubmit(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        
-        // Enhanced validation
-        const validation = this.validateForm(data);
-        
-        if (validation.isValid) {
-            this.submitForm(data, e.target);
-        } else {
-            this.showValidationErrors(validation.errors);
-        }
-    }
-
-    validateForm(data) {
-        const errors = [];
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!data.nombre || data.nombre.trim().length < 2) {
-            errors.push({ field: 'nombre', message: 'El nombre debe tener al menos 2 caracteres' });
-        }
-        
-        if (!data.email || !emailRegex.test(data.email)) {
-            errors.push({ field: 'email', message: 'Ingresa un email válido' });
-        }
-        
-        if (!data.mensaje || data.mensaje.trim().length < 10) {
-            errors.push({ field: 'mensaje', message: 'El mensaje debe tener al menos 10 caracteres' });
-        }
-        
-        return {
-            isValid: errors.length === 0,
-            errors
-        };
-    }
-
-    submitForm(data, form) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Loading state
-        submitBtn.textContent = '🤖 Procesando con IA...';
-        submitBtn.disabled = true;
-        submitBtn.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
-        
-        // Simulate AI processing
-        setTimeout(() => {
-            submitBtn.textContent = '✅ ¡Proyecto Iniciado!';
-            submitBtn.style.background = 'linear-gradient(45deg, #4ade80, #22c55e)';
-            
-            // Reset form
-            form.reset();
-            
-            // Show success message
-            this.showSuccessMessage();
-            
-            // Reset button
-            setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-            }, 3000);
-            
-            console.log('AI Project Initiated:', data);
-        }, 2000);
-    }
-
-    showSuccessMessage() {
-        const message = document.createElement('div');
-        message.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(45deg, #4ade80, #22c55e);
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-            ">
-                <strong>🎉 ¡Excelente!</strong><br>
-                Tu proyecto de IA ha sido iniciado. Te contactaremos pronto.
-            </div>
-        `;
-        
-        document.body.appendChild(message);
-        
-        setTimeout(() => {
-            message.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => message.remove(), 300);
-        }, 4000);
-    }
-
-    showValidationErrors(errors) {
-        errors.forEach(error => {
-            const field = document.getElementById(error.field);
-            if (field) {
-                field.style.borderColor = '#ef4444';
-                field.style.animation = 'shake 0.5s ease';
-                
-
-                
-                setTimeout(() => {
-                    field.style.borderColor = '';
-                    field.style.animation = '';
-                }, 2000);
-            }
-        });
-    }
-
     handleNavbarVisibility() {
         const nav = document.querySelector('.header__nav');
         const inicioSection = document.getElementById('inicio');
@@ -331,18 +192,6 @@ class AILandingPage {
         }
     }
 
-    handleButtonHover(e) {
-        if (e.target.classList.contains('btn-primary')) {
-            e.target.style.boxShadow = '0 20px 40px rgba(0, 212, 255, 0.4), 0 0 30px rgba(0, 212, 255, 0.3)';
-        }
-    }
-
-    handleButtonLeave(e) {
-        if (e.target.classList.contains('btn-primary')) {
-            e.target.style.boxShadow = '';
-        }
-    }
-
     handleKeyboardNav(e) {
         if (e.key === 'Tab') {
             document.body.classList.add('keyboard-nav');
@@ -350,17 +199,6 @@ class AILandingPage {
         if (e.key === 'Escape') {
             document.activeElement.blur();
         }
-    }
-
-    handleResize() {
-        this.setupParallax();
-    }
-
-    staggerAnimateElements(selector, delay) {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach((el, index) => {
-            el.style.animationDelay = `${index * delay}ms`;
-        });
     }
 
     throttle(func, limit) {
@@ -379,6 +217,7 @@ class AILandingPage {
 
 // Initialize the landing page enhancements
 new AILandingPage();
+
 
 // FAQ toggle functionality
 document.querySelectorAll('.faq__question').forEach(button => {

@@ -19,7 +19,7 @@
     <!-- Header -->
     <header class="header" role="banner">
         <div class="container header__container">
-            <div class="header__logo" aria-label="Cumbre IA" style="cursor:pointer;" onclick="window.scrollTo({top:0,behavior:'smooth'});">
+            <div class="header__logo" aria-label="Cumbre IA" style="cursor:pointer;">
                 <div class="mountain-icon">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <defs>
@@ -44,45 +44,34 @@
                 <a href="#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
                 <a href="#servicios" class="header__nav-link">Servicios</a>
                 <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
-                <a href="#contacto" class="btn btn-primary header__nav-cta">📅 Agendar sesión</a>
+                <a href="#contacto" class="btn btn-primary header__nav-cta">📅 Agendar Sesión</a>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="inicio" class="section hero" role="main" style="background: linear-gradient(180deg, #1a233a 0%, #1a1a2e 60%, #16213e 100%); position: relative;">
+    <section id="inicio" class="section hero" role="main">
         <!-- Fondo de montañas PNG con resplandor -->
-        <div class="hero__mountain-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;">
-            <img src="cumbre.png" alt="Montañas Cumbre IA"
-                style="width:100vw;min-width:100%;height:127%;object-fit:cover;object-position:center bottom;will-change:transform;transition:transform 0.2s;
-                filter: brightness(0.3) contrast(1) saturate(1) drop-shadow(0 0 40px #00d5ffb2);"
-                id="mountain">
+        <div class="hero__mountain-bg">
+            <img src="cumbre.png" alt="Montañas Cumbre IA" id="mountain">
         </div>
         <!-- Semi-transparent overlay -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg,rgba(10,20,40,0.18) 0%,rgba(10,20,40,0.32) 100%); z-index: 1;"></div>
-        <div class="container" style="position: relative; z-index: 2;">
+        <div class="hero__overlay"></div>
+        <div class="container hero__container">
             <div class="hero__content">
-                <h1 class="hero__title" style="text-shadow: 0 4px 6px rgba(0, 0, 0, 0);">
-                <span style="white-space: nowrap;">No es solo Inteligencia Artificial</span><br>es tu <span class="hero__title-gradient">Cumbre</span>
+                <h1 class="hero__title hero__title-shadow">
+                <span class="hero__title-no-wrap">No es solo Inteligencia Artificial</span><br>es tu <span class="hero__title-gradient">Cumbre</span>
                 </h1>
-                <p class="hero__subtitle" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.178);">
+                <p class="hero__subtitle hero__subtitle-shadow">
                 Conectamos tu PyME a un ecosistema inteligente que trasciende la automatización básica. Eliminamos las tareas repetitivas, unificamos todas tus plataformas y liberamos tu tiempo para que conquistes tu cumbre empresarial
                 </p>
-                <div class="hero__actions">
-                    <a href="#contacto" class="btn btn-primary">
-                    📅 Agendar sesión
-                    </a>
-                    <a href="#tu_cumbre" class="btn btn-secondary">
-                    🏔️ Hacer Cumbre
-                    </a>
+                <!-- Indicador de scroll UX debajo del subtítulo -->
+                <div class="scroll-indicator" aria-hidden="true">
+                    <span class="scroll-indicator__label">Comenzá tu ascenso</span>
+                    <div class="scroll-indicator__mouse">
+                        <div class="scroll-dot"></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Indicador de scroll UX, ahora junto a la barra de desplazamiento -->
-        <div class="scroll-indicator" aria-hidden="true">
-            <span class="scroll-indicator__label">Desliza</span>
-            <div class="scroll-indicator__mouse">
-                <div class="scroll-dot"></div>
             </div>
         </div>
     </section>
@@ -93,8 +82,8 @@
         <div class="features__grid">
             <!-- Columna izquierda: Imagen y texto alineados arriba -->
             <div class="features__content">
-                <div style="position: relative; width: 180px; max-width: 90%; margin-bottom: 1.5rem; align-self: center;">
-                    <img src="robot.png" alt="Robot IA Cumbre" class="robot-anim" style="width: 100%; display: block; z-index: 2; position: relative; box-shadow: 0 8px 32px rgba(0, 213, 255, 0)">
+                <div class="features__robot-container">
+                    <img src="robot.png" alt="Robot IA Cumbre" class="robot-anim features__robot-image">
                     <div class="robot-shadow"></div>
                 </div>
                 <h2>¿En qué etapa del ascenso se encuentra Tu PyME?</h2>
@@ -106,28 +95,51 @@
                     Te acompañamos paso a paso hasta que veas tu negocio en la cima.
                 </p>
                 <a href="#contacto" class="btn btn-primary">
-                    ⛰️ Quiero conquistar mi CUMBRE
+                    🏔️ Hacer Cumbre
                 </a>
             </div>
             <!-- Columna derecha: Cards alineadas arriba y más compactas -->
             <div class="features__cards">
                 <div class="feature-card glass-card">
-                    <span class="feature-card__icon">🏕️ ETAPA 1</span>
+                    <span class="feature-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        ETAPA 1
+                    </span>
                     <h3 class="feature-card__title">Campamento Base</h3>
                     <p class="feature-card__description">Analizamos tu ecosistema actual de plataformas (WhatsApp, MercadoLibre, Instagram, CRM). Identificamos dónde se pierden clientes, se duplica trabajo y se escapan oportunidades de venta.</p>
                 </div>
                 <div class="feature-card glass-card">
-                    <span class="feature-card__icon">🧗 ETAPA 2</span>
+                    <span class="feature-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                        </svg>
+                        ETAPA 2
+                    </span>
                     <h3 class="feature-card__title">Ascenso Técnico</h3>
                     <p class="feature-card__description">Conectamos todas tus plataformas en un solo ecosistema que intercambia información automáticamente. Un cliente pregunta por Instagram → se registra en CRM → recibe seguimiento por WhatsApp.</p>
                 </div>
                 <div class="feature-card glass-card">
-                    <span class="feature-card__icon">🤖 ETAPA 3</span>
+                    <span class="feature-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect width="18" height="10" x="3" y="11" rx="2"/>
+                            <circle cx="12" cy="5" r="2"/>
+                            <path d="m12 7-3 4h6l-3-4Z"/>
+                        </svg>
+                        ETAPA 3
+                    </span>
                     <h3 class="feature-card__title">Agente Operativo 24/7</h3>
                     <p class="feature-card__description">Tu Agente IA atiende consultas, califica leads, gestiona reclamos y convierte visitantes en clientes las 24 horas. Vos te enfocás en estrategia mientras tu negocio vende solo.</p>
                 </div>
                 <div class="feature-card glass-card">
-                    <span class="feature-card__icon">🏔️ ETAPA 4</span>
+                    <span class="feature-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+                        </svg>
+                        ETAPA 4
+                    </span>
                     <h3 class="feature-card__title">Cumbre Digital</h3>
                     <p class="feature-card__description">Dashboard que predice qué clientes van a comprar, cuándo necesitarás restock, y qué estrategias generan más ROI. Decisiones basadas en datos, no solo intuición.</p>
                 </div>
@@ -231,110 +243,68 @@
     <!-- Contact Section -->
     <section id="contacto" class="section contact">
         <div class="container">
-            <div class="contact__grid" style="align-items: stretch;">
-                <!-- Columna izquierda: texto y beneficios -->
-                <div class="contact__info" style="display: flex; flex-direction: column; justify-content: center;">
-                    <div style="margin-bottom: 1.2rem;">
-                        <span style="display:inline-block; background:linear-gradient(90deg,#00d4ff,#667eea); color:#fff; font-weight:700; border-radius:1.2rem; padding:0.4rem 1.2rem; font-size:1rem; box-shadow:0 2px 12px #00d4ff33;">✨ Sesión 100% Gratuita</span>
-                    </div>
-                    <h2 style="font-size:2.5rem; font-weight:800; margin-bottom:1.2rem; line-height:1.1;">Transforma tu<br>PyME</h2>
-                    <p style="font-size:1.18rem; color:var(--text-secondary); margin-bottom:1.5rem;">
-                        Agenda una sesión de presentación y descubre cómo automatizar tu negocio, eliminar tareas repetitivas y alcanzar tu cumbre empresarial. En este encuentro, te mostraremos cómo la inteligencia artificial puede revolucionar tu negocio.
+            <!-- Título centrado -->
+            <div class="contact__header">
+                <h2 class="contact__title-style">Transforma tu PyME</h2>
+            </div>
+            
+            <!-- Contenido en dos columnas -->
+            <div class="contact__grid">
+                <!-- Columna izquierda: subtítulo y beneficios -->
+                <div class="contact__info">
+                    <p class="contact__description-style">
+                        Agenda una sesión de presentación y descubre cómo automatizar tu negocio, eliminar tareas repetitivas y alcanzar tu cumbre empresarial. En este encuentro, te mostraremos cómo la inteligencia artificial puede revolucionar tu negocio:
                     </p>
-                    <ul style="list-style:none; padding:0; margin-bottom:2rem;">
-                        <li style="margin-bottom:0.7rem; display:flex; align-items:center; gap:0.7rem;">
-                            <span style="font-size:1.3rem;">🧠</span>
-                            <span>Análisis completo de tu ecosistema actual</span>
+                    <ul class="contact__list">
+                        <li class="contact__list-item">
+                            <span class="contact__list-icon">🧠</span>
+                            <span>Analizando tu ecosistema actual</span>
                         </li>
-                        <li style="margin-bottom:0.7rem; display:flex; align-items:center; gap:0.7rem;">
-                            <span style="font-size:1.3rem;">🚀</span>
-                            <span>Estrategias de automatización personalizadas</span>
-                        </li>
-                        <li style="margin-bottom:0.7rem; display:flex; align-items:center; gap:0.7rem;">
-                            <span style="font-size:1.3rem;">🎯</span>
-                            <span>Roadmap hacia tu cumbre digital</span>
-                        </li>
-                        <li style="margin-bottom:0.7rem; display:flex; align-items:center; gap:0.7rem;">
-                            <span style="font-size:1.3rem;">🤖</span>
-                            <span>Implementación de agentes IA especializados</span>
+                        <li class="contact__list-item">
+                            <span class="contact__list-icon">🚀</span>
+                            <span>Identificando áreas de mejora inmediata</span>
                         </li>
                     </ul>
                 </div>
                 <!-- Columna derecha: agenda y botón -->
-                <div class="glass-card"
-                    style="
-                        padding:2.5rem 2.5rem;
-                        border-radius:1.5rem;
-                        display:flex;
-                        flex-direction:column;
-                        justify-content:center;
-                        min-width:380px;
-                        max-width:540px;
-                        margin-left:auto;
-                        margin-right:0;
-                        margin-top:2.5rem;
-                        margin-bottom:2.5rem;
-                        box-shadow:0 8px 40px #00d4ff22;
-                    ">
-                    <h3 style="font-size:2rem; font-weight:700; margin-bottom:0.5rem; color:var(--text-primary);">Agenda tu Sesión</h3>
-                    <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Sesión de 30 minutos por videollamada</p>
-                    <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:2rem;">
-                        <div style="display:flex; align-items:flex-start; gap:1rem; background:rgba(0,212,255,0.07); border-radius:1rem; padding:1rem;">
-                            <span style="font-size:2rem; background:#00d4ff22; border-radius:0.7rem; padding:0.5rem;">🧠</span>
-                            <div>
-                                <div style="font-weight:700; color:var(--text-primary);">Análisis Estratégico</div>
-                                <div style="font-size:1rem; color:var(--text-secondary);">Revisaremos tu presencia digital actual</div>
-                            </div>
-                        </div>
-                        <div style="display:flex; align-items:flex-start; gap:1rem; background:rgba(0,212,255,0.07); border-radius:1rem; padding:1rem;">
-                            <span style="font-size:2rem; background:#00d4ff22; border-radius:0.7rem; padding:0.5rem;">🚀</span>
-                            <div>
-                                <div style="font-weight:700; color:var(--text-primary);">Oportunidades de Crecimiento</div>
-                                <div style="font-size:1rem; color:var(--text-secondary);">Identificaremos areas de mejora inmediata</div>
-                            </div>
-                        </div>
+                <div class="glass-card contact__card">
+                    <div class="contact__badge">
+                        <span class="contact__badge-span">✨ Sesión 100% Gratuita</span>
                     </div>
+                    <h3 class="contact__card-title">Agenda tu Sesión</h3>
+                    <p class="contact__card-subtitle">Sesión de 30 minutos por videollamada</p>
                     <!-- Google Calendar Appointment Scheduling begin -->
-<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-<script>
-(function() {
-  var target = document.currentScript;
-  window.addEventListener('load', function() {
-    calendar.schedulingButton.load({
-      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3LhAboA9GMoKPsCtM_aDp1I12KbhfYzCwm0a44vI5f_a8urpqaj_1w3ijfUwtp957W57hT2aQx?gv=true',
-      color: '#039BE5',
-      label: '📅 Reservar Ahora',
-      target,
-    });
-  });
-})();
-</script>
-<!-- end Google Calendar Appointment Scheduling -->
+                    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+                    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true',
+                          color: '#039BE5',
+                          label: '📅 Reservar Ahora',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                    <!-- end Google Calendar Appointment Scheduling -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo" style="position: relative; overflow: hidden;">
+    <footer class="footer" role="contentinfo">
         <!-- Fondo opaco con la imagen de la cumbre -->
-        <div style="
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: url('cumbre.png') center center / cover no-repeat;
-            opacity: 0.13;
-            z-index: 0;
-            pointer-events: none;
-        " aria-hidden="true"></div>
-        <div class="container" style="position: relative; z-index: 1;">
+        <div class="footer__background" aria-hidden="true"></div>
+        <div class="container footer__container">
             <div class="footer__content">
                 <div class="footer__section">
                     <h3>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div class="mountain-icon" style="width: 24px; height: 24px;">
+                        <div class="footer__logo-container">
+                            <div class="mountain-icon footer__logo-icon">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
                                         <linearGradient id="footerMountainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -350,7 +320,7 @@
                         </div>
                     </h3>
                     <p>Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica.</p>
-                    <div class="footer__social" style="margin-top: 16px;">
+                    <div class="footer__social footer__social-margin">
                         <a href="#" class="footer__social-link" aria-label="LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#0077B5">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.5c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.5h-3v-5c0-1.104-.896-2-2-2s-2 .896-2 2v5h-3v-10h3v1.5c.896-.896 2.104-1.5 3.5-1.5 2.209 0 4 1.791 4 4v6z"/>
