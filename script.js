@@ -59,6 +59,14 @@ class AILandingPage {
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
         }
+
+        // Footer logo scroll to top functionality
+        const footerLogo = document.querySelector('.footer__logo-container');
+        if (footerLogo) {
+            footerLogo.addEventListener('click', () => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        }
     }
 
     handleScrollIndicator() {

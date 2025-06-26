@@ -979,15 +979,23 @@ body {
 }
 
 .footer__logo-container {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--spacing-sm);
+    line-height: 1.8;
 }
 
-.footer__logo-icon {
-    width: 24px;
-    height: 24px;
+.footer__logo-container:hover .mountain-icon svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
 }
 
 .footer__social-margin {

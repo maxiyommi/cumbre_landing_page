@@ -303,20 +303,23 @@
             <div class="footer__content">
                 <div class="footer__section">
                     <h3>
-                        <div class="footer__logo-container">
-                            <div class="mountain-icon footer__logo-icon">
-                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <div class="footer__logo-container" aria-label="Cumbre IA" style="cursor:pointer;">
+                            <div class="mountain-icon">
+                                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <defs>
                                         <linearGradient id="footerMountainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" stop-color="#00d4ff" />
-                                            <stop offset="100%" stop-color="#667eea" />
+                                            <stop offset="0%" stop-color="#00d4ff"/>
+                                            <stop offset="100%" stop-color="#667eea"/>
                                         </linearGradient>
                                     </defs>
-                                    <path fill="url(#footerMountainGradient)" d="M4 24 L12 8 L20 16 L28 4 L32 12 L32 28 L4 28 Z" />
-                                    <path fill="url(#footerMountainGradient)" opacity="0.6" d="M0 28 L8 18 L16 22 L24 14 L32 20 L32 28 Z" />
+                                    <!-- Simple mountain with two peaks -->
+                                    <polygon 
+                                        points="2,28 9,12 16,20 23,4 30,28" 
+                                        fill="url(#footerMountainGradient)" 
+                                    />
                                 </svg>
                             </div>
-                            Cumbre IA
+                            CUMBRE IA
                         </div>
                     </h3>
                     <p>Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica.</p>
