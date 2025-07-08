@@ -14,7 +14,7 @@ Una landing page moderna y optimizada para Cumbre IA, empresa especializada en s
 
 ```
 cumbre-ia/
-├── index.html              # Archivo principal HTML
+├── index.html             # Archivo principal HTML
 ├── style.css              # Estilos CSS optimizados
 ├── script.js              # JavaScript funcional
 ├── CNAME                  # Configuración de dominio
@@ -60,6 +60,22 @@ mkdir -p assets/images assets/videos assets/fonts
 **Fuentes requeridas (`assets/fonts/`):**
 
 - `basetica-light.otf` - Fuente personalizada Baseltica (formato OpenType)
+
+
+3. **Abrir en navegador**
+   ```bash
+   # Opción 1: Abrir directamente
+   open index.html
+   
+   # Opción 2: Servidor local con Python
+   python -m http.server 8000
+   
+   # Opción 3: Servidor local con Node.js
+   npx serve
+   ```
+
+4. **Navegar a** `http://localhost:8000`
+
 
 ### 4. Optimizaciones recomendadas para assets
 
@@ -233,4 +249,4 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-⚡ **Powered by [Mecantronics](https://mecantronic.com.ar/)**
+⚡ **Powered by [Mecantronic](https://mecantronic.com.ar/)**
