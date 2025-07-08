@@ -1,124 +1,236 @@
-# Cumbre IA - Landing Page
+# Cumbre IA - Landing Page Optimizada
 
-Una landing page moderna para **Cumbre IA**, una agencia de inteligencia artificial especializada en PyMEs argentinas.
+Una landing page moderna y optimizada para Cumbre IA, empresa especializada en soluciones de inteligencia artificial para PyMEs.
 
-## ✨ Características
+## 🚀 Características
 
-- 🏔️ **Diseño AI-themed** con metáforas de montañismo
-- 📱 **Totalmente responsive** optimizado para todas las resoluciones
-- 🎨 **Glassmorphism UI** con efectos de cristal y backdrop-filter
-- 🔍 **SEO optimizado** con meta tags apropiados
-- ⚡ **Código limpio** sin dependencias externas
-- 🎯 **Scroll indicator** centrado y fijo en pantalla
+- **Diseño Moderno**: Glassmorphism, gradientes y animaciones fluidas
+- **Totalmente Responsivo**: Desde 280px hasta 4K (2560px+)
+- **Optimizado para Performance**: Lazy loading, preload de recursos críticos
+- **Accesible**: Navegación por teclado, ARIA labels, semántica correcta
+- **SEO Optimizado**: Meta tags, estructura semántica, Google verification
 
-## 🛠️ Tecnologías
+## 📁 Estructura del Proyecto
 
-- **HTML5** semántico con roles ARIA
-- **CSS3** con custom properties, CSS Grid y Flexbox
-- **JavaScript ES6+** modular con clase AILandingPage
-- **Responsive Design** mobile-first con múltiples breakpoints
-- **Google Calendar API** integrada para agendamiento
-
-## 🚀 Instalación y Uso
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/tu-usuario/cumbre_landing_page.git
-   cd cumbre_landing_page
-   ```
-
-2. **Abrir en navegador**
-   ```bash
-   # Opción 1: Abrir directamente
-   open index.html
-   
-   # Opción 2: Servidor local con Python
-   python -m http.server 8000
-   
-   # Opción 3: Servidor local con Node.js
-   npx serve
-   ```
-
-3. **Navegar a** `http://localhost:8000`
-
-## 🎯 Funcionalidades
-
-### Landing Page
-- Navegación inteligente que se oculta en la sección inicio
-- Scroll indicator centrado que se desvanece al hacer scroll
-- Efecto parallax en imagen de montaña de fondo
-- Logo clickeable para scroll to top
-
-### Secciones
-- **Inicio**: Hero con título, subtítulo e indicador de scroll
-- **Tu Cumbre**: 4 etapas del proceso de transformación digital con robot animado
-- **Servicios**: Agentes IA, Chatbots inteligentes y Consultoría tecnológica
-- **FAQ**: Preguntas frecuentes con acordeón funcional
-- **Contacto**: Integración con Google Calendar para agendamiento
-
-### Características Técnicas
-- Navbar responsive con menú hamburguesa para móviles
-- Animaciones con Intersection Observer para scroll-triggered effects
-- FAQ toggle con animación de rotación
-- Optimización para múltiples resoluciones (320px-4K)
-
-## 🎨 Diseño
-
-- **Paleta**: Gradientes azules AI-themed (#00d4ff, #667eea, #764ba2)
-- **Tipografía**: Inter font family con font-weights 300-800
-- **Layout**: CSS Grid y Flexbox para layouts complejos
-- **Efectos**: Glassmorphism, backdrop-filter, animaciones suaves
-- **Iconografía**: SVG inline para iconos de montaña y features
-
-## 📱 Responsive Design
-
-- **Mobile Small**: 320px (elementos ultra-compactos)
-- **Mobile Medium**: 375px (ajustes intermedios)  
-- **Mobile Large**: 425px (optimización para móviles grandes)
-- **Tablet**: 768px - 1024px (servicios en 2 columnas)
-- **Desktop**: > 1024px (layout completo)
-- **Large Desktop**: > 1440px (contenedores expandidos)
-- **4K**: > 2560px (escalado para pantallas grandes)
-
-## 🏗️ Arquitectura
-
-### Archivos principales
-- `index.html` - Estructura HTML semántica
-- `style.css` - Estilos con CSS custom properties
-- `script.js` - Funcionalidad JavaScript modular
-
-### Recursos
-- `cumbre.png` - Imagen de fondo de montañas
-- `cumbre.svg` - Logo SVG escalable  
-- `robot.png` - Imagen del robot animado
-
-## 🔧 Desarrollo
-
-Para desarrollo local, simplemente edita los archivos y recarga el navegador. No requiere build process.
-
-### Comandos útiles
-```bash
-# Validar HTML
-npx html-validate index.html
-
-# Optimizar imágenes
-npx imagemin-cli cumbre.png --out-dir=optimized/
-
-# Servidor local
-python -m http.server 8000
-npx serve
+```
+cumbre-ia/
+├── index.html              # Archivo principal HTML
+├── style.css              # Estilos CSS optimizados
+├── script.js              # JavaScript funcional
+├── CNAME                  # Configuración de dominio
+├── README.md              # Documentación
+└── assets/                # Recursos del proyecto
+    ├── images/            # Imágenes optimizadas
+    │   ├── pitch.svg      # Logo principal
+    │   ├── robot.png      # Imagen del robot IA
+    │   └── cumbre.png     # Imagen de fondo del footer
+    ├── videos/            # Videos de fondo
+    │   └── video.mp4      # Video de fondo del hero
+    └── fonts/             # Fuentes personalizadas
+        └── basetica-light.otf  # Fuente principal
 ```
 
-### Estructura CSS
-- Variables CSS en `:root` para temas consistentes
-- Media queries mobile-first
-- Clases BEM para componentes
-- Animaciones CSS optimizadas
+## 🛠️ Instalación y Setup
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/cumbre-ia.git
+cd cumbre-ia
+```
+
+### 2. Crear estructura de assets
+
+```bash
+mkdir -p assets/images assets/videos assets/fonts
+```
+
+### 3. Agregar los archivos multimedia
+
+**Imágenes requeridas (`assets/images/`):**
+
+- `pitch.svg` - Logo principal de Cumbre IA (formato SVG recomendado)
+- `robot.png` - Imagen del robot IA para la sección features
+- `cumbre.png` - Imagen de fondo para el footer
+
+**Videos requeridos (`assets/videos/`):**
+
+- `video.mp4` - Video de fondo para la sección hero (formato MP4, optimizado para web)
+
+**Fuentes requeridas (`assets/fonts/`):**
+
+- `basetica-light.otf` - Fuente personalizada Baseltica (formato OpenType)
+
+### 4. Optimizaciones recomendadas para assets
+
+**Para las imágenes:**
+
+```bash
+# Optimizar PNGs
+pngquant --quality=65-80 assets/images/*.png
+
+# Optimizar SVGs
+svgo assets/images/*.svg
+
+# Convertir a WebP (opcional, para mejor performance)
+cwebp -q 80 assets/images/robot.png -o assets/images/robot.webp
+cwebp -q 80 assets/images/cumbre.png -o assets/images/cumbre.webp
+```
+
+**Para el video:**
+
+```bash
+# Comprimir video para web
+ffmpeg -i input.mp4 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k assets/videos/video.mp4
+```
+
+## 🎨 Personalización
+
+### Colores principales
+
+```css
+:root {
+  --primary-gradient: linear-gradient(45deg, #00d4ff, #0066ff);
+  --secondary-gradient: linear-gradient(135deg, #667eea, #764ba2);
+  --neural-gradient: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 50%,
+    #f093fb 100%
+  );
+}
+```
+
+### Fuentes
+
+- **Principal**: Baseltica (custom)
+- **Fallback**: Inter (Google Fonts)
+- **Configuración**: `font-display: swap` para mejor performance
+
+### Breakpoints responsivos
+
+- **Mobile**: 320px - 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: 1024px - 1440px
+- **Large Desktop**: 1440px+
+- **4K**: 2560px+
+
+## 🔧 Funcionalidades
+
+### Navegación
+
+- Header fijo con navegación suave
+- Menú móvil hamburguesa
+- Indicadores de sección activa
+- Scroll indicator en hero
+
+### Secciones
+
+1. **Hero** - Video de fondo con CTA principal
+2. **Tu Cumbre** - 4 etapas del proceso con robot animado
+3. **Servicios** - Cards con efectos glassmorphism
+4. **FAQ** - Acordeón interactivo
+5. **Contacto** - Integración con Google Calendar
+6. **Footer** - Links y redes sociales
+
+### Animaciones
+
+- Robot flotante con sombra animada
+- Efectos hover en cards y botones
+- Scroll reveal para elementos
+- Shimmer effects en servicios
+
+## 🔗 Integraciones
+
+### Google Calendar
+
+```javascript
+// Configurado en section contacto
+calendar.schedulingButton.load({
+  url: "https://calendar.google.com/calendar/appointments/schedules/...",
+  color: "#039BE5",
+  label: "📅 Reservar Ahora",
+});
+```
+
+### Analytics (opcional)
+
+```html
+<!-- Agregar en <head> -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "GA_MEASUREMENT_ID");
+</script>
+```
+
+## 🛡️ Seguridad
+
+### Content Security Policy (recomendado)
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+  default-src 'self';
+  style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+  font-src 'self' fonts.gstatic.com;
+  script-src 'self' calendar.google.com;
+  img-src 'self' data:;
+  media-src 'self';
+"
+/>
+```
+
+## 📱 Testing
+
+### Responsive testing
+
+```bash
+# Usar las herramientas de desarrollo del navegador
+# Probar en dispositivos reales
+# Lighthouse para performance
+# WAVE para accesibilidad
+```
+
+### Checklist de calidad
+
+- [ ] ✅ Funciona en Chrome, Firefox, Safari, Edge
+- [ ] ✅ Responsive en todos los breakpoints
+- [ ] ✅ Navegación por teclado funcional
+- [ ] ✅ Performance Score > 90
+- [ ] ✅ Accesibilidad Score > 95
+- [ ] ✅ SEO optimizado
+- [ ] ✅ Formularios funcionando
+- [ ] ✅ Links externos abren en nueva pestaña
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crear feature branch (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'Agregar nueva funcionalidad'`)
+4. Push al branch (`git push origin feature/nueva-funcionalidad`)
+5. Crear Pull Request
 
 ## 📄 Licencia
 
-© 2025 Cumbre IA. Todos los derechos reservados.
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+
+## 📞 Contacto
+
+**Cumbre IA**
+
+- 🌐 Website: [cumbre.cloud](https://cumbre.cloud)
+- 💼 LinkedIn: [@cumbre-ia](https://www.linkedin.com/company/cumbre-ia)
+- 📧 Email: contacto@cumbre.cloud
 
 ---
 
-**Desarrollado por** [Mecantronics](https://mecantronic.com.ar/) 🤖
+⚡ **Powered by [Mecantronics](https://mecantronic.com.ar/)**
