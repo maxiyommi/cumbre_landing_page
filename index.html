@@ -95,6 +95,29 @@
           <a href="#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="#servicios" class="header__nav-link">Servicios</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <!-- Desktop: menú agrupado -->
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de contacto"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Contacto
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
+              <a
+                href="mailto:hola@cumbre.cloud"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >hola@cumbre.cloud</a
+              >
+            </div>
+          </div>
+          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
           <a href="#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >

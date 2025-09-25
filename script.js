@@ -346,6 +346,34 @@ class AILandingPage {
             });
         }
 
+        // Contact dropdown (mobile/click)
+        const contactToggle = document.querySelector('.header__nav-contact-toggle');
+        const contactDropdown = document.querySelector('.header__nav-contact-dropdown');
+        if (contactToggle && contactDropdown) {
+            // Desktop: handled by CSS hover
+            // Mobile: toggle on click
+            contactToggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 700) {
+                    e.preventDefault();
+                    const expanded = contactDropdown.style.display === 'block';
+                    contactDropdown.style.display = expanded ? 'none' : 'block';
+                    contactToggle.setAttribute('aria-expanded', !expanded);
+                }
+            });
+            // Close dropdown on outside click (mobile)
+            document.addEventListener('click', (e) => {
+                if (
+                    window.innerWidth <= 700 &&
+                    contactDropdown.style.display === 'block' &&
+                    !contactDropdown.contains(e.target) &&
+                    !contactToggle.contains(e.target)
+                ) {
+                    contactDropdown.style.display = 'none';
+                    contactToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
         // Logo scroll to top functionality
         const logo = document.querySelector('.header__logo');
         if (logo) {
