@@ -59,7 +59,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='simpleMountainGradient' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2300d4ff'/><stop offset='100%' stop-color='%23667eea'/></linearGradient></defs><polygon points='2,28 10,16 16,22 22,10 30,28' fill='url(%23simpleMountainGradient)'/></svg>"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='2,28 10,10 12,14 16,6 30,28' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>"
     />
   </head>
 
@@ -72,7 +72,7 @@
           aria-label="Cumbre IA"
           style="cursor: pointer"
         >
-          <img
+            <img
             src="assets/images/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
@@ -95,6 +95,29 @@
           <a href="#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="#servicios" class="header__nav-link">Servicios</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <!-- Desktop: menú agrupado -->
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de contacto"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Contacto
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
+              <a
+                href="mailto:hola@cumbre.cloud"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >hola@cumbre.cloud</a
+              >
+            </div>
+          </div>
+          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
           <a href="#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -202,10 +225,10 @@
               </span>
               <h3 class="feature-card__title">Campamento Base</h3>
               <p class="feature-card__description">
-                Analizamos tu ecosistema actual de plataformas (WhatsApp,
-                MercadoLibre, Instagram, CRM). Identificamos dónde se pierden
-                clientes, se duplica trabajo y se escapan oportunidades de
-                venta.
+                Revisamos cómo funcionan actualmente todos tus sistemas de negocio: canales de venta, 
+                gestión de clientes, inventarios y operaciones internas. Identificamos dónde se están 
+                perdiendo oportunidades comerciales, qué procesos consumen tiempo innecesario y cuáles 
+                son las mejores áreas para automatizar y optimizar tu operación.
               </p>
             </div>
             <div class="feature-card glass-card">
@@ -225,10 +248,9 @@
               </span>
               <h3 class="feature-card__title">Ascenso Técnico</h3>
               <p class="feature-card__description">
-                Conectamos todas tus plataformas en un solo ecosistema que
-                intercambia información automáticamente. Un cliente pregunta por
-                Instagram → se registra en CRM → recibe seguimiento por
-                WhatsApp.
+                Conectamos todos tus sistemas actuales para que funcionen como una sola operación integrada. 
+                Eliminamos el trabajo manual de pasar información entre plataformas y creamos flujos automáticos 
+                que aseguran que ningún cliente se pierda en el proceso, independientemente de cómo te contacte.
               </p>
             </div>
             <div class="feature-card glass-card">
@@ -250,9 +272,10 @@
               </span>
               <h3 class="feature-card__title">Agente Operativo 24/7</h3>
               <p class="feature-card__description">
-                Tu Agente IA atiende consultas, califica leads, gestiona
-                reclamos y convierte visitantes en clientes las 24 horas. Vos te
-                enfocás en estrategia mientras tu negocio vende solo.
+                Tu Agente IA funciona las 24 horas atendiendo consultas, calificando potenciales clientes y gestionando 
+                reclamos con respuestas contextuales inteligentes. Mantiene conversaciones naturales, deriva casos complejos 
+                cuando es necesario y convierte visitantes en oportunidades comerciales concretas. Mientras vos te enfocás en 
+                hacer crecer el negocio, el agente se encarga de que ninguna consulta quede sin responder.
               </p>
             </div>
             <div class="feature-card glass-card">
@@ -272,9 +295,9 @@
               </span>
               <h3 class="feature-card__title">Cumbre Digital</h3>
               <p class="feature-card__description">
-                Dashboard que predice qué clientes van a comprar, cuándo
-                necesitarás restock, y qué estrategias generan más ROI.
-                Decisiones basadas en datos, no solo intuición.
+                Dashboard ejecutivo que centraliza métricas clave de todas tus operaciones automatizadas. Analiza patrones de 
+                comportamiento de clientes, identifica tendencias de inventario y mide el ROI real de cada canal. Te proporciona 
+                insights accionables para tomar decisiones estratégicas basadas en datos concretos, no solo intuición empresarial.
               </p>
             </div>
           </div>
@@ -347,12 +370,15 @@
             </button>
             <div class="faq__answer">
               <p>
-                La inversión para implementar soluciones de IA personalizadas
-                varía según la complejidad y alcance del proyecto, típicamente
-                entre $1000 y $5000 USD. Incluimos mantenimiento flexible
-                (aproximadamente 20% del valor inicial) que te permite ahorrar
-                costos operativos significativos y escalar tu negocio sin
-                limitaciones.
+                La inversión para implementar soluciones de IA varía según la complejidad y el alcance del proyecto. 
+                El punto de partida es una auditoría técnica y funcional de USD 1,500 (20 horas de trabajo), 
+                que nos permite relevar procesos, validar accesos y diseñar la arquitectura más eficiente. 
+                En caso de avanzar con el desarrollo, este monto queda bonificado en la inversión final. 
+                Las implementaciones comienzan en USD 10,250 para un agente independiente, y pueden llegar 
+                hasta USD 32,500 en el caso de un ecosistema de tres agentes con capacidad de interactuar entre sí 
+                mediante un servidor central dedicado (MCP). A partir de allí, es posible adicionar agentes según 
+                la cantidad de unidades de negocio a integrar, con valores que se ajustan a la complejidad y 
+                necesidades de cada despliegue.
               </p>
             </div>
           </div>
@@ -363,11 +389,10 @@
             </button>
             <div class="faq__answer">
               <p>
-                Todas las soluciones de IA implican costos mensuales por uso.
-                Ofrecemos total flexibilidad en nuestros planes de
-                mantenimiento. Podes elegir la modalidad que mejor se adapte a
-                tu negocio, desde soporte bajo demanda hasta planes mensuales.
-                No te quedas atado a nuestros servicios.
+                La mayoría de las soluciones de IA requieren un mantenimiento mensual, pero en nuestro caso es 100% flexible. 
+                Podés elegir desde un plan básico de soporte técnico hasta un acompañamiento estratégico completo, 
+                siempre con monitoreo y actualizaciones incluidas. El costo suele rondar entre el 15% y 25% de la implementación, 
+                ajustado al crecimiento real de tu negocio. No hay permanencias forzadas.
               </p>
             </div>
           </div>
@@ -383,6 +408,22 @@
                 semanas. Durante todo el proceso, nos mantenemos comunicados
                 constantemente con vos, asegurándonos de que cada etapa esté
                 perfectamente alineada con los objetivos de tu negocio.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">
+              ¿Qué pasa con la tecnología cuando termina el proyecto?
+              <span class="faq__toggle">+</span>
+            </button>
+            <div class="faq__answer">
+              <p>
+                Nuestro modelo de ownership tecnologico, ofrece durante los primeros 3 meses 
+                mantenimiento transitorio con soporte completo para asegurar estabilidad y adopción. 
+                Pasado este período, la tecnología se transfiere completamente a tu empresa 
+                sin cuotas perpetuas. El sistema queda instalado en tu infraestructura propia, 
+                sin licencias ocultas ni dependencias de proveedor. 
+                La IA se convierte en un activo estratégico de tu empresa, no en un gasto recurrente.
               </p>
             </div>
           </div>
@@ -486,7 +527,7 @@
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer con columna de contacto agregada -->
     <footer class="footer" role="contentinfo">
       <!-- Background image with lazy loading -->
       <div class="footer__background" aria-hidden="true"></div>
@@ -501,11 +542,11 @@
               >
                 <div class="mountain-icon">
                   <img
-            src="assets/images/pitch.svg"
-            alt="Logo Cumbre IA"
-            class="logo-svg"
-            loading="eager"
-          />
+                    src="assets/images/pitch.svg"
+                    alt="Logo Cumbre IA"
+                    class="logo-svg"
+                    loading="eager"
+                  />
                 </div>
               </div>
             </h3>
@@ -541,14 +582,18 @@
             <p><a href="#servicios">Chatbots Inteligentes</a></p>
             <p><a href="#servicios">Consultoría tecnológica</a></p>
           </div>
+          <!-- Nueva columna de contacto -->
+          <div class="footer__section">
+            <h3>Contacto</h3>
+            <p><a href="mailto:hola@cumbre.cloud">hola@cumbre.cloud</a></p>
+            <p>Respuesta en menos de 24hs</p>
+          </div>
         </div>
         <div class="footer__bottom">
           <p>
             &copy; 2025 Cumbre IA. Inteligencia Artificial para el Futuro |
             Powered by
-            <a href="https://mecantronic.com.ar/" target="_blank"
-              >Mecantronic</a
-            >
+            <a href="https://mecantronic.com.ar/" target="_blank">Mecantronic</a>
           </p>
         </div>
       </div>
