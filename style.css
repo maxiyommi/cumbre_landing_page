@@ -2007,7 +2007,7 @@ body {
   }
   .header__nav {
     position: fixed;
-    top: 56px;
+    top: 95px; /* Antes: top: 56px; Ahora: despliega más abajo para no tapar el logo */
     left: 0;
     width: 100vw;
     background: rgba(10, 10, 15, 0.93);
