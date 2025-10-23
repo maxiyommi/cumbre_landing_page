@@ -697,3 +697,254 @@ window.addEventListener('error', (e) => {
         }, 1000);
     }
 }, true);
+
+// Soluciones - "Conocer más" buttons functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const solucionButtons = document.querySelectorAll('.solucion-card__btn');
+
+    solucionButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const solucionName = button.getAttribute('data-solucion');
+
+            // Crear notificación estilo toast
+            showProximamenteNotification(solucionName);
+        });
+    });
+
+    // Inicializar carruseles de soluciones
+    initSolucionCarousels();
+});
+
+// Función para inicializar carruseles automáticos
+function initSolucionCarousels() {
+    const carousels = document.querySelectorAll('.solucion-carousel');
+
+    carousels.forEach(carousel => {
+        const slides = carousel.querySelectorAll('.solucion-carousel__slide');
+        const indicators = carousel.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let autoplayInterval;
+
+        // Función para cambiar de slide
+        const goToSlide = (slideIndex) => {
+            // Remover clase active de todos
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            // Agregar clase active al slide e indicator actual
+            slides[slideIndex].classList.add('active');
+            indicators[slideIndex].classList.add('active');
+
+            currentSlide = slideIndex;
+        };
+
+        // Función para ir al siguiente slide
+        const nextSlide = () => {
+            const next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        };
+
+        // Event listeners para los indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                goToSlide(index);
+                // Reiniciar autoplay al hacer click manual
+                clearInterval(autoplayInterval);
+                autoplayInterval = setInterval(nextSlide, 4000);
+            });
+        });
+
+        // Pausar autoplay al hacer hover sobre la card
+        const card = carousel.closest('.solucion-card');
+        if (card) {
+            card.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                autoplayInterval = setInterval(nextSlide, 4000);
+            });
+        }
+
+        // Iniciar autoplay (cambiar cada 4 segundos)
+        autoplayInterval = setInterval(nextSlide, 4000);
+
+        // Limpiar interval cuando la página se descarga
+        window.addEventListener('beforeunload', () => {
+            clearInterval(autoplayInterval);
+        });
+    });
+}
+
+// Función para mostrar notificación "Proximamente" con estilo AI
+function showProximamenteNotification(solucionName) {
+    // Remover notificación existente si hay alguna
+    const existingNotification = document.querySelector('.ai-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // Crear elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = 'ai-notification';
+    notification.innerHTML = `
+        <div class="ai-notification__icon">🚀</div>
+        <div class="ai-notification__content">
+            <div class="ai-notification__title">Próximamente</div>
+            <div class="ai-notification__message">Esta solución estará disponible muy pronto</div>
+        </div>
+        <button class="ai-notification__close" aria-label="Cerrar notificación">&times;</button>
+    `;
+
+    // Agregar estilos inline para la notificación
+    const notificationStyles = `
+        <style>
+        .ai-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(102, 126, 234, 0.1) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            min-width: 320px;
+            max-width: 400px;
+            box-shadow: 0 16px 48px rgba(0, 212, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1), fadeOut 0.5s 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .ai-notification__icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .ai-notification__content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .ai-notification__title {
+            color: #00d4ff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .ai-notification__message {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .ai-notification__close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .ai-notification__close:hover {
+            color: #00d4ff;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-notification {
+                top: 80px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                max-width: none;
+            }
+
+            @keyframes slideInRight {
+                from {
+                    transform: translateY(-100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes fadeOut {
+                to {
+                    transform: translateY(-100px);
+                    opacity: 0;
+                }
+            }
+        }
+        </style>
+    `;
+
+    // Inyectar estilos si no existen
+    if (!document.querySelector('#ai-notification-styles')) {
+        const styleElement = document.createElement('div');
+        styleElement.id = 'ai-notification-styles';
+        styleElement.innerHTML = notificationStyles;
+        document.head.appendChild(styleElement);
+    }
+
+    // Agregar notificación al DOM
+    document.body.appendChild(notification);
+
+    // Agregar event listener para cerrar
+    const closeButton = notification.querySelector('.ai-notification__close');
+    closeButton.addEventListener('click', () => {
+        notification.style.animation = 'fadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        setTimeout(() => notification.remove(), 300);
+    });
+
+    // Auto-remover después de 3 segundos
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 3000);
+}
