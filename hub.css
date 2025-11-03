@@ -1,0 +1,256 @@
+/*
+  ============================
+  ESTILOS PARA TARJETA DIGITAL HUB
+  (Versión Final - Replicando Mock-up)
+  ============================
+*/
+
+/* Variables adicionales */
+:root {
+  --bg-dark-blue: #141624;
+  --card-bg-mockup: #1c1f30;
+  --primary-gradient-mockup: linear-gradient(90deg, #00d4ff 0%, #0066ff 100%);
+  --secondary-bg-mockup: #26293f;
+  --whatsapp-border: #25D366;
+  --whatsapp-bg-hover: rgba(37, 211, 102, 0.1);
+  --border-color-mockup: rgba(255, 255, 255, 0.12);
+  --text-icon-color: rgba(255, 255, 255, 0.85); /* Color base para iconos y texto secundario */
+}
+
+/* Base Body */
+.hub-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark-blue);
+    padding: 4rem 0;
+}
+
+.hub-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 0 1.25rem;
+    margin: auto;
+}
+
+/* Card */
+.hub-card {
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 1.5rem;
+    
+    background: var(--card-bg-mockup); 
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-color-mockup);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/*
+  -----------------------------
+  HEADER (LOGO, NOMBRE, ROL)
+  -----------------------------
+*/
+.hub-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem; 
+    border-bottom: none; 
+}
+
+/* Aumentar tamaño del logo */
+.hub-header .hub-profile__logo {
+    width: 170px; 
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    margin-bottom: 0.2rem; /* Espacio mínimo */
+}
+
+/* Eliminado hub-header__company */
+
+.hub-header__name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0.5rem 0 0.2rem 0;
+    line-height: 1.2;
+}
+
+.hub-header__role {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem 0; /* Espacio antes de los botones */
+}
+
+/*
+  -----------------------------
+  BOTONES DE ACCIÓN
+  -----------------------------
+*/
+.hub-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.hub-link-btn {
+    width: 100%;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    background: var(--secondary-bg-mockup);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color-mockup);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Iconos de botones secundarios (Ajuste clave: color base grisáceo) */
+.hub-link-btn i, 
+.hub-link-btn svg {
+    font-size: 1.35rem;
+    margin-right: 1rem;
+    color: var(--text-icon-color); /* Iconos de color grisáceo */
+    transition: color 0.3s ease;
+}
+
+/* Botón Primario (Agendar Sesión) */
+.hub-link-btn.btn-primary {
+    background: var(--primary-gradient-mockup);
+    color: var(--bg-dark-blue) !important; 
+    border: none;
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+}
+
+.hub-link-btn.btn-primary i,
+.hub-link-btn.btn-primary svg {
+    color: var(--bg-dark-blue) !important; /* Icono en color oscuro */
+}
+
+/* Botón de WhatsApp (Fondo oscuro, borde verde) */
+.hub-link-btn--whatsapp {
+    background: var(--secondary-bg-mockup) !important;
+    border: 1px solid var(--whatsapp-border) !important;
+    color: var(--whatsapp-border) !important; /* Texto de WhatsApp en verde */
+}
+
+.hub-link-btn--whatsapp i,
+.hub-link-btn--whatsapp svg {
+    color: var(--whatsapp-border) !important; /* Icono de WhatsApp en verde */
+}
+
+/* Hover States para botones secundarios */
+.hub-link-btn:hover:not(.btn-primary):not(.hub-link-btn--whatsapp) {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    border-color: #00d4ff;
+    color: var(--text-primary); /* Asegura que el texto siga blanco */
+}
+
+.hub-link-btn:hover:not(.btn-primary):not(.hub-link-btn--whatsapp) i,
+.hub-link-btn:hover:not(.btn-primary):not(.hub-link-btn--whatsapp) svg {
+    color: #00d4ff; /* El icono toma el color primario en hover */
+}
+
+/* Hover State de WhatsApp */
+.hub-link-btn--whatsapp:hover {
+    background: var(--whatsapp-bg-hover) !important;
+    border-color: #25D366 !important;
+    color: #25D366 !important;
+}
+
+/* Icono especial de calendario para replicar el mock-up */
+.calendar-icon-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.calendar-date {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #fff;
+    background: #f5576c; 
+    border-radius: 3px;
+    padding: 1px 3px;
+    line-height: 1;
+    z-index: 3;
+    transform: rotate(-5deg);
+}
+
+.hub-link-btn.btn-primary .fi-rr-calendar-clock {
+    margin-right: 0.5rem; 
+}
+
+
+/*
+  -----------------------------
+  LINKS SOCIALES Y DISCLAIMER
+  -----------------------------
+*/
+.hub-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 0.5rem; /* Espacio antes del link de LinkedIn */
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Línea divisoria muy sutil */
+}
+
+/* Estilo para el link de LinkedIn (texto centrado) */
+.hub-linkedin-link {
+    font-size: 0.95rem;
+    color: #0077B5; 
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.hub-linkedin-link i {
+    font-size: 1.1rem;
+    margin-right: 5px;
+    color: #0077B5;
+}
+
+.hub-linkedin-link:hover {
+    color: #0099FF;
+}
+
+/* Círculo Central del Mockup (El punto azul) */
+.hub-social__container {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 102, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 102, 255, 0.4);
+}
+
+/* Disclaimer */
+.hub-disclaimer {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0;
+    line-height: 1.4;
+}
