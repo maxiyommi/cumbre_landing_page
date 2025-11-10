@@ -704,11 +704,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     solucionButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault();
             const solucionName = button.getAttribute('data-solucion');
 
-            // Crear notificación estilo toast
-            showProximamenteNotification(solucionName);
+            // Solo prevenir el comportamiento por defecto si tiene data-solucion
+            // (para soluciones que aún no tienen página dedicada)
+            if (solucionName) {
+                e.preventDefault();
+                // Crear notificación estilo toast
+                showProximamenteNotification(solucionName);
+            }
+            // Si no tiene data-solucion, dejar que el link funcione normalmente
         });
     });
 
