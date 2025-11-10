@@ -2477,12 +2477,22 @@ body {
     box-shadow: 0 8px 32px #0002;
     z-index: 9999;
     display: none;
-    opacity: 1 !important;
-    pointer-events: auto !important;
     transition: none;
   }
+  /* Mobile menu open state */
   .header__nav.open {
     display: flex;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  /* Visibility classes override for FacturaScan page (higher specificity) */
+  .header__nav.header__nav--hidden:not(.open) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .header__nav.header__nav--visible:not(.open) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
   .header__nav-link {
     width: 100%;
@@ -2645,6 +2655,21 @@ body {
     border-bottom: none;
   }
 }
+
+/* Navbar visibility classes for scroll behavior (FacturaScan page) */
+/* Desktop and tablet - always apply when class is present */
+@media (min-width: 701px) {
+  .header__nav.header__nav--hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .header__nav.header__nav--visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
 @media (min-width: 1440px) {
   .container {
     max-width: 1400px;

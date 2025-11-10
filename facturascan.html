@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+
+    <title>FacturaScan - Lectura Automática de Comprobantes con IA | Cumbre IA</title>
+    <meta
+      name="description"
+      content="FacturaScan automatiza la lectura y carga de comprobantes fiscales. Extrae datos de facturas, tickets y recibos en segundos con inteligencia artificial."
+    />
+    <meta
+      name="keywords"
+      content="facturascan, lectura automática facturas, OCR facturas, IA contabilidad, automatización contable"
+    />
+
+    <!-- Preconnect for external fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical resources -->
+    <link
+      rel="preload"
+      href="assets/fonts/basetica-light.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      as="style"
+    />
+
+    <!-- Load fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="facturascan.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='2,28 10,10 12,14 16,6 30,28' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="container header__container">
+        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
+          <img
+            src="assets/images/pitch.svg"
+            alt="Logo Cumbre IA"
+            class="logo-svg"
+            loading="eager"
+          />
+        </a>
+
+        <button
+          class="header__menu-toggle"
+          aria-label="Abrir menú"
+          style="display: none"
+        >
+          <span aria-hidden="true">&#9776;</span>
+        </button>
+        <nav
+          class="header__nav"
+          role="navigation"
+          aria-label="Navegación principal"
+        >
+          <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
+          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <a href="index.html#soluciones" class="header__nav-link">Soluciones</a>
+          <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <!-- Desktop: menú agrupado -->
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de contacto"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Contacto
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
+              <a
+                href="mailto:hola@cumbre.cloud"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >hola@cumbre.cloud</a
+              >
+            </div>
+          </div>
+          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
+            >📅 Agendar Sesión</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="facturascan-hero">
+      <div class="container">
+        <div class="facturascan-hero__content">
+          <div class="facturascan-hero__badge">
+            <i class="fi fi-rr-file-invoice"></i>
+            <span>Solución de Automatización Contable</span>
+          </div>
+          <h1 class="facturascan-hero__title">
+            Transformá horas de trabajo en <span class="gradient-text">segundos</span>
+          </h1>
+          <p class="facturascan-hero__subtitle">
+            Digitalizá información en segundos. Agilizá tareas, reducí equivocaciones y potenciá el rendimiento con nuestra
+            <strong>plataforma inteligente de lectura de documentos</p>
+          <div class="facturascan-hero__ctas">
+            <a href="mailto:hola@cumbre.cloud" class="btn btn-primary btn-large">
+              <i class="fi fi-rr-calendar"></i>
+              Solicitar demo
+            </a>
+            <button id="openVideoModal" class="btn btn-secondary btn-large">
+              <i class="fi fi-rr-play-circle"></i>
+              Ver video
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="facturascan-stats">
+            <div class="stat-item">
+              <div class="stat-value">x50</div>
+              <div class="stat-label">Más rápido</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">92%</div>
+              <div class="stat-label">Menos errores</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">70%</div>
+              <div class="stat-label">Ahorro de tiempo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="features" class="facturascan-how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>Nuestra plataforma <span class="gradient-text">FacturaScan</span></h2>
+          <p class="section-subtitle">Automatizá la extracción de datos de tus documentos para trabajar más rápido, con menos errores y mayor precisión</p>
+        </div>
+
+        <div class="how-it-works-grid">
+          <div class="how-it-works-step glass-card">
+            <div class="step-icon">
+              <i class="fi fi-rr-cloud-upload"></i>
+            </div>
+            <div class="step-number">1</div>
+            <h3>Cargar los archivos</h3>
+            <p>Subí tus comprobantes desde cualquier dispositivo. Soportamos PDFs, imágenes y escaneos.</p>
+          </div>
+
+          <div class="how-it-works-step glass-card">
+            <div class="step-icon">
+              <i class="fi fi-rr-search-alt"></i>
+            </div>
+            <div class="step-number">2</div>
+            <h3>La IA obtiene los datos</h3>
+            <p>Nuestra inteligencia artificial procesa y extrae toda la información relevante automáticamente.</p>
+          </div>
+
+          <div class="how-it-works-step glass-card">
+            <div class="step-icon">
+              <i class="fi fi-rr-checkbox"></i>
+            </div>
+            <div class="step-number">3</div>
+            <h3>¡Listo!</h3>
+            <p>Datos estructurados y listos para exportar a tu sistema contable o ERP.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Document Types -->
+    <section class="facturascan-document-types">
+      <div class="container">
+        <div class="section-header">
+          <h2>Podemos capturar datos de <span class="gradient-text">cualquier tipo de documento</span></h2>
+        </div>
+
+        <div class="document-types-grid">
+          <div class="document-type-group">
+            <div class="document-type-item">
+              <i class="fi fi-rr-file-invoice"></i>
+              <span>Facturas</span>
+            </div>
+            <div class="document-type-item">
+              <i class="fi fi-rr-receipt"></i>
+              <span>Remitos</span>
+            </div>
+            <div class="document-type-item">
+              <i class="fi fi-rr-money-check-edit"></i>
+              <span>Recibos</span>
+            </div>
+          </div>
+
+          <div class="document-type-group">
+            <div class="document-type-item">
+              <i class="fi fi-rr-shopping-cart"></i>
+              <span>Órdenes de compra</span>
+            </div>
+            <div class="document-type-item">
+              <i class="fi fi-rr-bank"></i>
+              <span>Extractos bancarios</span>
+            </div>
+          </div>
+
+          <div class="document-type-group">
+            <div class="document-type-item">
+              <i class="fi fi-rr-id-card-clip-alt"></i>
+              <span>DNI</span>
+            </div>
+            <div class="document-type-item">
+              <i class="fi fi-rr-document"></i>
+              <span>Impuestos</span>
+            </div>
+            <div class="document-type-item">
+              <i class="fi fi-rr-star"></i>
+              <span>Lo que quieras</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-document-cta">
+          <p class="custom-question">¿Tenés algún otro tipo de documento?</p>
+          <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary">
+            Consultanos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Screenshots -->
+    <section class="facturascan-screenshots">
+      <div class="container">
+        <div class="section-header">
+          <h2><span class="gradient-text">Portal de autogestión</span></h2>
+          <p class="section-subtitle">Seleccioná los datos a capturar y definí reglas para realizar validaciones</p>
+        </div>
+
+        <div class="screenshots-showcase">
+          <div class="screenshot-main glass-card">
+            <img
+              id="main-screenshot"
+              src="assets/images/facturascan_dashboard.png"
+              alt="FacturaScan Dashboard"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="screenshots-thumbnails">
+            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png">
+              <img src="assets/images/facturascan_dashboard.png" alt="Dashboard" loading="lazy" />
+              <span>Dashboard</span>
+            </button>
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png">
+              <img src="assets/images/facturascan_detalles.png" alt="Detalles" loading="lazy" />
+              <span>Detalles</span>
+            </button>
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png">
+              <img src="assets/images/facturascan_reportes.png" alt="Reportes" loading="lazy" />
+              <span>Reportes</span>
+            </button>
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png">
+              <img src="assets/images/facturascan_login.png" alt="Login" loading="lazy" />
+              <span>Login</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Adaptation -->
+    <section class="facturascan-process">
+      <div class="container">
+        <div class="process-content">
+          <div class="process-visual">
+            <div class="process-diagram">
+              <!-- Paso 1: Cargar Documento -->
+              <div class="process-flow-step">
+                <div class="process-node node-upload">
+                  <i class="fi fi-rr-document"></i>
+                </div>
+                <div class="process-label">Cargar documento</div>
+                <div class="process-arrow-down"></div>
+              </div>
+
+              <!-- Paso 2: IA Procesa -->
+              <div class="process-flow-step">
+                <div class="process-node node-ai">
+                  <i class="fi fi-rr-brain"></i>
+                </div>
+                <div class="process-label">IA extrae datos</div>
+                <div class="process-arrow-down"></div>
+              </div>
+
+              <!-- Paso 3: Aplicar Reglas -->
+              <div class="process-flow-step">
+                <div class="process-node node-rules">
+                  <i class="fi fi-rr-settings"></i>
+                </div>
+                <div class="process-label">Aplicar tus reglas</div>
+                <div class="process-arrow-down"></div>
+              </div>
+
+              <!-- Decisión: Validación -->
+              <div class="process-flow-step">
+                <div class="process-node node-decision">
+                  <i class="fi fi-rr-interrogation"></i>
+                </div>
+                <div class="process-label">¿Cumple validaciones?</div>
+              </div>
+
+              <!-- Branches: Sí / No -->
+              <div class="process-branches-container">
+                <!-- Rama Sí -->
+                <div class="process-branch-wrapper">
+                  <div class="process-arrow-down success-arrow"></div>
+                  <div class="process-node node-success">
+                    <i class="fi fi-rr-check"></i>
+                  </div>
+                  <div class="process-label success">Aprobar y exportar</div>
+                </div>
+
+                <!-- Rama No -->
+                <div class="process-branch-wrapper">
+                  <div class="process-arrow-down error-arrow"></div>
+                  <div class="process-node node-error">
+                    <i class="fi fi-rr-cross"></i>
+                  </div>
+                  <div class="process-label error">Revisar y corregir</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-info">
+            <h2>Nos adaptamos a <span class="gradient-text">tus procesos</span></h2>
+            <p class="process-description">
+              Podemos aplicar las reglas de negocio que necesites. Transformar, agrupar datos,
+              generar reportes o informes según tu flujo de trabajo específico.
+            </p>
+            <ul class="process-features">
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Validaciones automáticas personalizadas</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Transformación de datos según tus reglas</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Generación de reportes automáticos</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Integración con tus sistemas existentes</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section id="demo" class="facturascan-final-cta">
+      <div class="container">
+        <div class="final-cta-wrapper">
+          <div class="final-cta-visual">
+            <div class="cta-icon-container">
+              <i class="fi fi-rr-rocket-lunch"></i>
+            </div>
+            <div class="cta-stats-mini">
+              <div class="cta-stat-badge">
+                <i class="fi fi-rr-time-fast"></i>
+                <span>Implementación en 45 días</span>
+              </div>
+              <div class="cta-stat-badge">
+                <i class="fi fi-rr-shield-check"></i>
+                <span>Datos 100% seguros</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="final-cta-content">
+            <div class="cta-label">
+              <i class="fi fi-rr-sparkles"></i>
+              <span>Comenzá hoy</span>
+            </div>
+            <h2>Transformá tu gestión documental con <span class="gradient-text">inteligencia artificial</span></h2>
+            <p class="cta-description">
+              Unite a las empresas que ya están ahorrando tiempo y reduciendo errores.
+              Nuestro equipo está listo para mostrarte cómo FacturaScan se adapta a tu negocio.
+            </p>
+
+            <div class="cta-benefits-list">
+              <div class="cta-benefit-item">
+                <i class="fi fi-rr-check-circle"></i>
+                <span>100% personalizable a tus necesidades</span>
+              </div>
+              <div class="cta-benefit-item">
+                <i class="fi fi-rr-check-circle"></i>
+                <span>Deploy en tu propia infraestructura</span>
+              </div>
+              <div class="cta-benefit-item">
+                <i class="fi fi-rr-check-circle"></i>
+                <span>Total control y ownership del código</span>
+              </div>
+            </div>
+
+            <div class="final-cta-actions">
+              <a href="index.html#contacto" class="btn btn-primary btn-large cta-primary">
+                <i class="fi fi-rr-calendar"></i>
+                Agendar demo gratuita
+              </a>
+              <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary btn-large cta-secondary">
+                <i class="fi fi-rr-comment-alt"></i>
+                Contactar ahora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer__background" aria-hidden="true"></div>
+      <div class="container footer__container">
+        <div class="footer__content">
+          <div class="footer__section">
+            <h3>
+              <div class="footer__logo-container" aria-label="Cumbre IA">
+                <div class="mountain-icon">
+                  <img
+                    src="assets/images/pitch.svg"
+                    alt="Logo Cumbre IA"
+                    class="logo-svg"
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            </h3>
+            <p>
+              Soluciones de inteligencia artificial que transforman tu negocio.
+              Desarrollo de agentes IA, chatbots inteligentes y consultoría
+              tecnológica.
+            </p>
+            <div class="footer__social footer__social-margin">
+              <a
+                href="https://www.linkedin.com/company/cumbre-ia"
+                class="footer__social-link"
+                aria-label="LinkedIn"
+                target="_blank"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="#0077B5"
+                >
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.5c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.5h-3v-5c0-1.104-.896-2-2-2s-2 .896-2 2v5h-3v-10h3v1.5c.896-.896 2.104-1.5 3.5-1.5 2.209 0 4 1.791 4 4v6z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__section">
+            <h3>Soluciones</h3>
+            <p><a href="facturascan.html">FacturaScan</a></p>
+            <p><a href="index.html#soluciones">Synthetic Audience</a></p>
+          </div>
+          <div class="footer__section">
+            <h3>Contacto</h3>
+            <p><a href="mailto:hola@cumbre.cloud">hola@cumbre.cloud</a></p>
+            <p>Respuesta en menos de 24hs</p>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>
+            &copy; 2025 Cumbre IA. Inteligencia Artificial para el Futuro |
+            Powered by
+            <a href="https://mecantronic.com.ar/" target="_blank">Mecantronic</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+      <div class="video-modal__backdrop"></div>
+      <div class="video-modal__content">
+        <button class="video-modal__close" aria-label="Cerrar video">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+        <div class="video-modal__player">
+          <video id="demoVideo" controls controlsList="nodownload" preload="metadata">
+            <source src="assets/videos/facturaScan_demo.mp4" type="video/mp4" />
+            Tu navegador no soporta la reproducción de video.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <script src="facturascan.js"></script>
+  </body>
+</html>
