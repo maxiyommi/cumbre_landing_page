@@ -522,8 +522,11 @@ button.btn-large {
 }
 
 /* Product Image Wrapper */
+.product-image-wrapper img {
+  transition: box-shadow 0.3s ease;
+}
+
 .product-image-wrapper img:hover {
-  transform: scale(1.05) !important;
   box-shadow: 0 20px 60px rgba(147, 51, 234, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
@@ -1606,31 +1609,9 @@ button.btn-large {
   align-items: center;
   justify-content: center;
   padding: 8rem 2rem 8rem;
-  background: linear-gradient(
-    135deg,
-    var(--bg-primary) 0%,
-    var(--bg-secondary) 50%,
-    var(--bg-tertiary) 100%
-  );
+  background: transparent;
   position: relative;
   overflow: hidden;
-}
-
-/* Smooth gradient transition at bottom of hero */
-.synthetic-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--bg-primary) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* Animated Network Background */
