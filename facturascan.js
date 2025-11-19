@@ -7,6 +7,8 @@ class FacturaScanPage {
     this.handleMobileMenu();
     this.setupVideoModal();
     this.handleNavbarVisibility();
+    this.setupBentoCards();
+    this.setupImageModal();
   }
 
   initializeComponents() {
@@ -162,6 +164,11 @@ class FacturaScanPage {
     );
 
     animatedElements.forEach((el, index) => {
+      // Skip animation for cards inside facturascan-how-it-works section
+      if (el.closest('.facturascan-how-it-works.section-transition-from-purple-gradient')) {
+        return;
+      }
+
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
@@ -282,6 +289,77 @@ class FacturaScanPage {
       nav.classList.add('header__nav--visible');
     }
   }
+
+  setupBentoCards() {
+    const bentoCards = document.querySelectorAll('.bento-card');
+    const agentCards = document.querySelectorAll('.agent-response-card');
+
+    bentoCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+
+    agentCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    });
+  }
+
+  setupImageModal() {
+    const clickableImages = document.querySelectorAll('.product-image-clickable');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.image-modal-close');
+    const overlay = document.querySelector('.image-modal-overlay');
+
+    if (!modal || !clickableImages.length) return;
+
+    // Abrir modal al hacer clic en imagen
+    clickableImages.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        modalCaption.textContent = img.alt + ' · Imagen generada con IA';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Cerrar modal
+    const closeModal = () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeModal);
+    }
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  }
+
 }
 
 // Initialize when DOM is ready

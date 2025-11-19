@@ -94,7 +94,35 @@
         >
           <a href="#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="#servicios" class="header__nav-link">Servicios</a>
-          <a href="#soluciones" class="header__nav-link">Soluciones</a>
+          <!-- Desktop: menú desplegable de Soluciones -->
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de soluciones"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Soluciones
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
+              <a
+                href="facturascan.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >FacturaScan</a
+              >
+              <a
+                href="synthetic-audience.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >Synthetic Audience</a
+              >
+            </div>
+          </div>
+          <!-- Link directo a sección soluciones en mobile -->
+          <a href="#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
           <!-- Desktop: menú agrupado -->
           <div class="header__nav-contact-group">
@@ -179,129 +207,158 @@
 
     <!-- Features Section -->
     <section id="tu_cumbre" class="section features">
-      <!-- Subtle gradient overlay at top -->
-      <div class="features__top-gradient"></div>
       <div class="container">
-        <div class="features__grid">
-          <!-- Left column: Image and text -->
-          <div class="features__content">
-            <div class="features__robot-container">
-              <img
-                src="assets/images/robot.png"
-                alt="Robot IA Cumbre"
-                class="robot-anim features__robot-image"
-                loading="lazy"
-              />
-              <div class="robot-shadow"></div>
-            </div>
-            <h2>¿En qué etapa del ascenso se encuentra Tu PyME?</h2>
-            <p>
-              Cada PyME exitosa pasa por estas 4 etapas para alcanzar su cumbre.
-              Identificá dónde estás hoy y descubrí cuál es tu próximo paso
-              hacia la automatización total.<br />
-            </p>
-            <p>
-              <strong>No tenés que hacer el ascenso solo.</strong><br />
-              Te acompañamos paso a paso hasta que veas tu negocio en la cima.
-            </p>
-            <a href="#contacto" class="btn btn-primary"> 🏔️ Hacer Cumbre </a>
-          </div>
-          <!-- Right column: Feature cards -->
-          <div class="features__cards">
-            <div class="feature-card glass-card">
-              <span class="feature-card__icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9,22 9,12 15,12 15,22" />
-                </svg>
-                ETAPA 1
-              </span>
-              <h3 class="feature-card__title">Campamento Base</h3>
-              <p class="feature-card__description">
-                Revisamos cómo funcionan actualmente todos tus sistemas de negocio: canales de venta, 
-                gestión de clientes, inventarios y operaciones internas. Identificamos dónde se están 
-                perdiendo oportunidades comerciales, qué procesos consumen tiempo innecesario y cuáles 
+        <!-- Header centralizado -->
+        <div class="features__header">
+          <h2 class="features__title">¿En qué etapa del ascenso se encuentra Tu PyME?</h2>
+          <p class="features__subtitle">
+            Cada PyME exitosa pasa por estas 4 etapas para alcanzar su cumbre.
+            Identificá dónde estás hoy y descubrí cuál es tu próximo paso hacia la automatización total
+          </p>
+        </div>
+
+        <!-- Timeline de etapas -->
+        <div class="features__timeline">
+          <!-- Etapa 1 -->
+          <div class="timeline-item timeline-item--right">
+            <div class="timeline-item__connector"></div>
+            <div class="timeline-item__content glass-card">
+              <div class="timeline-item__header">
+                <div class="timeline-item__number">1</div>
+                <div class="timeline-item__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9,22 9,12 15,12 15,22" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="timeline-item__title">Campamento Base</h3>
+              <p class="timeline-item__description">
+                Revisamos cómo funcionan actualmente todos tus sistemas de negocio: canales de venta,
+                gestión de clientes, inventarios y operaciones internas. Identificamos dónde se están
+                perdiendo oportunidades comerciales, qué procesos consumen tiempo innecesario y cuáles
                 son las mejores áreas para automatizar y optimizar tu operación.
               </p>
             </div>
-            <div class="feature-card glass-card">
-              <span class="feature-card__icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" />
-                </svg>
-                ETAPA 2
-              </span>
-              <h3 class="feature-card__title">Ascenso Técnico</h3>
-              <p class="feature-card__description">
-                Conectamos todos tus sistemas actuales para que funcionen como una sola operación integrada. 
-                Eliminamos el trabajo manual de pasar información entre plataformas y creamos flujos automáticos 
+          </div>
+
+          <!-- Etapa 2 -->
+          <div class="timeline-item timeline-item--left">
+            <div class="timeline-item__connector"></div>
+            <div class="timeline-item__content glass-card">
+              <div class="timeline-item__header">
+                <div class="timeline-item__number">2</div>
+                <div class="timeline-item__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="timeline-item__title">Ascenso Técnico</h3>
+              <p class="timeline-item__description">
+                Conectamos todos tus sistemas actuales para que funcionen como una sola operación integrada.
+                Eliminamos el trabajo manual de pasar información entre plataformas y creamos flujos automáticos
                 que aseguran que ningún cliente se pierda en el proceso, independientemente de cómo te contacte.
               </p>
             </div>
-            <div class="feature-card glass-card">
-              <span class="feature-card__icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect width="18" height="10" x="3" y="11" rx="2" />
-                  <circle cx="12" cy="5" r="2" />
-                  <path d="m12 7-3 4h6l-3-4Z" />
-                </svg>
-                ETAPA 3
-              </span>
-              <h3 class="feature-card__title">Agente Operativo 24/7</h3>
-              <p class="feature-card__description">
-                Tu Agente IA funciona las 24 horas atendiendo consultas, calificando potenciales clientes y gestionando 
-                reclamos con respuestas contextuales inteligentes. Mantiene conversaciones naturales, deriva casos complejos 
-                cuando es necesario y convierte visitantes en oportunidades comerciales concretas. Mientras vos te enfocás en 
+          </div>
+
+          <!-- Etapa 3 -->
+          <div class="timeline-item timeline-item--right">
+            <div class="timeline-item__connector"></div>
+            <div class="timeline-item__content glass-card">
+              <div class="timeline-item__header">
+                <div class="timeline-item__number">3</div>
+                <div class="timeline-item__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="18" height="10" x="3" y="11" rx="2" />
+                    <circle cx="12" cy="5" r="2" />
+                    <path d="m12 7-3 4h6l-3-4Z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="timeline-item__title">Agente Operativo 24/7</h3>
+              <p class="timeline-item__description">
+                Tu Agente IA funciona las 24 horas atendiendo consultas, calificando potenciales clientes y gestionando
+                reclamos con respuestas contextuales inteligentes. Mantiene conversaciones naturales, deriva casos complejos
+                cuando es necesario y convierte visitantes en oportunidades comerciales concretas. Mientras vos te enfocás en
                 hacer crecer el negocio, el agente se encarga de que ninguna consulta quede sin responder.
               </p>
             </div>
-            <div class="feature-card glass-card">
-              <span class="feature-card__icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-                </svg>
-                ETAPA 4
-              </span>
-              <h3 class="feature-card__title">Cumbre Digital</h3>
-              <p class="feature-card__description">
-                Dashboard ejecutivo que centraliza métricas clave de todas tus operaciones automatizadas. Analiza patrones de 
-                comportamiento de clientes, identifica tendencias de inventario y mide el ROI real de cada canal. Te proporciona 
+          </div>
+
+          <!-- Etapa 4 -->
+          <div class="timeline-item timeline-item--left">
+            <div class="timeline-item__connector"></div>
+            <div class="timeline-item__content glass-card">
+              <div class="timeline-item__header">
+                <div class="timeline-item__number">4</div>
+                <div class="timeline-item__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="timeline-item__title">Cumbre Digital</h3>
+              <p class="timeline-item__description">
+                Dashboard ejecutivo que centraliza métricas clave de todas tus operaciones automatizadas. Analiza patrones de
+                comportamiento de clientes, identifica tendencias de inventario y mide el ROI real de cada canal. Te proporciona
                 insights accionables para tomar decisiones estratégicas basadas en datos concretos, no solo intuición empresarial.
               </p>
             </div>
           </div>
+        </div>
+
+        <!-- Robot al final del recorrido -->
+        <div class="features__robot-container">
+          <img
+            src="assets/images/robot.png"
+            alt="Robot IA Cumbre"
+            class="robot-anim features__robot-image"
+            loading="lazy"
+          />
+          <div class="robot-shadow"></div>
+        </div>
+
+        <!-- Footer con mensaje y CTA -->
+        <div class="features__footer">
+          <p class="features__message">
+            <strong>No tenés que hacer el ascenso solo</strong><br />
+            Te acompañamos paso a paso hasta que veas tu negocio en la cima
+          </p>
+          <a href="#contacto" class="btn btn-primary features__cta">🏔️ Hacer Cumbre</a>
         </div>
       </div>
     </section>
@@ -314,7 +371,7 @@
           <p>
             Desarrollamos soluciones de inteligencia artificial a medida que se
             adaptan a las necesidades específicas de tu industria y objetivos
-            empresariales.
+            empresariales
           </p>
         </div>
         <div class="services__grid">
@@ -441,16 +498,16 @@
                 <i class="fi fi-rr-users-alt"></i>
               </div>
               <div class="solucion-card__info">
-                <h3 class="solucion-card__title">Synthetic Audience Platform</h3>
-                <p class="solucion-card__subtitle">Validación de Campañas con IA</p>
+                <h3 class="solucion-card__title">Synthetic Audience Builder</h3>
+                <p class="solucion-card__subtitle">Inteligencia Colectiva Simulada</p>
                 <p class="solucion-card__description">
-                  Valida tus campañas de marketing antes de invertir presupuesto real. Simula audiencias
-                  sintéticas que actúan como tu público objetivo, identificando fortalezas y debilidades
-                  de tu estrategia antes del lanzamiento.
+                  Arquitectura multi-agente que simula una gran variedad de perspectivas reales en segundos.
+                  Validá campañas antes de invertir en focus groups. Detectá fortalezas,
+                  debilidades y puntos ciegos que un solo agente no revelaría.
                 </p>
-                <button class="btn btn-secondary solucion-card__btn" data-solucion="synthetic-audience">
+                <a href="synthetic-audience.html" class="btn btn-secondary solucion-card__btn">
                   Conocer más
-                </button>
+                </a>
               </div>
             </div>
             <div class="solucion-card__visual">
@@ -497,8 +554,8 @@
                 El punto de partida es una auditoría técnica y funcional de USD 1,500 (20 horas de trabajo), 
                 que nos permite relevar procesos, validar accesos y diseñar la arquitectura más eficiente. 
                 En caso de avanzar con el desarrollo, este monto queda bonificado en la inversión final. 
-                Las implementaciones comienzan en USD 10,250 para un agente independiente, y pueden llegar 
-                hasta USD 32,500 en el caso de un ecosistema de tres agentes con capacidad de interactuar entre sí 
+                Las implementaciones comienzan en USD 5000 para un agente independiente, y pueden llegar 
+                hasta USD 20000 en el caso de un ecosistema de tres agentes con capacidad de interactuar entre sí 
                 mediante un servidor central dedicado (MCP). A partir de allí, es posible adicionar agentes según 
                 la cantidad de unidades de negocio a integrar, con valores que se ajustan a la complejidad y 
                 necesidades de cada despliegue.
@@ -527,7 +584,7 @@
             <div class="faq__answer">
               <p>
                 El tiempo de implementación depende del alcance del proyecto,
-                pero generalmente completamos la integración entre 3 y 5
+                pero generalmente completamos la integración entre 3 y 8
                 semanas. Durante todo el proceso, nos mantenemos comunicados
                 constantemente con vos, asegurándonos de que cada etapa esté
                 perfectamente alineada con los objetivos de tu negocio.
@@ -714,13 +771,61 @@
         </div>
         <div class="footer__bottom">
           <p>
-            &copy; 2025 Cumbre IA. Inteligencia Artificial para el Futuro |
-            Powered by
-            <a href="https://mecantronic.com.ar/" target="_blank">Mecantronic</a>
+            &copy; <span id="currentYear"></span> Cumbre IA. Todos los derechos reservados.
+            <script>
+              (function(){
+                const el = document.getElementById('currentYear');
+                if (el) el.textContent = new Date().getFullYear();
+              })();
+            </script>
           </p>
         </div>
       </div>
     </footer>
+
+    <!-- Smart Banner Lateral para PDF de Casos de Uso -->
+    <aside class="smart-banner" id="smartBanner" aria-label="Descarga casos de uso">
+      <a
+        href="https://drive.google.com/file/d/1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS/view?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="smart-banner__content"
+        id="downloadCTA"
+      >
+        <div class="smart-banner__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+
+        <div class="smart-banner__text">
+          <h3 class="smart-banner__title">¿Cómo lo hicieron otras PyMEs?</h3>
+          <p class="smart-banner__description">Descargá el roadmap completo de transformación digital</p>
+        </div>
+
+        <div class="smart-banner__thumbnail">
+          <div class="smart-banner__thumbnail-icon">
+            <i class="fi fi-rr-file-pdf"></i>
+          </div>
+          <div class="smart-banner__thumbnail-label">
+            <span class="smart-banner__badge">Descarga gratuita</span>
+            <span class="smart-banner__filename">Roadmap Cumbre.pdf</span>
+          </div>
+        </div>
+      </a>
+    </aside>
+
+    <!-- Indicador lateral (tab) para mostrar el banner cuando está oculto -->
+    <button class="smart-banner__tab" id="smartBannerTab" aria-label="Abrir roadmap">
+      <span class="smart-banner__tab-text">Roadmap Cumbre</span>
+      <div class="smart-banner__tab-icon">
+        <i class="fi fi-rr-file-pdf"></i>
+      </div>
+    </button>
 
     <script src="script.js"></script>
   </body>
