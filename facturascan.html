@@ -87,7 +87,35 @@
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="index.html#servicios" class="header__nav-link">Servicios</a>
-          <a href="index.html#soluciones" class="header__nav-link">Soluciones</a>
+          <!-- Desktop: menú desplegable de Soluciones -->
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de soluciones"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Soluciones
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
+              <a
+                href="facturascan.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >FacturaScan</a
+              >
+              <a
+                href="synthetic-audience.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >Synthetic Audience</a
+              >
+            </div>
+          </div>
+          <!-- Link directo a sección soluciones en mobile -->
+          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
           <!-- Desktop: menú agrupado -->
           <div class="header__nav-contact-group">
@@ -120,21 +148,50 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="facturascan-hero">
+    <section class="synthetic-hero">
+      <div class="synthetic-hero__background">
+        <!-- Animated document visualization -->
+        <div class="network-viz">
+          <div class="network-node" style="--delay: 0s; --x: 15%; --y: 25%;"></div>
+          <div class="network-node" style="--delay: 0.4s; --x: 80%; --y: 20%;"></div>
+          <div class="network-node" style="--delay: 0.8s; --x: 30%; --y: 70%;"></div>
+          <div class="network-node" style="--delay: 1.2s; --x: 65%; --y: 75%;"></div>
+          <div class="network-node" style="--delay: 1.6s; --x: 50%; --y: 50%;"></div>
+          <div class="network-node" style="--delay: 2s; --x: 85%; --y: 55%;"></div>
+          <div class="network-node" style="--delay: 2.4s; --x: 20%; --y: 45%;"></div>
+          <div class="network-node" style="--delay: 2.8s; --x: 55%; --y: 30%;"></div>
+
+          <!-- Connection lines -->
+          <svg class="network-connections" xmlns="http://www.w3.org/2000/svg">
+            <line class="connection-line" x1="15%" y1="25%" x2="80%" y2="20%" style="--delay: 0.5s;"/>
+            <line class="connection-line" x1="80%" y1="20%" x2="65%" y2="75%" style="--delay: 1s;"/>
+            <line class="connection-line" x1="30%" y1="70%" x2="65%" y2="75%" style="--delay: 1.5s;"/>
+            <line class="connection-line" x1="50%" y1="50%" x2="85%" y2="55%" style="--delay: 2s;"/>
+            <line class="connection-line" x1="20%" y1="45%" x2="50%" y2="50%" style="--delay: 2.5s;"/>
+            <line class="connection-line" x1="55%" y1="30%" x2="50%" y2="50%" style="--delay: 3s;"/>
+          </svg>
+        </div>
+      </div>
+
       <div class="container">
-        <div class="facturascan-hero__content">
-          <div class="facturascan-hero__badge">
+        <div class="synthetic-hero__content">
+          <div class="synthetic-hero__badge">
             <i class="fi fi-rr-file-invoice"></i>
-            <span>Solución de Automatización Contable</span>
+            <span>Automatización Contable con IA</span>
           </div>
-          <h1 class="facturascan-hero__title">
-            Transformá horas de trabajo en <span class="gradient-text">segundos</span>
+
+          <h1 class="synthetic-hero__title">
+            <span class="title-line">Transformá horas de trabajo</span>
+            <span class="title-line title-highlight">en <span class="gradient-text-animated">segundos</span></span>
           </h1>
-          <p class="facturascan-hero__subtitle">
-            Digitalizá información en segundos. Agilizá tareas, reducí equivocaciones y potenciá el rendimiento con nuestra
-            <strong>plataforma inteligente de lectura de documentos</p>
-          <div class="facturascan-hero__ctas">
-            <a href="mailto:hola@cumbre.cloud" class="btn btn-primary btn-large">
+
+          <p class="synthetic-hero__subtitle">
+            Digitalizá información en segundos. <strong>Agilizá tareas, reducí equivocaciones</strong> y potenciá el rendimiento con nuestra
+            plataforma inteligente de <strong>lectura automática de comprobantes</strong>.
+          </p>
+
+          <div class="synthetic-hero__ctas">
+            <a href="mailto:hola@cumbre.cloud" class="btn btn-primary btn-large btn-glow">
               <i class="fi fi-rr-calendar"></i>
               Solicitar demo
             </a>
@@ -142,22 +199,6 @@
               <i class="fi fi-rr-play-circle"></i>
               Ver video
             </button>
-          </div>
-
-          <!-- Stats -->
-          <div class="facturascan-stats">
-            <div class="stat-item">
-              <div class="stat-value">x50</div>
-              <div class="stat-label">Más rápido</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value">92%</div>
-              <div class="stat-label">Menos errores</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value">70%</div>
-              <div class="stat-label">Ahorro de tiempo</div>
-            </div>
           </div>
         </div>
       </div>
@@ -512,9 +553,13 @@
         </div>
         <div class="footer__bottom">
           <p>
-            &copy; 2025 Cumbre IA. Inteligencia Artificial para el Futuro |
-            Powered by
-            <a href="https://mecantronic.com.ar/" target="_blank">Mecantronic</a>
+            &copy; <span id="currentYear"></span> Cumbre IA. Todos los derechos reservados.
+            <script>
+              (function(){
+                const el = document.getElementById('currentYear');
+                if (el) el.textContent = new Date().getFullYear();
+              })();
+            </script>
           </p>
         </div>
       </div>

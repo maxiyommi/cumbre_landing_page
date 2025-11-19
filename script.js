@@ -15,7 +15,8 @@ class AILandingPage {
         this.header = document.querySelector('.header');
         this.navLinks = document.querySelectorAll('.header__nav-link');
         this.sections = document.querySelectorAll('.section');
-        this.animatedElements = document.querySelectorAll('.glass-card, .feature-card, .service-card');
+        // Excluir las cards del timeline de las animaciones automáticas del observer
+        this.animatedElements = document.querySelectorAll('.glass-card:not(.features__timeline .glass-card), .feature-card, .service-card');
         this.backgroundVideo = document.getElementById('bg-video'); // Referencia al video
         this.heroSection = document.getElementById('inicio');
         this.isParallaxEnabled = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
@@ -295,6 +296,7 @@ class AILandingPage {
             this.handleScroll();
             this.handleNavbarVisibility();
             this.handleScrollIndicator();
+            this.updateActiveNavLink(); // Actualizar nav activo en cada scroll
         }, 16));
         
         // Navigation clicks
@@ -428,10 +430,10 @@ class AILandingPage {
             rootMargin: '0px 0px -50px 0px'
         };
 
-        // Navigation observer
+        // Navigation observer - ajustado para detectar mejor las secciones
         this.navObserver = new IntersectionObserver(this.handleNavObserver.bind(this), {
-            threshold: 0.5,
-            rootMargin: '0px 0px -50% 0px'
+            threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+            rootMargin: '0px 0px -40% 0px'
         });
 
         this.sections.forEach(section => {
@@ -474,19 +476,69 @@ class AILandingPage {
         }
     }
 
-    handleNavObserver(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const targetId = `#${entry.target.id}`;
-                
-                this.navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === targetId) {
-                        link.classList.add('active');
-                    }
+    updateActiveNavLink() {
+        // Obtener todas las secciones actualmente visibles
+        const visibleSections = [];
+        const headerOffset = this.header ? this.header.offsetHeight : 0;
+
+        // Recorrer todas las secciones para ver cuáles están visibles
+        this.sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Calcular qué porcentaje de la sección está visible
+            const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, headerOffset);
+            const visibilityRatio = visibleHeight / windowHeight;
+
+            if (visibilityRatio > 0) { // Cualquier parte visible
+                visibleSections.push({
+                    section: section,
+                    ratio: visibilityRatio,
+                    distanceFromTop: Math.max(0, rect.top - headerOffset)
                 });
             }
         });
+
+        // Encontrar la sección más relevante (la que está más cerca del top y es más visible)
+        if (visibleSections.length > 0) {
+            // Ordenar por distancia desde el top (priorizar la que está más arriba)
+            visibleSections.sort((a, b) => {
+                return a.distanceFromTop - b.distanceFromTop;
+            });
+
+            const activeSection = visibleSections[0].section;
+            const targetId = `#${activeSection.id}`;
+            const sectionId = activeSection.id;
+
+            // Remover active de todos los links y botones
+            this.navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const solucionesToggle = document.querySelector('.header__nav-contact-toggle[aria-label="Abrir menú de soluciones"]');
+            if (solucionesToggle) {
+                solucionesToggle.classList.remove('active');
+            }
+
+            // Activar el link correspondiente
+            this.navLinks.forEach(link => {
+                if (link.getAttribute('href') === targetId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Manejar caso especial: botón "Soluciones" (dropdown en desktop)
+            if (sectionId === 'soluciones') {
+                if (solucionesToggle) {
+                    solucionesToggle.classList.add('active');
+                }
+            }
+        }
+    }
+
+    handleNavObserver(entries) {
+        // Delegar a updateActiveNavLink para mantener consistencia
+        this.updateActiveNavLink();
     }
 
     handleAnimationObserver(entries) {
@@ -953,3 +1005,85 @@ function showProximamenteNotification(solucionName) {
         }
     }, 3000);
 }
+
+/* ============================================
+   SMART BANNER - PDF CASOS DE USO
+   ============================================ */
+
+class SmartBannerController {
+    constructor() {
+        this.banner = document.getElementById('smartBanner');
+        this.tab = document.getElementById('smartBannerTab');
+        this.autoHideDelay = 5000; // 5 segundos
+        this.autoHideTimer = null;
+        this.scrollCount = 0;
+        this.scrollThreshold = 15; // Ocultar al 3er scroll
+        this.lastScrollY = 0;
+
+        if (this.banner && this.tab) {
+            this.init();
+        }
+    }
+
+    init() {
+        // Mostrar solo el tab al inicio
+        this.tab.classList.add('visible');
+
+        // Click en tab para mostrar banner
+        this.tab.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evitar que se propague el click
+            this.showBanner();
+        });
+
+        // Cerrar banner al hacer scroll
+        window.addEventListener('scroll', () => {
+            if (this.banner.classList.contains('visible')) {
+                this.hideBanner();
+            }
+        }, { passive: true });
+
+        // Cerrar banner al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (this.banner.classList.contains('visible')) {
+                // Verificar si el clic fue fuera del banner
+                if (!this.banner.contains(e.target) && !this.tab.contains(e.target)) {
+                    this.hideBanner();
+                }
+            }
+        });
+    }
+
+    showBanner() {
+        this.banner.classList.add('visible');
+        this.tab.classList.remove('visible');
+        this.scrollCount = 0; // Resetear contador de scrolls
+        this.lastScrollY = window.scrollY; // Actualizar posición inicial
+        this.startAutoHideTimer();
+    }
+
+    hideBanner() {
+        this.clearAutoHideTimer();
+        this.banner.classList.remove('visible');
+        this.tab.classList.add('visible');
+        this.scrollCount = 0; // Resetear contador
+    }
+
+    startAutoHideTimer() {
+        this.clearAutoHideTimer();
+        this.autoHideTimer = setTimeout(() => {
+            this.hideBanner();
+        }, this.autoHideDelay);
+    }
+
+    clearAutoHideTimer() {
+        if (this.autoHideTimer) {
+            clearTimeout(this.autoHideTimer);
+            this.autoHideTimer = null;
+        }
+    }
+}
+
+// Inicializar Smart Banner
+document.addEventListener('DOMContentLoaded', () => {
+    new SmartBannerController();
+});
