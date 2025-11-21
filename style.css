@@ -1799,13 +1799,13 @@ body {
   border-radius: 2.5rem;
   background: linear-gradient(
     135deg,
-    rgba(0, 212, 255, 0.08) 0%,
-    rgba(102, 126, 234, 0.06) 50%,
-    rgba(255, 255, 255, 0.02) 100%
+    rgba(0, 212, 255, 0.05) 0%,
+    rgba(102, 126, 234, 0.03) 50%,
+    rgba(255, 255, 255, 0.01) 100%
   );
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  box-shadow: 0 24px 80px rgba(0, 212, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   position: relative;
@@ -1845,10 +1845,10 @@ body {
 }
 
 .contact__card:hover {
-  transform: scale(1.03) translateY(-8px);
-  border-color: rgba(0, 212, 255, 0.4);
-  box-shadow: 0 40px 120px rgba(0, 212, 255, 0.2),
-    0 16px 48px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: scale(1.02) translateY(-4px);
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .contact__card * {
@@ -2547,6 +2547,12 @@ body {
     transform: translateY(-50%);
   }
 
+  .timeline-item--left .timeline-item__connector,
+  .timeline-item--right .timeline-item__connector {
+    left: 30px;
+    right: auto;
+  }
+
   .timeline-item__connector::after {
     left: -8px;
     right: auto;
@@ -3230,7 +3236,7 @@ body {
 
 .smart-banner {
   position: fixed;
-  right: -400px;
+  left: -400px;
   top: 50%;
   transform: translateY(-50%);
   width: 340px;
@@ -3240,15 +3246,15 @@ body {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(0, 212, 255, 0.25);
-  border-right: none;
-  border-radius: 1.5rem 0 0 1.5rem;
-  box-shadow: -8px 8px 32px rgba(0, 0, 0, 0.3), -4px 4px 16px rgba(0, 212, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: none;
+  border-radius: 0 1.5rem 1.5rem 0;
+  box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.3), 4px 4px 16px rgba(0, 212, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 
 .smart-banner.visible {
-  right: 0;
+  left: 0;
 }
 
 /* Contenido del banner - ahora es clickeable */
@@ -3373,19 +3379,19 @@ body {
 }
 
 /* Animación de entrada */
-@keyframes slideInFromRight {
+@keyframes slideInFromLeft {
   from {
-    right: -400px;
+    left: -400px;
     opacity: 0;
   }
   to {
-    right: 0;
+    left: 0;
     opacity: 1;
   }
 }
 
 .smart-banner.visible {
-  animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ============================================
@@ -3415,7 +3421,7 @@ body {
 
   .smart-banner.dismissed {
     bottom: -500px;
-    right: auto;
+    left: auto;
   }
 
   @keyframes slideInFromBottom {
@@ -3458,7 +3464,7 @@ body {
 /* Indicador lateral (tab) - visible solo cuando el banner está oculto */
 .smart-banner__tab {
   position: fixed;
-  right: -60px;
+  left: -60px;
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
@@ -3471,8 +3477,8 @@ body {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(0, 212, 255, 0.3);
-  border-right: none;
-  border-radius: 1rem 0 0 1rem;
+  border-left: none;
+  border-radius: 0 1rem 1rem 0;
   box-shadow:
     0 8px 32px rgba(0, 212, 255, 0.15),
     0 4px 16px rgba(0, 0, 0, 0.3);
@@ -3482,15 +3488,15 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease;
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease;
 }
 
 .smart-banner__tab.visible {
-  right: 0;
+  left: 0;
 }
 
 .smart-banner__tab.visible:hover {
-  transform: translateY(-50%) translateX(-5px);
+  transform: translateY(-50%) translateX(5px);
   background: linear-gradient(
     135deg,
     rgba(0, 212, 255, 0.25) 0%,
@@ -3536,13 +3542,13 @@ body {
 /* Responsive para el tab en mobile */
 @media (max-width: 768px) {
   .smart-banner__tab {
-    /* Transformar en floating button en mobile */
-    right: 20px;
-    bottom: 20px;
+    /* Transformar en floating button en mobile - tamaño reducido */
+    left: 16px;
+    bottom: 16px;
     top: auto;
     transform: none;
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     padding: 0;
     display: flex;
@@ -3550,16 +3556,16 @@ body {
     justify-content: center;
     background: linear-gradient(
       135deg,
-      rgba(0, 212, 255, 0.9) 0%,
-      rgba(102, 126, 234, 0.9) 100%
+      rgba(0, 212, 255, 0.85) 0%,
+      rgba(102, 126, 234, 0.85) 100%
     );
     box-shadow:
-      0 8px 24px rgba(0, 212, 255, 0.4),
-      0 4px 12px rgba(0, 0, 0, 0.3);
+      0 4px 16px rgba(0, 212, 255, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
   .smart-banner__tab.visible {
-    right: 20px;
+    left: 16px;
     animation: fadeInScale 0.3s ease-out forwards;
   }
 
@@ -3572,7 +3578,7 @@ body {
   }
 
   .smart-banner__tab-icon {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     margin: 0;
   }
 
@@ -3586,4 +3592,142 @@ body {
       transform: scale(1);
     }
   }
+}
+
+/* ============================
+   HIDE BROWSER SCROLLBAR
+   ============================ */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* ============================
+   SCROLL PROGRESS INDICATOR
+   ============================ */
+.scroll-progress {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-progress.visible {
+  opacity: 1;
+}
+
+.scroll-progress__track {
+  position: relative;
+  width: 2px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.scroll-progress__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to bottom, #667eea, #00d4ff);
+  border-radius: 2px;
+  transition: height 0.1s ease-out;
+}
+
+/* Stations/checkpoints */
+.scroll-progress__stations {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 10px;
+}
+
+.scroll-progress__station {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.scroll-progress__station.active {
+  background: #00d4ff;
+  border-color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+.scroll-progress__station.passed {
+  background: #667eea;
+  border-color: #667eea;
+}
+
+/* Station labels */
+.scroll-progress__label {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.scroll-progress__station:hover .scroll-progress__label,
+.scroll-progress__station.active .scroll-progress__label {
+  opacity: 1;
+}
+
+.scroll-progress__station.active .scroll-progress__label {
+  color: #00d4ff;
+}
+
+/* Current position indicator */
+.scroll-progress__current {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #f093fb, #00d4ff);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+  transition: top 0.1s ease-out;
+  z-index: 2;
+}
+
+/* Hide scroll progress on smaller screens */
+@media (max-width: 1200px) {
+  .scroll-progress {
+    display: none;
+  }
+
+  /* Show scrollbar on mobile */
+  html {
+    scrollbar-width: auto;
+  }
+
+  html::-webkit-scrollbar {
+    display: block;
+  }
+}
+
+/* Hide scroll indicator when scrolled */
+.scroll-indicator.hidden {
+  opacity: 0;
 }

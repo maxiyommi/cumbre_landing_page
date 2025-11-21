@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+
+    <title>Casos de Uso - Cumbre IA</title>
+    <meta
+      name="description"
+      content="Descubrí los 6 casos de uso de IA que transforman PyMEs argentinas: chatbots, automatización de ventas, análisis de sentimiento y más."
+    />
+    <meta
+      name="keywords"
+      content="casos de uso IA, automatización PyME, chatbot WhatsApp, FacturaScan, análisis sentimiento"
+    />
+
+    <!-- Preconnect for external fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload critical resources -->
+    <link
+      rel="preload"
+      href="assets/fonts/basetica-light.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      as="style"
+    />
+
+    <!-- Load fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="servicios.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='2,28 10,10 12,14 16,6 30,28' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="container header__container">
+        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
+          <img
+            src="assets/images/pitch.svg"
+            alt="Logo Cumbre IA"
+            class="logo-svg"
+            loading="eager"
+          />
+        </a>
+
+        <button
+          class="header__menu-toggle"
+          aria-label="Abrir menú"
+          style="display: none"
+        >
+          <span aria-hidden="true">&#9776;</span>
+        </button>
+        <nav
+          class="header__nav"
+          role="navigation"
+          aria-label="Navegación principal"
+        >
+          <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
+          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de soluciones"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Soluciones
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
+              <a
+                href="facturascan.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >FacturaScan</a
+              >
+              <a
+                href="synthetic-audience.html"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >Synthetic Audience</a
+              >
+            </div>
+          </div>
+          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <div class="header__nav-contact-group">
+            <button
+              class="header__nav-link header__nav-contact-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Abrir menú de contacto"
+              type="button"
+              style="padding:0;background:none;border:none;font:inherit;"
+            >
+              Contacto
+            </button>
+            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
+              <a
+                href="mailto:hola@cumbre.cloud"
+                class="header__nav-contact-item"
+                role="menuitem"
+                >hola@cumbre.cloud</a
+              >
+            </div>
+          </div>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
+            >📅 Agendar Sesión</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="servicios-hero">
+      <!-- Animated background elements -->
+      <div class="servicios-hero__bg-elements">
+        <div class="bg-circle bg-circle--1"></div>
+        <div class="bg-circle bg-circle--2"></div>
+        <div class="bg-circle bg-circle--3"></div>
+      </div>
+
+      <div class="container">
+        <div class="servicios-hero__content">
+          <div class="servicios-hero__badge">
+            <i class="fi fi-rr-rocket-lunch"></i>
+            <span id="currentDate"></span>
+          </div>
+          <h1 class="servicios-hero__title">
+            <span class="servicios-hero__title-number">6</span>
+            <span class="servicios-hero__title-text">Casos de Uso que <span class="gradient-text">Transforman</span> tu Empresa</span>
+          </h1>
+          <p class="servicios-hero__subtitle">
+            Soluciones de inteligencia artificial diseñadas para PyMEs argentinas.
+            ROI demostrable. Propiedad 100% tuya.
+          </p>
+          <div class="servicios-hero__cta">
+            <a href="#casos" class="btn btn-primary btn-lg">
+              <i class="fi fi-rr-arrow-down"></i>
+              Explorar casos de uso
+            </a>
+            <a href="index.html#contacto" class="btn btn-secondary btn-lg">
+              <i class="fi fi-rr-calendar"></i>
+              Agendar auditoría
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-indicator__label">Explorá los casos</span>
+        <div class="scroll-indicator__mouse">
+          <div class="scroll-dot"></div>
+        </div>
+      </div>
+
+      <!-- Transition gradient -->
+      <div class="servicios-hero__transition"></div>
+    </section>
+
+    <!-- Resumen Ejecutivo -->
+    <section class="servicios-resumen">
+      <div class="container">
+        <div class="resumen-content glass-card">
+          <div class="resumen-header">
+            <i class="fi fi-rr-bulb"></i>
+            <h2>Resumen Ejecutivo</h2>
+          </div>
+          <div class="resumen-body">
+            <p class="resumen-lead">
+              La inteligencia artificial ya no es una tecnología del futuro: es la herramienta
+              que determina quién sobrevive y quién crece en el mercado actual.
+            </p>
+            <p>
+              Este documento presenta 6 casos de uso de IA diseñados específicamente
+              para PyMEs argentinas, priorizando soluciones de bajo costo, alto impacto y
+              ROI demostrable en 60-90 días.
+            </p>
+            <p>
+              Con Cumbre IA no comprás licencias de software eternas. <strong>Adquirís propiedad
+              tecnológica completa</strong>: cada agente, bot y automatización que implementamos
+              es 100% tuyo. Código, configuraciones, datos, todo.
+            </p>
+
+            <div class="resumen-categories">
+              <div class="category-box">
+                <h4>Atención al Cliente y Ventas (Casos 1-4)</h4>
+                <p>Automatización de WhatsApp, calificación de leads, análisis de sentimiento y recomendaciones personalizadas.</p>
+              </div>
+              <div class="category-box">
+                <h4>Gestión Administrativa (Casos 5-6)</h4>
+                <p>Facturación electrónica automática y gestión de gastos con OCR.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Glosario -->
+    <section class="servicios-glosario">
+      <div class="container">
+        <div class="glosario-header">
+          <h2>Glosario</h2>
+          <p>Entendé las diferencias entre Bot, Automatización y Agente Inteligente</p>
+        </div>
+        <div class="glosario-grid">
+          <article class="glosario-card glass-card">
+            <div class="glosario-card__icon">
+              <i class="fi fi-tr-user-robot"></i>
+            </div>
+            <h3 class="glosario-card__title">Bot - Asistente Conversacional</h3>
+            <div class="glosario-card__section">
+              <h4>¿Qué es?</h4>
+              <p>Un bot es un programa que automatiza conversaciones siguiendo reglas predefinidas. Funciona como un "atendedor automático inteligente" que responde preguntas frecuentes 24/7.</p>
+            </div>
+            <div class="glosario-card__section">
+              <h4>¿Qué hace?</h4>
+              <ul>
+                <li>Responde consultas frecuentes automáticamente</li>
+                <li>Califica leads básicos según criterios predefinidos</li>
+                <li>Captura información de clientes de manera estructurada</li>
+                <li>Deriva casos complejos a operadores humanos</li>
+              </ul>
+            </div>
+            <div class="glosario-card__features">
+              <span class="feature-badge">Flujos predefinidos</span>
+              <span class="feature-badge">Palabras clave</span>
+              <span class="feature-badge">Sin aprendizaje</span>
+            </div>
+          </article>
+
+          <article class="glosario-card glass-card">
+            <div class="glosario-card__icon">
+              <i class="fi fi-tr-settings"></i>
+            </div>
+            <h3 class="glosario-card__title">Automatización</h3>
+            <div class="glosario-card__section">
+              <h4>¿Qué es?</h4>
+              <p>La automatización implementa procesos automáticos que conectan sistemas mediante reglas tipo "si pasa X, entonces hace Y". Actúa como un asistente invisible que ejecuta tareas repetitivas.</p>
+            </div>
+            <div class="glosario-card__section">
+              <h4>¿Qué hace?</h4>
+              <ul>
+                <li>Conecta aplicaciones entre sí mediante APIs</li>
+                <li>Envía notificaciones automáticas cuando ocurren eventos</li>
+                <li>Sincroniza datos entre múltiples plataformas</li>
+                <li>Genera reportes programados</li>
+              </ul>
+            </div>
+            <div class="glosario-card__features">
+              <span class="feature-badge">Reglas IF-THEN</span>
+              <span class="feature-badge">Tareas mecánicas</span>
+              <span class="feature-badge">100% predecible</span>
+            </div>
+          </article>
+
+          <article class="glosario-card glass-card">
+            <div class="glosario-card__icon">
+              <i class="fi fi-tr-brain"></i>
+            </div>
+            <h3 class="glosario-card__title">Agente Inteligente</h3>
+            <div class="glosario-card__section">
+              <h4>¿Qué es?</h4>
+              <p>Un agente inteligente combina automatización avanzada con inteligencia artificial real, permitiéndole pensar, aprender y tomar decisiones complejas como un empleado virtual altamente capacitado.</p>
+            </div>
+            <div class="glosario-card__section">
+              <h4>¿Qué hace?</h4>
+              <ul>
+                <li>Comprende contexto e intención real más allá de las palabras</li>
+                <li>Adapta sus respuestas según cada situación específica</li>
+                <li>Toma decisiones complejas sin supervisión constante</li>
+                <li>Aprende de cada interacción para mejorar continuamente</li>
+                <li>Coordina múltiples acciones de manera inteligente</li>
+              </ul>
+            </div>
+            <div class="glosario-card__features">
+              <span class="feature-badge">Razonamiento contextual</span>
+              <span class="feature-badge">Aprendizaje continuo</span>
+              <span class="feature-badge">Decisiones autónomas</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Casos de Uso -->
+    <section id="casos" class="servicios-casos">
+      <div class="container">
+        <div class="casos-header">
+          <h2>Los 6 Casos de Uso</h2>
+          <p>Seleccioná un caso para ver todos los detalles</p>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="casos-tabs">
+          <button class="casos-tab active" data-caso="1">
+            <span class="casos-tab__number">01</span>
+            <span class="casos-tab__title">Chatbot WhatsApp</span>
+          </button>
+          <button class="casos-tab" data-caso="2">
+            <span class="casos-tab__number">02</span>
+            <span class="casos-tab__title">Asistente de Ventas</span>
+          </button>
+          <button class="casos-tab" data-caso="3">
+            <span class="casos-tab__number">03</span>
+            <span class="casos-tab__title">Análisis de Sentimiento</span>
+          </button>
+          <button class="casos-tab" data-caso="4">
+            <span class="casos-tab__number">04</span>
+            <span class="casos-tab__title">Recomendador</span>
+          </button>
+          <button class="casos-tab" data-caso="5">
+            <span class="casos-tab__number">05</span>
+            <span class="casos-tab__title">Facturación Automática</span>
+          </button>
+          <button class="casos-tab" data-caso="6">
+            <span class="casos-tab__number">06</span>
+            <span class="casos-tab__title">Gestión de Gastos</span>
+          </button>
+        </div>
+
+        <!-- Caso 1: Chatbot Inteligente en WhatsApp -->
+        <div class="caso-content active" id="caso-1">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-comment-dots"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 1</span>
+                <h3 class="caso-card__title">Chatbot Inteligente en WhatsApp Business</h3>
+                <p class="caso-card__subtitle">Atención al cliente 24/7 en el canal preferido por los argentinos</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <p>El 97% de los argentinos usa WhatsApp como canal principal. Sin atención inmediata:</p>
+                <ul class="problema-list">
+                  <li>45% de clientes no espera más de 2 horas → Ventas perdidas</li>
+                  <li>70% de consultas son repetitivas → Tiempo del equipo malgastado</li>
+                  <li>Sobrecarga constante → Imposibilidad de desconectarse</li>
+                  <li>Mala experiencia → Clientes frustrados que se van a la competencia</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Comprende modismos argentinos y errores de tipeo</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Responde consultas frecuentes automáticamente</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Califica y deriva leads a tu equipo de ventas</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Procesa pedidos simples y envía confirmaciones</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">60-80%</div>
+                    <div class="resultado-label">de consultas resueltas sin intervención humana</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">&lt;30 seg</div>
+                    <div class="resultado-label">tiempo de respuesta (vs 2-4 horas manual)</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">30-40%</div>
+                    <div class="resultado-label">aumento en conversión por respuesta inmediata</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">20-30%</div>
+                    <div class="resultado-label">recuperación de leads perdidos por demora</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>Comercios, gastronomía, servicios profesionales, e-commerce, inmobiliarias, agencias de turismo que reciben <strong>+50 consultas diarias por WhatsApp</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="index.html#contacto" class="btn btn-primary">Implementar esta solución</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 2: Asistente de Ventas -->
+        <div class="caso-content" id="caso-2">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-chart-network"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 2</span>
+                <h3 class="caso-card__title">Asistente de Ventas con Calificación Automática de Leads</h3>
+                <p class="caso-card__subtitle">Convertí más prospectos priorizando los de mayor potencial</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <p>Las PyMEs reciben leads de Instagram, Facebook, WhatsApp, web, pero:</p>
+                <ul class="problema-list">
+                  <li>80% nunca recibe seguimiento por desorganización</li>
+                  <li>Oportunidades calientes se pierden al no identificarse rápido</li>
+                  <li>Vendedores persiguen leads fríos perdiendo tiempo valioso</li>
+                  <li>Respuesta lenta (24-48hs) → 78% de ventas va a quien responde primero</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Centraliza todos los canales automáticamente (LinkedIn, redes, empresa)</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Califica con scoring 0-100 usando múltiples señales</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Detecta intención y urgencia en tiempo real</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Asigna automáticamente al vendedor adecuado</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Automatiza primer contacto en menos de 15 minutos</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Hace seguimiento predictivo del siguiente paso óptimo</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">40-60%</div>
+                    <div class="resultado-label">aumento en conversión por priorización inteligente</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">90%</div>
+                    <div class="resultado-label">reducción en tiempo de primera respuesta (&lt;15 min)</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">3-5x</div>
+                    <div class="resultado-label">aumento en productividad de ventas</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">25-35%</div>
+                    <div class="resultado-label">incremento en revenue</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>Empresas B2B, inmobiliarias, concesionarias, servicios premium, distribuidores, agencias que reciben <strong>+30 leads semanales</strong> con ticket promedio <strong>&gt;$200K</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="index.html#contacto" class="btn btn-primary">Implementar esta solución</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 3: Análisis de Sentimiento -->
+        <div class="caso-content" id="caso-3">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-heart-rate"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 3</span>
+                <h3 class="caso-card__title">Análisis de Sentimiento y Validación de Campañas con IA</h3>
+                <p class="caso-card__subtitle">Entendé tu audiencia antes de que explote una crisis</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <p>En Argentina, las redes son el principal canal de recomendación y queja:</p>
+                <ul class="problema-list">
+                  <li>Falta de visibilidad de menciones negativas hasta que es tarde</li>
+                  <li>Crisis virales destruyen meses de esfuerzo</li>
+                  <li>Campañas que fracasan después de gastar todo el presupuesto</li>
+                  <li>Respuestas inadecuadas empeoran el problema</li>
+                  <li>83% lee reviews antes de comprar - 2 reviews negativas sin responder = no compra</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Monitorea menciones 24/7 en todas las redes</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Clasifica sentimiento en tiempo real (positivo/negativo/neutro)</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Sugiere respuestas contextuales apropiadas</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Simula audiencias sintéticas que actúan como tu público objetivo</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Valida campañas ANTES de lanzar identificando fortalezas y debilidades</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">10-20x</div>
+                    <div class="resultado-label">más rápida detección de crisis</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">80-90%</div>
+                    <div class="resultado-label">reducción en tiempo de monitoreo manual</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">40-60%</div>
+                    <div class="resultado-label">mejora en tiempo de respuesta</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">30-50%</div>
+                    <div class="resultado-label">mejora en ROI de campañas por validación previa</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>Marcas consumer, gastronomía, retail con <strong>+50 menciones semanales en redes</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="index.html#contacto" class="btn btn-primary">Implementar esta solución</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 4: Recomendador -->
+        <div class="caso-content" id="caso-4">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-magic-wand"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 4</span>
+                <h3 class="caso-card__title">Recomendador Personalizado de Productos</h3>
+                <p class="caso-card__subtitle">Aumentá ticket promedio 20-35% con sugerencias inteligentes</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <ul class="problema-list">
+                  <li>Clientes abrumados no saben qué elegir → Compran menos</li>
+                  <li>Ventas cruzadas perdidas por falta de sugerencias oportunas</li>
+                  <li>Experiencia genérica sin personalización</li>
+                  <li>80% de ventas del 20% del catálogo → Inventario desbalanceado</li>
+                  <li>75% de consumidores prefiere marcas que personalizan</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Aprende de comportamiento individual (navegación, búsquedas, compras)</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Segmenta automáticamente clientes similares</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Recomienda en tiempo real según contexto actual</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Personaliza múltiples canales (web, app, email, WhatsApp, POS)</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Optimiza cross-sell y upsell en momento oportuno</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Predice recompra de productos consumibles</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">20-35%</div>
+                    <div class="resultado-label">aumento en ticket promedio</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">15-25%</div>
+                    <div class="resultado-label">incremento en tasa de conversión</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">30-50%</div>
+                    <div class="resultado-label">aumento en adopción de productos de bajo movimiento</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">25-40%</div>
+                    <div class="resultado-label">incremento en frecuencia de compra</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>E-commerce, retail físico con app, gastronomía, farmacias, librerías, cosmética, supermercados, ferreterías con catálogo <strong>+50 productos</strong> y <strong>clientes recurrentes</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="index.html#contacto" class="btn btn-primary">Implementar esta solución</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 5: Facturación Automática -->
+        <div class="caso-content" id="caso-5">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-file-invoice"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 5</span>
+                <h3 class="caso-card__title">Automatización de Facturación Electrónica</h3>
+                <p class="caso-card__subtitle">Eliminá el dolor de cabeza de facturar</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <p>La facturación electrónica en Argentina es una pesadilla:</p>
+                <ul class="problema-list">
+                  <li>Proceso manual complejo de 5-10 minutos por factura</li>
+                  <li>Alto riesgo de errores → Multas AFIP $10K-500K por infracción</li>
+                  <li>Interrupciones constantes en medio de ventas</li>
+                  <li>Falta de integración → Triple carga de datos</li>
+                  <li>Compliance complicado con 100+ tipos de comprobantes</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA - FacturaScan
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Se integra con tu sistema de ventas automáticamente</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Identifica tipo de comprobante correcto según cliente y operación</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Registra en sistema contable sin intervención manual</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Lee comprobantes físicos con OCR para registro de gastos</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">90-95%</div>
+                    <div class="resultado-label">reducción en tiempo (10 seg vs 5-10 min)</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">99%</div>
+                    <div class="resultado-label">eliminación de errores de carga</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">100%</div>
+                    <div class="resultado-label">prevención de multas AFIP</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">$0</div>
+                    <div class="resultado-label">costo de retrabajos por errores</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>Comercios, servicios profesionales, e-commerce, gastronomía, distribuidores, agencias que emiten <strong>+50 facturas/mes</strong> o tienen <strong>errores frecuentes</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="facturascan.html" class="btn btn-primary">Ver FacturaScan</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 6: Gestión de Gastos -->
+        <div class="caso-content" id="caso-6">
+          <div class="caso-card glass-card">
+            <div class="caso-card__header">
+              <div class="caso-card__icon">
+                <i class="fi fi-tr-receipt"></i>
+              </div>
+              <div class="caso-card__header-text">
+                <span class="caso-card__label">Caso 6</span>
+                <h3 class="caso-card__title">Asistente de Gestión de Gastos con FacturaScan</h3>
+                <p class="caso-card__subtitle">Convertí fotos de tickets en registros contables</p>
+              </div>
+            </div>
+
+            <div class="caso-card__body">
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-exclamation"></i>
+                  Problema que resuelve
+                </h4>
+                <ul class="problema-list">
+                  <li>30-40% de tickets se pierden → Nunca se registran</li>
+                  <li>Carga manual lenta: 3-5 minutos por comprobante</li>
+                  <li>Errores de transcripción frecuentes</li>
+                  <li>Gastos no autorizados pasan desapercibidos</li>
+                  <li>Reembolsos demorados (15-30 días)</li>
+                  <li>8-15% de gastos deducibles perdidos por falta de comprobantes</li>
+                </ul>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-lightbulb"></i>
+                  Solución con IA - FacturaScan Mobile
+                </h4>
+                <div class="solucion-grid">
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>App móvil para fotografiar cualquier comprobante</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Extrae datos automáticamente con OCR avanzado</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Valida contra AFIP en tiempo real</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Clasifica y registre en contabilidad automáticamente</p>
+                  </div>
+                  <div class="solucion-feature">
+                    <i class="fi fi-rr-check-circle"></i>
+                    <p>Alertas de gastos no autorizados o duplicados</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-chart-line-up"></i>
+                  Resultados
+                </h4>
+                <div class="resultados-grid">
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">90-95%</div>
+                    <div class="resultado-label">reducción en tiempo (10 seg vs 3-5 min)</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">99%</div>
+                    <div class="resultado-label">eliminación de errores de carga</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">30-40%</div>
+                    <div class="resultado-label">más comprobantes registrados (antes perdidos)</div>
+                  </div>
+                  <div class="resultado-item glass-card">
+                    <div class="resultado-value">8-15%</div>
+                    <div class="resultado-label">recuperación de gastos deducibles</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caso-section ideal-para">
+                <h4 class="caso-section__title">
+                  <i class="fi fi-rr-target"></i>
+                  Ideal para
+                </h4>
+                <p>PyMEs con equipo distribuido, servicios profesionales, gastronomía con compras múltiples, empresas con viáticos, cualquiera que procese <strong>+30 comprobantes/mes</strong>.</p>
+              </div>
+            </div>
+
+            <div class="caso-card__footer">
+              <a href="facturascan.html" class="btn btn-primary">Ver FacturaScan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Matriz de Decisión -->
+    <section class="servicios-matriz">
+      <div class="container">
+        <div class="matriz-header">
+          <h2>Matriz de Decisión</h2>
+          <p>No implementes IA porque está de moda. Implementala porque resuelve tu problema más costoso.</p>
+        </div>
+
+        <div class="matriz-table glass-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Si tu problema es...</th>
+                <th>Implementá primero...</th>
+                <th>ROI esperado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Perdés ventas por respuesta lenta en WhatsApp</td>
+                <td><strong>Caso 1:</strong> Chatbot</td>
+                <td><span class="roi-badge">2-3 meses</span></td>
+              </tr>
+              <tr>
+                <td>Leads se pierden en el desorden</td>
+                <td><strong>Caso 2:</strong> Asistente Ventas</td>
+                <td><span class="roi-badge">2-3 meses</span></td>
+              </tr>
+              <tr>
+                <td>Crisis virales dañan tu marca</td>
+                <td><strong>Caso 3:</strong> Análisis Sentimiento</td>
+                <td><span class="roi-badge">2-3 meses</span></td>
+              </tr>
+              <tr>
+                <td>Ticket promedio bajo</td>
+                <td><strong>Caso 4:</strong> Recomendador</td>
+                <td><span class="roi-badge">4-6 meses</span></td>
+              </tr>
+              <tr>
+                <td>Errores de facturación generan multas</td>
+                <td><strong>Caso 5:</strong> Automatización Facturación</td>
+                <td><span class="roi-badge">3-5 meses</span></td>
+              </tr>
+              <tr>
+                <td>Gastos mal controlados</td>
+                <td><strong>Caso 6:</strong> Gestión Gastos</td>
+                <td><span class="roi-badge">3-6 meses</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="matriz-cta">
+          <p class="matriz-cta__text">
+            <strong>Recomendación:</strong> Comenzá con tu punto de dolor más crítico, no con el caso más atractivo.
+          </p>
+          <a href="index.html#contacto" class="btn btn-primary">Agenda tu auditoría técnica</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="servicios-cta">
+      <div class="container">
+        <div class="cta-content glass-card">
+          <h2>¿Listo para transformar tu PyME?</h2>
+          <p>Agenda una auditoría técnica de 1.500 USD <strong>bonificada al contratar</strong> y descubrí cuál de estos 6 casos genera el mayor impacto en tu negocio.</p>
+          <div class="cta-buttons">
+            <a href="index.html#contacto" class="btn btn-primary btn-lg">📅 Agendar Auditoría</a>
+            <a href="https://drive.google.com/file/d/1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS/view?usp=drive_link" target="_blank" class="btn btn-secondary btn-lg">📄 Descargar PDF Completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer__background" aria-hidden="true"></div>
+      <div class="container footer__container">
+        <div class="footer__content">
+          <div class="footer__section">
+            <h3>
+              <a href="index.html" class="footer__logo-container" aria-label="Cumbre IA">
+                <div class="mountain-icon">
+                  <img
+                    src="assets/images/pitch.svg"
+                    alt="Logo Cumbre IA"
+                    class="logo-svg"
+                    loading="eager"
+                  />
+                </div>
+              </a>
+            </h3>
+            <p>
+              Soluciones de inteligencia artificial que transforman tu negocio.
+              Desarrollo de agentes IA, chatbots inteligentes y consultoría
+              tecnológica.
+            </p>
+            <div class="footer__social footer__social-margin">
+              <a
+                href="https://www.linkedin.com/company/cumbre-ia"
+                class="footer__social-link"
+                aria-label="LinkedIn"
+                target="_blank"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="#0077B5"
+                >
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.5c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.5h-3v-5c0-1.104-.896-2-2-2s-2 .896-2 2v5h-3v-10h3v1.5c.896-.896 2.104-1.5 3.5-1.5 2.209 0 4 1.791 4 4v6z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__section">
+            <h3>Casos de Uso</h3>
+            <p><a href="#caso-1">Chatbot WhatsApp</a></p>
+            <p><a href="#caso-2">Asistente de Ventas</a></p>
+            <p><a href="#caso-3">Análisis de Sentimiento</a></p>
+            <p><a href="#caso-5">Facturación Automática</a></p>
+          </div>
+          <div class="footer__section">
+            <h3>Contacto</h3>
+            <p><a href="mailto:hola@cumbre.cloud">hola@cumbre.cloud</a></p>
+            <p>Respuesta en menos de 24hs</p>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>
+            &copy; <span id="currentYear"></span> Cumbre IA. Todos los derechos reservados.
+            <script>
+              (function(){
+                const el = document.getElementById('currentYear');
+                if (el) el.textContent = new Date().getFullYear();
+              })();
+            </script>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Progress Indicator -->
+    <nav class="scroll-progress" aria-label="Progreso de lectura">
+      <div class="scroll-progress__track">
+        <div class="scroll-progress__fill"></div>
+        <div class="scroll-progress__stations">
+          <div class="scroll-progress__station" data-section="hero">
+            <span class="scroll-progress__label">Inicio</span>
+          </div>
+          <div class="scroll-progress__station" data-section="resumen">
+            <span class="scroll-progress__label">Resumen</span>
+          </div>
+          <div class="scroll-progress__station" data-section="glosario">
+            <span class="scroll-progress__label">Glosario</span>
+          </div>
+          <div class="scroll-progress__station" data-section="casos">
+            <span class="scroll-progress__label">Casos de Uso</span>
+          </div>
+          <div class="scroll-progress__station" data-section="matriz">
+            <span class="scroll-progress__label">Matriz</span>
+          </div>
+          <div class="scroll-progress__station" data-section="cta">
+            <span class="scroll-progress__label">Contacto</span>
+          </div>
+        </div>
+        <div class="scroll-progress__current"></div>
+      </div>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="servicios.js"></script>
+  </body>
+</html>

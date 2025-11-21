@@ -1019,6 +1019,7 @@ class SmartBannerController {
         this.scrollCount = 0;
         this.scrollThreshold = 15; // Ocultar al 3er scroll
         this.lastScrollY = 0;
+        this.tuCumbreSection = document.getElementById('tu_cumbre');
 
         if (this.banner && this.tab) {
             this.init();
@@ -1026,8 +1027,8 @@ class SmartBannerController {
     }
 
     init() {
-        // Mostrar solo el tab al inicio
-        this.tab.classList.add('visible');
+        // NO mostrar el tab al inicio - solo después de la sección "Tu Cumbre"
+        // this.tab.classList.add('visible');
 
         // Click en tab para mostrar banner
         this.tab.addEventListener('click', (e) => {
@@ -1035,8 +1036,21 @@ class SmartBannerController {
             this.showBanner();
         });
 
-        // Cerrar banner al hacer scroll
+        // Controlar visibilidad del tab según scroll y cerrar banner al hacer scroll
         window.addEventListener('scroll', () => {
+            // Mostrar/ocultar tab basado en sección "Tu Cumbre"
+            if (this.tuCumbreSection && !this.banner.classList.contains('visible')) {
+                const tuCumbreTop = this.tuCumbreSection.offsetTop;
+                const scrollTop = window.pageYOffset;
+
+                if (scrollTop >= tuCumbreTop - 100) {
+                    this.tab.classList.add('visible');
+                } else {
+                    this.tab.classList.remove('visible');
+                }
+            }
+
+            // Cerrar banner al hacer scroll
             if (this.banner.classList.contains('visible')) {
                 this.hideBanner();
             }
@@ -1087,3 +1101,123 @@ class SmartBannerController {
 document.addEventListener('DOMContentLoaded', () => {
     new SmartBannerController();
 });
+
+// Scroll Progress Indicator
+function setupScrollProgress() {
+  const scrollProgress = document.querySelector(".scroll-progress");
+  const progressFill = document.querySelector(".scroll-progress__fill");
+  const progressCurrent = document.querySelector(".scroll-progress__current");
+  const stations = document.querySelectorAll(".scroll-progress__station");
+  const scrollIndicator = document.querySelector(".scroll-indicator");
+
+  if (!scrollProgress || !progressFill || !progressCurrent) return;
+
+  // Map sections by their IDs
+  const sectionMap = {
+    inicio: document.getElementById("inicio"),
+    tu_cumbre: document.getElementById("tu_cumbre"),
+    servicios: document.getElementById("servicios"),
+    soluciones: document.getElementById("soluciones"),
+    faq: document.getElementById("faq"),
+    contacto: document.getElementById("contacto")
+  };
+
+  const trackHeight = 300;
+  let ticking = false;
+
+  const positionStations = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const scrollToShowTitle = Math.max(0, sectionTop - 150);
+        const sectionPercent = Math.min(scrollToShowTitle / docHeight, 1);
+        const stationTop = sectionPercent * (trackHeight - 10);
+
+        station.style.position = "absolute";
+        station.style.top = `${stationTop}px`;
+      }
+    });
+  };
+
+  const updateProgress = () => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollTop / docHeight, 1);
+
+    if (scrollTop > 200) {
+      scrollProgress.classList.add("visible");
+      if (scrollIndicator) scrollIndicator.classList.add("hidden");
+    } else {
+      scrollProgress.classList.remove("visible");
+      if (scrollIndicator) scrollIndicator.classList.remove("hidden");
+    }
+
+    progressFill.style.height = `${scrollPercent * 100}%`;
+
+    const currentTop = scrollPercent * (trackHeight - 14);
+    progressCurrent.style.top = `${currentTop}px`;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const titleVisibleAt = sectionTop - 120;
+        const viewportTop = scrollTop;
+
+        station.classList.remove("active", "passed");
+
+        if (viewportTop >= titleVisibleAt && viewportTop < sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("active");
+        } else if (viewportTop >= sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("passed");
+        }
+      }
+    });
+
+    ticking = false;
+  };
+
+  const requestTick = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  };
+
+  stations.forEach((station) => {
+    station.style.pointerEvents = "auto";
+    station.style.cursor = "pointer";
+    station.addEventListener("click", () => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+      if (section) {
+        const targetPosition = section.offsetTop - 100;
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", positionStations, { passive: true });
+
+  positionStations();
+  updateProgress();
+}
+
+// Initialize scroll progress after DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupScrollProgress);
+} else {
+  setupScrollProgress();
+}

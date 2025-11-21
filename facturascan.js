@@ -389,3 +389,141 @@ if ('IntersectionObserver' in window) {
   const lazyImages = document.querySelectorAll('img[loading="lazy"]');
   lazyImages.forEach(img => imageObserver.observe(img));
 }
+
+// Scroll Progress Indicator
+function setupScrollProgress() {
+  const scrollProgress = document.querySelector(".scroll-progress");
+  const progressFill = document.querySelector(".scroll-progress__fill");
+  const progressCurrent = document.querySelector(".scroll-progress__current");
+  const stations = document.querySelectorAll(".scroll-progress__station");
+  const scrollIndicator = document.querySelector(".scroll-indicator");
+
+  if (!scrollProgress || !progressFill || !progressCurrent) return;
+
+  // Detect which page we're on and map sections accordingly
+  const isFacturaScan = document.querySelector('.facturascan-document-types') !== null;
+  const isSyntheticAudience = document.querySelector('.example-section-no-animate') !== null;
+
+  let sectionMap = {};
+
+  if (isFacturaScan) {
+    sectionMap = {
+      hero: document.querySelector(".synthetic-hero"),
+      features: document.querySelector(".facturascan-how-it-works"),
+      documents: document.querySelector(".facturascan-document-types"),
+      screenshots: document.querySelector(".facturascan-screenshots"),
+      process: document.querySelector(".facturascan-process"),
+      cta: document.querySelector(".facturascan-final-cta")
+    };
+  } else if (isSyntheticAudience) {
+    sectionMap = {
+      hero: document.querySelector(".synthetic-hero"),
+      features: document.querySelector("#features"),
+      documents: document.querySelector(".facturascan-document-types"),
+      example: document.querySelector(".example-section-no-animate"),
+      screenshots: document.querySelector(".facturascan-screenshots"),
+      cta: document.querySelector(".facturascan-final-cta")
+    };
+  }
+
+  const trackHeight = 300;
+  let ticking = false;
+
+  const positionStations = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const scrollToShowTitle = Math.max(0, sectionTop - 150);
+        const sectionPercent = Math.min(scrollToShowTitle / docHeight, 1);
+        const stationTop = sectionPercent * (trackHeight - 10);
+
+        station.style.position = "absolute";
+        station.style.top = `${stationTop}px`;
+      }
+    });
+  };
+
+  const updateProgress = () => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollTop / docHeight, 1);
+
+    if (scrollTop > 200) {
+      scrollProgress.classList.add("visible");
+      if (scrollIndicator) scrollIndicator.classList.add("hidden");
+    } else {
+      scrollProgress.classList.remove("visible");
+      if (scrollIndicator) scrollIndicator.classList.remove("hidden");
+    }
+
+    progressFill.style.height = `${scrollPercent * 100}%`;
+
+    const currentTop = scrollPercent * (trackHeight - 14);
+    progressCurrent.style.top = `${currentTop}px`;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        // Usar el título visible (con offset de 120px para el header)
+        const titleVisibleAt = sectionTop - 120;
+        const viewportTop = scrollTop;
+
+        station.classList.remove("active", "passed");
+
+        // Activo cuando el título está visible en la parte superior del viewport
+        if (viewportTop >= titleVisibleAt && viewportTop < sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("active");
+        } else if (viewportTop >= sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("passed");
+        }
+      }
+    });
+
+    ticking = false;
+  };
+
+  const requestTick = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  };
+
+  stations.forEach((station) => {
+    station.style.pointerEvents = "auto";
+    station.style.cursor = "pointer";
+    station.addEventListener("click", () => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+      if (section) {
+        const targetPosition = section.offsetTop - 100;
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", positionStations, { passive: true });
+
+  positionStations();
+  updateProgress();
+}
+
+// Initialize scroll progress after DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupScrollProgress);
+} else {
+  setupScrollProgress();
+}
