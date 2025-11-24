@@ -154,8 +154,8 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="section hero" role="main">
+    <!-- Hero Section - Cinematic Scroll -->
+    <section id="inicio" class="section hero hero--cinematic" role="main">
       <!-- Background video with smooth playback optimization -->
       <div class="hero__background-video">
         <video
@@ -182,25 +182,32 @@
       <div class="hero__transition-gradient"></div>
 
       <div class="container hero__container">
-        <div class="hero__content">
-          <h1 class="hero__title hero__title-shadow">
-            <span class="hero__title-no-wrap"
-              >No es solo Inteligencia Artificial</span
-            ><br />es tu <span class="hero__title-gradient">Cumbre</span>
+        <div class="hero__content hero__content--cinematic hero__content--minimal">
+          <!-- Título principal - protagonista absoluto -->
+          <h1 class="hero__title hero__title--cinematic hero__title--giant">
+            <span class="hero__title-line hero__title-line--1">
+              No es solo
+            </span>
+            <span class="hero__title-line hero__title-line--2">
+              Inteligencia Artificial
+            </span>
+            <span class="hero__title-line hero__title-line--3">
+              es tu <span class="hero__title-accent" id="heroAccent">Cumbre</span>
+            </span>
           </h1>
-          <p class="hero__subtitle hero__subtitle-shadow">
-            Conectamos tu PyME a un ecosistema inteligente que trasciende la
-            automatización básica. Eliminamos las tareas repetitivas, unificamos
-            todas tus plataformas y liberamos tu tiempo para que conquistes tu
-            cumbre empresarial
+
+          <!-- Subtítulo minimalista -->
+          <p class="hero__subtitle hero__subtitle--minimal">
+            Creamos infraestructuras de inteligencia artificial que eliminan tareas repetitivas, unifica tus plataformas y libera tu tiempo para conquistar tu cumbre
           </p>
-          <!-- Scroll indicator -->
-          <div class="scroll-indicator" aria-hidden="true">
-            <span class="scroll-indicator__label">Comenzá tu ascenso</span>
-            <div class="scroll-indicator__mouse">
-              <div class="scroll-dot"></div>
-            </div>
-          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator minimalista -->
+      <div class="scroll-indicator scroll-indicator--minimal" aria-hidden="true">
+        <span class="scroll-indicator__label">Comenzá tu ascenso</span>
+        <div class="scroll-indicator__mouse">
+          <div class="scroll-dot"></div>
         </div>
       </div>
     </section>
@@ -341,15 +348,35 @@
           </div>
         </div>
 
-        <!-- Robot al final del recorrido -->
-        <div class="features__robot-container">
-          <img
-            src="assets/images/robot.png"
-            alt="Robot IA Cumbre"
-            class="robot-anim features__robot-image"
-            loading="lazy"
-          />
-          <div class="robot-shadow"></div>
+        <!-- AI Visual Element al final del recorrido -->
+        <div class="features__ai-visual">
+          <div class="ai-visual__container">
+            <!-- Círculo principal con gradiente -->
+            <div class="ai-visual__main-circle">
+              <div class="ai-visual__inner-circle">
+                <i class="fi fi-tr-mountain"></i>
+              </div>
+            </div>
+
+            <!-- Órbitas flotantes con iconos -->
+            <div class="ai-visual__orbit ai-visual__orbit--1">
+              <div class="ai-visual__orbit-icon">
+                <i class="fi fi-tr-brain"></i>
+              </div>
+            </div>
+
+            <div class="ai-visual__orbit ai-visual__orbit--2">
+              <div class="ai-visual__orbit-icon">
+                <i class="fi fi-tr-chart-network"></i>
+              </div>
+            </div>
+
+            <div class="ai-visual__orbit ai-visual__orbit--3">
+              <div class="ai-visual__orbit-icon">
+                <i class="fi fi-tr-bulb"></i>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Footer con mensaje y CTA -->
@@ -381,9 +408,9 @@
             </div>
             <h3 class="service-card__title">Agentes IA</h3>
             <p class="service-card__description">
-              Implementamos sistemas de automatización inteligente que optimizan
-              procesos, reducen costos operativos y aumentan la eficiencia
-              empresarial.
+              Empleados virtuales que toman decisiones complejas sin supervisión constante.
+              Comprenden contexto, aprenden continuamente y coordinan múltiples acciones de manera autónoma
+              para automatizar procesos que antes solo podían hacer personas capacitadas.
             </p>
             <a href="servicios.html" class="service-card__cta">
               <span class="service-card__cta-text">Explorar servicios</span>
@@ -400,10 +427,9 @@
             <div class="service-card__visual"><i class="fi fi-tr-comment-dots"></i></div>
             <h3 class="service-card__title">Chatbots Inteligentes</h3>
             <p class="service-card__description">
-              Creamos asistentes virtuales con capacidades de comprensión
-              contextual, integración multicanal y aprendizaje continuo para
-              mejorar la experiencia del cliente o incluso ser tu socio
-              estratégico.
+              Atención al cliente 24/7 que responde al instante en WhatsApp, el canal preferido por el 97% de los argentinos.
+              Resuelve 60-80% de consultas automáticamente, califica leads y procesa pedidos simples,
+              recuperando ventas perdidas por demora en la respuesta.
             </p>
             <a href="servicios.html" class="service-card__cta">
               <span class="service-card__cta-text">Explorar servicios</span>
@@ -420,11 +446,9 @@
             <div class="service-card__visual"><i class="fi fi-tr-discussion-idea"></i></div>
             <h3 class="service-card__title">Consultoría tecnológica</h3>
             <p class="service-card__description">
-              Transformamos tu empresa con asesoramiento tecnológico
-              especializado. Realizamos un análisis profundo de tus procesos
-              actuales, identificamos las mejores oportunidades para integrar IA
-              y diseñamos una estrategia de implementación que maximiza el
-              retorno de inversión y la eficiencia operativa.
+              Auditoría técnica que identifica tu punto de dolor más costoso: ventas perdidas, leads desorganizados,
+              errores de facturación o gastos mal controlados. Diseñamos una estrategia con ROI demostrable
+              en 60-90 días, priorizando soluciones de bajo costo y alto impacto para PyMEs.
             </p>
             <a href="servicios.html" class="service-card__cta">
               <span class="service-card__cta-text">Explorar servicios</span>
@@ -661,11 +685,11 @@
             </p>
             <ul class="contact__list">
               <li class="contact__list-item">
-                <span class="contact__list-icon">🧠</span>
+                <span class="contact__list-icon"><i class="fi fi-tr-brain"></i></span>
                 <span>Analizando tu ecosistema actual</span>
               </li>
               <li class="contact__list-item">
-                <span class="contact__list-icon">🚀</span>
+                <span class="contact__list-icon"><i class="fi fi-tr-rocket"></i></span>
                 <span>Identificando áreas de mejora inmediata</span>
               </li>
             </ul>
@@ -673,7 +697,7 @@
           <!-- Columna derecha: agenda y botón -->
           <div class="glass-card contact__card">
             <div class="contact__badge">
-              <span class="contact__badge-span">✨ Sesión 100% Gratuita</span>
+              <span class="contact__badge-span"><i class="fi fi-tr-sparkles"></i> Sesión 100% Gratuita</span>
             </div>
             <h3 class="contact__card-title">Agenda tu Sesión</h3>
             <p class="contact__card-subtitle">

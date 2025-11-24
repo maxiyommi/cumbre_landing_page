@@ -204,12 +204,6 @@ class ServiciosPage {
       selectedTab.classList.add("active");
       selectedContent.classList.add("active");
 
-      // Scroll suave al contenido
-      selectedContent.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-
       // Actualizar URL hash sin scroll
       history.replaceState(null, null, `#caso-${casoNumber}`);
     }

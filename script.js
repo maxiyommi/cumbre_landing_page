@@ -73,12 +73,8 @@ class AILandingPage {
             optimizeVideo();
         }
 
-        // Manejar eventos para reproducción continua
-        this.backgroundVideo.addEventListener('ended', () => {
-            // Reiniciar inmediatamente para evitar saltos
-            this.backgroundVideo.currentTime = 0;
-            this.backgroundVideo.play();
-        });
+        // Manejar eventos para reproducción continua con fade in/out
+        this.setupVideoFadeLoop();
 
         // Prevenir pausas no deseadas
         this.backgroundVideo.addEventListener('pause', () => {
@@ -120,6 +116,88 @@ class AILandingPage {
         document.addEventListener('click', playOnInteraction, { once: true });
         document.addEventListener('touchstart', playOnInteraction, { once: true });
         document.addEventListener('scroll', playOnInteraction, { once: true });
+    }
+
+    // Configurar fade in/out para loop suave del video con crossfade
+    setupVideoFadeLoop() {
+        if (!this.backgroundVideo) return;
+
+        const fadeDuration = 400; // 0.4 segundos de fade (transición rápida)
+        const crossfadeThreshold = 0.5; // Reiniciar cuando opacity llegue a 0.5 (mitad del fade)
+        let fadeInterval;
+        let isFading = false;
+        let hasTriggeredFade = false;
+
+        // Función para hacer crossfade (fade out + reinicio + fade in simultáneos)
+        const startCrossfade = () => {
+            if (isFading) return; // Prevenir múltiples fades simultáneos
+            isFading = true;
+
+            let opacity = 1;
+            const fadeStep = 0.05;
+            const stepTime = fadeDuration / (1 / fadeStep);
+            let hasRestarted = false;
+
+            if (fadeInterval) clearInterval(fadeInterval);
+
+            fadeInterval = setInterval(() => {
+                opacity -= fadeStep;
+
+                // Cuando llegamos al threshold del crossfade, reiniciar el video
+                if (!hasRestarted && opacity <= crossfadeThreshold) {
+                    hasRestarted = true;
+                    this.backgroundVideo.currentTime = 0;
+
+                    // Iniciar fade in inmediatamente
+                    let newOpacity = crossfadeThreshold;
+                    if (fadeInterval) clearInterval(fadeInterval);
+
+                    fadeInterval = setInterval(() => {
+                        newOpacity += fadeStep;
+                        if (newOpacity >= 1) {
+                            newOpacity = 1;
+                            clearInterval(fadeInterval);
+                            this.backgroundVideo.style.opacity = '1';
+                            isFading = false; // Permitir el siguiente fade
+                            hasTriggeredFade = false; // Reset para el próximo ciclo
+                        } else {
+                            this.backgroundVideo.style.opacity = newOpacity.toString();
+                        }
+                    }, stepTime);
+                } else if (!hasRestarted) {
+                    this.backgroundVideo.style.opacity = opacity.toString();
+                }
+            }, stepTime);
+        };
+
+        // Monitorear el progreso del video para iniciar el crossfade antes de que termine
+        this.backgroundVideo.addEventListener('timeupdate', () => {
+            if (isFading || hasTriggeredFade) return; // No verificar si ya está haciendo fade
+
+            const duration = this.backgroundVideo.duration;
+            const currentTime = this.backgroundVideo.currentTime;
+            const timeRemaining = duration - currentTime;
+
+            // Iniciar crossfade 1 segundo antes de que termine
+            if (timeRemaining <= (fadeDuration / 1000) && timeRemaining > 0) {
+                hasTriggeredFade = true;
+                startCrossfade();
+            }
+        });
+
+        // Asegurar que el video se reinicie si llega al final sin fade
+        this.backgroundVideo.addEventListener('ended', () => {
+            if (!isFading) {
+                this.backgroundVideo.currentTime = 0;
+                this.backgroundVideo.style.opacity = '1';
+                this.backgroundVideo.play();
+                hasTriggeredFade = false;
+            }
+        });
+
+        // Establecer opacidad inicial
+        this.backgroundVideo.style.opacity = '1';
+        this.backgroundVideo.style.transition = 'none'; // Desactivar transiciones CSS para control manual
     }
 
     // Inicializar transiciones suaves y efectos parallax
@@ -399,27 +477,45 @@ class AILandingPage {
     }
 
     handleScrollIndicator() {
-        const indicator = document.querySelector('.scroll-indicator');
+        const indicator = document.querySelector('.scroll-indicator--minimal');
         const hero = document.getElementById('inicio');
         if (!indicator || !hero) return;
-        
-        const scrollY = window.scrollY || window.pageYOffset;
-        const heroRect = hero.getBoundingClientRect();
-        
-        const fadeStart = 50;
-        const fadeEnd = 300;
-        
-        let opacity = 0.7;
-        
-        if (scrollY >= fadeStart) {
-            const fadeRange = fadeEnd - fadeStart;
-            const fadeProgress = Math.min((scrollY - fadeStart) / fadeRange, 1);
-            opacity = 0.7 * (1 - fadeProgress);
+
+        // Setup inicial: esperar a que termine la animación CSS
+        if (!this.scrollIndicatorReady) {
+            indicator.addEventListener('animationend', () => {
+                // Remover la animación CSS y preparar para control JS
+                indicator.style.animation = 'none';
+                indicator.style.transition = 'opacity 0.6s ease-out';
+                this.scrollIndicatorReady = true;
+
+                // Forzar opacidad 1 después de la animación
+                indicator.style.opacity = '1';
+            }, { once: true });
+            return;
         }
-        
-        indicator.style.opacity = opacity;
-        
-        if (heroRect.bottom < 0) {
+
+        const heroRect = hero.getBoundingClientRect();
+        const heroBottomPosition = heroRect.bottom;
+        const viewportHeight = window.innerHeight;
+
+        // El indicator debe:
+        // - Mantenerse visible mientras está en la parte superior
+        // - Empezar a desvanecerse cuando el bottom del hero esté a 80% del viewport
+        // - Desaparecer completamente a 50% del viewport (fade out rápido)
+
+        if (heroBottomPosition > viewportHeight * 0.8) {
+            // Hero todavía en la parte superior, mantener indicator visible
+            indicator.style.opacity = '1';
+        } else if (heroBottomPosition > viewportHeight * 0.5) {
+            // Fade out rápido en la primera mitad del scroll
+            const fadeStart = viewportHeight * 0.8;
+            const fadeEnd = viewportHeight * 0.5;
+            const fadeRange = fadeStart - fadeEnd;
+            const fadeProgress = (heroBottomPosition - fadeEnd) / fadeRange;
+            indicator.style.opacity = Math.max(0, fadeProgress).toString();
+        } else {
+            // Ocultar completamente
             indicator.style.opacity = '0';
         }
     }
@@ -553,21 +649,22 @@ class AILandingPage {
 
     handleNavbarVisibility() {
         const nav = document.querySelector('.header__nav');
+        const menuToggle = document.querySelector('.header__menu-toggle');
         const inicioSection = document.getElementById('inicio');
-        
+
         if (!nav || !inicioSection) return;
-        
+
         const inicioRect = inicioSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        
+
         const inInicioSection = inicioRect.bottom > windowHeight * 0.2;
-        
+
         if (inInicioSection) {
-            nav.style.opacity = '0';
-            nav.style.pointerEvents = 'none';
+            nav.classList.remove('header__nav--visible');
+            if (menuToggle) menuToggle.classList.remove('header__menu-toggle--visible');
         } else {
-            nav.style.opacity = '1';
-            nav.style.pointerEvents = 'auto';
+            nav.classList.add('header__nav--visible');
+            if (menuToggle) menuToggle.classList.add('header__menu-toggle--visible');
         }
     }
 
@@ -705,7 +802,54 @@ let aiLandingPage;
 document.addEventListener('DOMContentLoaded', () => {
     aiLandingPage = new AILandingPage();
     window.aiLandingPage = aiLandingPage; // Hacer accesible globalmente
+
+    // Initialize hero stats counter animation
+    initHeroStatsCounter();
 });
+
+// Hero Stats Counter Animation
+function initHeroStatsCounter() {
+    const stats = document.querySelectorAll('.hero__stat-value[data-count]');
+    if (!stats.length) return;
+
+    const animateCounter = (el, target) => {
+        const duration = 2000;
+        const startTime = performance.now();
+        const startValue = 0;
+
+        const update = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
+
+            el.textContent = currentValue;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(update);
+    };
+
+    // Use Intersection Observer to trigger animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.dataset.count);
+                animateCounter(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    stats.forEach(stat => observer.observe(stat));
+}
 
 // FAQ toggle functionality
 document.addEventListener('DOMContentLoaded', () => {

@@ -13,7 +13,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--bg-primary);
+  background: linear-gradient(
+    180deg,
+    #241552 0%,
+    #1e1640 30%,
+    #16213e 70%,
+    var(--bg-primary) 100%
+  );
   overflow: hidden;
   padding: calc(80px + var(--spacing-3xl)) var(--spacing-lg) var(--spacing-3xl);
   z-index: 1;
@@ -111,6 +117,12 @@
 
 .servicios-hero__badge i {
   font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .servicios-hero__title {
@@ -180,6 +192,12 @@
 
 .servicios-hero__cta .btn i {
   font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 /* Hero transition gradient - igual que index.html */
@@ -230,6 +248,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .resumen-header h2 {
@@ -355,6 +379,12 @@
 .glosario-card__icon i {
   font-size: 2.5rem;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .glosario-card__title {
@@ -571,6 +601,12 @@
   box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
 }
 
+.caso-card__icon i {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
 .caso-card__header-text {
   flex: 1;
   display: flex;
@@ -626,6 +662,12 @@
 .caso-section__title i {
   color: #00d4ff;
   font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .caso-section p {
@@ -685,7 +727,12 @@
   flex-shrink: 0;
   color: #00d4ff;
   font-size: 1.25rem;
-  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .solucion-feature p {
