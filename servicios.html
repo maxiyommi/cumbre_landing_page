@@ -81,12 +81,13 @@
           <span aria-hidden="true">&#9776;</span>
         </button>
         <nav
-          class="header__nav"
+          class="header__nav header__nav--visible"
           role="navigation"
           aria-label="Navegación principal"
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <!-- Desktop: menú desplegable de Soluciones -->
           <div class="header__nav-contact-group">
             <button
               class="header__nav-link header__nav-contact-toggle"
@@ -113,8 +114,10 @@
               >
             </div>
           </div>
+          <!-- Link directo a sección soluciones en mobile -->
           <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <!-- Desktop: menú agrupado -->
           <div class="header__nav-contact-group">
             <button
               class="header__nav-link header__nav-contact-toggle"
@@ -135,6 +138,7 @@
               >
             </div>
           </div>
+          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
           <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
           <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
@@ -159,7 +163,6 @@
             <span id="currentDate"></span>
           </div>
           <h1 class="servicios-hero__title">
-            <span class="servicios-hero__title-number">6</span>
             <span class="servicios-hero__title-text">Casos de Uso que <span class="gradient-text">Transforman</span> tu Empresa</span>
           </h1>
           <p class="servicios-hero__subtitle">
