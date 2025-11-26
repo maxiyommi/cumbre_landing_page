@@ -6,6 +6,11 @@
 class ServiciosPage {
   constructor() {
     this.currentCaso = 1;
+    this.modal = null;
+    this.modalContent = null;
+    this.modalContainer = null;
+    this.focusedElementBeforeModal = null;
+    this.isMobile = window.innerWidth <= 768;
     this.init();
   }
 
@@ -25,6 +30,8 @@ class ServiciosPage {
     this.checkURLHash();
     this.setupCurrentDate();
     this.setupScrollProgress();
+    this.setupModal();
+    this.setupResponsiveDetection();
   }
 
   /**
@@ -178,7 +185,13 @@ class ServiciosPage {
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const casoNumber = tab.getAttribute("data-caso");
-        this.switchCaso(casoNumber, tabs, contents);
+
+        // En mobile, abrir modal. En desktop, cambiar contenido inline
+        if (this.isMobile) {
+          this.openModal(casoNumber);
+        } else {
+          this.switchCaso(casoNumber, tabs, contents);
+        }
       });
     });
   }
@@ -278,6 +291,285 @@ class ServiciosPage {
       });
     });
   }
+
+  /**
+   * Detecta cambios de tamaño de pantalla
+   */
+  setupResponsiveDetection() {
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const wasMobile = this.isMobile;
+        this.isMobile = window.innerWidth <= 768;
+
+        // Si cambiamos de mobile a desktop o viceversa, cerrar modal
+        if (wasMobile !== this.isMobile && this.modal?.classList.contains('active')) {
+          this.closeModal();
+        }
+      }, 250);
+    });
+  }
+
+  /**
+   * Configura el sistema de modal para mobile
+   */
+  setupModal() {
+    this.modal = document.getElementById('casoModal');
+    this.modalContent = document.getElementById('casoModalContent');
+    this.modalContainer = this.modal?.querySelector('.caso-modal__container');
+
+    if (!this.modal || !this.modalContent || !this.modalContainer) {
+      return;
+    }
+
+    // Cerrar modal con overlay o botón close
+    this.modal.querySelectorAll('[data-modal-close]').forEach(element => {
+      element.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.closeModal();
+      });
+    });
+
+    // Swipe to close (mobile)
+    this.setupSwipeToClose();
+
+    // Keyboard accessibility
+    this.setupModalKeyboard();
+
+    // Prevent body scroll when modal is open
+    this.modal.addEventListener('transitionend', () => {
+      if (this.modal.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  /**
+   * Abre el modal con el contenido de un caso específico
+   */
+  openModal(casoNumber) {
+    if (!this.modal || !this.modalContent) {
+      console.error('Modal elements not found');
+      return;
+    }
+
+    // Guardar elemento enfocado antes de abrir modal
+    this.focusedElementBeforeModal = document.activeElement;
+
+    // Obtener el contenido del caso
+    const casoContent = document.getElementById(`caso-${casoNumber}`);
+    if (!casoContent) {
+      console.error(`Caso ${casoNumber} content not found`);
+      return;
+    }
+
+    // Obtener la tarjeta del caso (el contenido real)
+    const casoCard = casoContent.querySelector('.caso-card');
+    if (!casoCard) {
+      console.error(`Caso card not found for caso ${casoNumber}`);
+      return;
+    }
+
+    // Clonar la tarjeta (deep clone)
+    const clonedCard = casoCard.cloneNode(true);
+
+    // Eliminar estilos inline de animación que puedan ocultar el contenido
+    clonedCard.style.opacity = '1';
+    clonedCard.style.transform = 'none';
+    clonedCard.style.transition = 'none';
+
+    // También eliminar estilos inline de todos los elementos hijos que puedan tener animaciones
+    const animatedChildren = clonedCard.querySelectorAll('[style*="opacity"], [style*="transform"]');
+    animatedChildren.forEach(child => {
+      child.style.opacity = '1';
+      child.style.transform = 'none';
+      child.style.transition = 'none';
+    });
+
+    // Limpiar contenido anterior y agregar nuevo
+    this.modalContent.innerHTML = '';
+    this.modalContent.appendChild(clonedCard);
+
+    // Actualizar ARIA
+    this.modal.setAttribute('aria-hidden', 'false');
+    const title = clonedCard.querySelector('.caso-card__title');
+    if (title) {
+      title.id = 'casoModalTitle';
+    }
+
+    // Mostrar modal
+    this.modal.style.display = 'flex';
+    // Force reflow
+    void this.modal.offsetHeight;
+
+    // Usar requestAnimationFrame para asegurar que la animación se ejecute
+    requestAnimationFrame(() => {
+      this.modal.classList.add('active');
+    });
+
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+
+    // Focus en el modal
+    setTimeout(() => {
+      const closeButton = this.modal.querySelector('.caso-modal__close');
+      if (closeButton) closeButton.focus();
+    }, 100);
+
+    // Track analytics
+    this.trackModalView(casoNumber);
+  }
+
+  /**
+   * Cierra el modal
+   */
+  closeModal() {
+    if (!this.modal) return;
+
+    this.modal.classList.remove('active');
+    this.modal.setAttribute('aria-hidden', 'true');
+
+    // Restaurar scroll del body
+    document.body.style.overflow = '';
+
+    // Restaurar focus al elemento anterior
+    setTimeout(() => {
+      if (this.focusedElementBeforeModal) {
+        this.focusedElementBeforeModal.focus();
+      }
+    }, 400);
+
+    // Limpiar contenido después de la animación
+    setTimeout(() => {
+      if (!this.modal.classList.contains('active')) {
+        this.modalContent.innerHTML = '';
+        this.modal.style.display = 'none';
+      }
+    }, 400);
+  }
+
+  /**
+   * Configura swipe to close para mobile
+   */
+  setupSwipeToClose() {
+    if (!this.modalContainer) return;
+
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+
+    const handleTouchStart = (e) => {
+      // Solo activar si el contenedor está en la parte superior del scroll
+      if (this.modalContainer.scrollTop === 0) {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+        this.modalContainer.style.transition = 'none';
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+
+      currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+
+      // Solo permitir arrastrar hacia abajo
+      if (deltaY > 0) {
+        e.preventDefault();
+        const progress = Math.min(deltaY / 300, 1);
+        this.modalContainer.style.transform = `translateY(${deltaY}px)`;
+        this.modal.querySelector('.caso-modal__overlay').style.opacity = 1 - progress;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (!isDragging) return;
+
+      const deltaY = currentY - startY;
+      this.modalContainer.style.transition = '';
+
+      // Si arrastró más de 150px, cerrar modal
+      if (deltaY > 150) {
+        this.closeModal();
+      } else {
+        // Restaurar posición
+        this.modalContainer.style.transform = '';
+        this.modal.querySelector('.caso-modal__overlay').style.opacity = '';
+      }
+
+      isDragging = false;
+      startY = 0;
+      currentY = 0;
+    };
+
+    this.modalContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+    this.modalContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+    this.modalContainer.addEventListener('touchend', handleTouchEnd);
+  }
+
+  /**
+   * Configura navegación por teclado del modal
+   */
+  setupModalKeyboard() {
+    if (!this.modal) return;
+
+    document.addEventListener('keydown', (e) => {
+      if (!this.modal.classList.contains('active')) return;
+
+      // Escape para cerrar
+      if (e.key === 'Escape') {
+        this.closeModal();
+      }
+
+      // Tab trap (mantener focus dentro del modal)
+      if (e.key === 'Tab') {
+        this.trapFocus(e);
+      }
+    });
+  }
+
+  /**
+   * Mantiene el foco dentro del modal (focus trap)
+   */
+  trapFocus(e) {
+    const focusableElements = this.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (document.activeElement === firstFocusable) {
+        lastFocusable.focus();
+        e.preventDefault();
+      }
+    } else {
+      // Tab
+      if (document.activeElement === lastFocusable) {
+        firstFocusable.focus();
+        e.preventDefault();
+      }
+    }
+  }
+
+  /**
+   * Track modal view para analytics
+   */
+  trackModalView(casoNumber) {
+    if (typeof gtag !== "undefined") {
+      gtag("event", "view_modal_caso", {
+        event_category: "Servicios",
+        event_label: `Caso ${casoNumber}`,
+        method: this.isMobile ? 'mobile' : 'desktop'
+      });
+    }
+  }
 }
 
 // Función para agregar contador de scroll en stats
@@ -347,19 +639,6 @@ function setupTooltips() {
   });
 }
 
-// Función para tracking de analytics (opcional)
-function trackCasoView(casoNumber) {
-  // Si tienes Google Analytics o similar, puedes trackear aquí
-  if (typeof gtag !== "undefined") {
-    gtag("event", "view_caso", {
-      event_category: "Servicios",
-      event_label: `Caso ${casoNumber}`,
-    });
-  }
-
-  // También puedes enviar a tu propio sistema de analytics
-  console.log(`Usuario viendo Caso ${casoNumber}`);
-}
 
 // Función para agregar animación de highlight al hacer hover en resultados
 function setupResultadosHighlight() {
@@ -454,17 +733,72 @@ function setupLazyLoading() {
   }
 }
 
-// Función para copiar al portapapeles (útil para compartir casos)
+// Función para compartir casos (placeholder para futura implementación)
 function setupShareButtons() {
-  // Agregar botones de compartir si es necesario
-  const casos = document.querySelectorAll(".caso-card");
+  // Funcionalidad de compartir casos - por implementar si es necesario
+}
 
-  casos.forEach((caso, index) => {
-    const casoNumber = index + 1;
-    const shareUrl = `${window.location.origin}${window.location.pathname}#caso-${casoNumber}`;
+// Función para configurar el glosario colapsable en mobile
+function setupGlosarioAccordion() {
+  const glosarioItems = document.querySelectorAll('[data-glosario-item]');
 
-    // Aquí podrías agregar botones de compartir si los necesitas
-    // Por ejemplo, agregar un botón "Compartir este caso"
+  // Solo aplicar comportamiento de acordeón en mobile
+  const isMobile = window.innerWidth <= 768;
+
+  if (!isMobile) {
+    // En desktop, mantener todos expandidos
+    glosarioItems.forEach(item => {
+      item.classList.add('open');
+    });
+    return;
+  }
+
+  glosarioItems.forEach((item, index) => {
+    const toggle = item.querySelector('[data-glosario-toggle]');
+    const content = item.querySelector('[data-glosario-content]');
+
+    if (!toggle || !content) return;
+
+    // Primer item abierto por defecto en mobile
+    if (index === 0) {
+      item.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = item.classList.contains('open');
+
+      // Cerrar todos los demás items (comportamiento acordeón)
+      glosarioItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('open');
+          const otherToggle = otherItem.querySelector('[data-glosario-toggle]');
+          if (otherToggle) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+
+      // Toggle el item actual
+      item.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+
+  // Reconfigurar en resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const nowMobile = window.innerWidth <= 768;
+      if (!nowMobile) {
+        // Si cambiamos a desktop, abrir todos
+        glosarioItems.forEach(item => {
+          item.classList.add('open');
+        });
+      }
+    }, 250);
   });
 }
 
@@ -480,19 +814,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRippleEffect();
   setupLazyLoading();
   setupShareButtons();
-
-  // Log para debugging
-  console.log("Servicios Page initialized successfully");
+  setupGlosarioAccordion();
 });
 
-// Manejo de resize para ajustar elementos responsive
-let resizeTimer;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    console.log("Window resized - adjusting layout");
-  }, 250);
-});
 
 // Exportar para uso global si es necesario
 if (typeof module !== "undefined" && module.exports) {

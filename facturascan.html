@@ -332,23 +332,31 @@
             />
           </div>
 
-          <div class="screenshots-thumbnails">
-            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png">
+          <div class="screenshots-thumbnails" id="screenshotsCarousel">
+            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png" data-index="0">
               <img src="assets/images/facturascan_dashboard.png" alt="Dashboard" loading="lazy" />
               <span>Dashboard</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png" data-index="1">
               <img src="assets/images/facturascan_detalles.png" alt="Detalles" loading="lazy" />
               <span>Detalles</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png" data-index="2">
               <img src="assets/images/facturascan_reportes.png" alt="Reportes" loading="lazy" />
               <span>Reportes</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png" data-index="3">
               <img src="assets/images/facturascan_login.png" alt="Login" loading="lazy" />
               <span>Login</span>
             </button>
+          </div>
+
+          <!-- Indicadores de progreso (solo visible en mobile) -->
+          <div class="screenshots-indicators" id="screenshotsIndicators">
+            <span class="screenshot-dot active" data-index="0"></span>
+            <span class="screenshot-dot" data-index="1"></span>
+            <span class="screenshot-dot" data-index="2"></span>
+            <span class="screenshot-dot" data-index="3"></span>
           </div>
         </div>
       </div>
@@ -620,6 +628,17 @@
         <div class="scroll-progress__current"></div>
       </div>
     </nav>
+
+    <!-- Screenshot Lightbox Modal -->
+    <div class="screenshot-lightbox" id="screenshotLightbox">
+      <div class="screenshot-lightbox__container">
+        <button class="screenshot-lightbox__close" id="closeLightbox" aria-label="Cerrar vista ampliada">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+        <img class="screenshot-lightbox__image" id="lightboxImage" src="" alt="">
+        <div class="screenshot-lightbox__caption" id="lightboxCaption"></div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="facturascan.js"></script>

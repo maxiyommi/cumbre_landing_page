@@ -128,7 +128,7 @@
 .servicios-hero__title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: var(--spacing-lg);
   animation: fadeInUp 0.6s ease-out 0.1s backwards;
   display: flex;
@@ -139,7 +139,7 @@
 
 .servicios-hero__title-number {
   display: inline-block;
-  font-size: clamp(5rem, 12vw, 10rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: 900;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
@@ -172,9 +172,9 @@
 }
 
 .servicios-hero__subtitle {
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
   margin-bottom: var(--spacing-2xl);
   animation: fadeInUp 0.6s ease-out 0.2s backwards;
   max-width: 600px;
@@ -277,7 +277,7 @@
 
 .resumen-body p {
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .resumen-categories {
@@ -313,7 +313,7 @@
 
 .category-box p {
   font-size: var(--font-size-sm);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
@@ -353,11 +353,11 @@
 }
 
 .glosario-card {
-  padding: var(--spacing-2xl);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .glosario-card:hover {
@@ -365,19 +365,50 @@
   box-shadow: var(--card-shadow-hover);
 }
 
+.glosario-card__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.glosario-card__header:hover {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.glosario-card__toggle-icon {
+  margin-left: auto;
+  font-size: 1.5rem;
+  color: #00d4ff;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.glosario-card[data-glosario-item].open .glosario-card__toggle-icon {
+  transform: rotate(180deg);
+}
+
 .glosario-card__icon {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--primary-gradient);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
 }
 
 .glosario-card__icon i {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: white;
   display: flex;
   align-items: center;
@@ -388,10 +419,26 @@
 }
 
 .glosario-card__title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
+  flex: 1;
+}
+
+.glosario-card__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.glosario-card[data-glosario-item].open .glosario-card__content {
+  max-height: 2000px;
+  padding: 0 var(--spacing-xl) var(--spacing-xl);
 }
 
 .glosario-card__section {
@@ -453,6 +500,53 @@
   font-size: var(--font-size-xs);
   color: #00d4ff;
   font-weight: 500;
+}
+
+/* Desktop: Glosario siempre expandido */
+@media (min-width: 769px) {
+  .glosario-card {
+    padding: var(--spacing-2xl);
+  }
+
+  .glosario-card__header {
+    cursor: default;
+    pointer-events: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: 0;
+  }
+
+  .glosario-card__header:hover {
+    background: none;
+  }
+
+  .glosario-card__toggle-icon {
+    display: none;
+  }
+
+  .glosario-card__icon {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+  }
+
+  .glosario-card__icon i {
+    font-size: 2.5rem;
+  }
+
+  .glosario-card__title {
+    font-size: var(--font-size-xl);
+  }
+
+  .glosario-card__content {
+    max-height: none !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
 }
 
 /* ============================
@@ -534,7 +628,7 @@
 .casos-tab__number {
   font-size: var(--font-size-2xl);
   font-weight: 800;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
@@ -672,7 +766,7 @@
 
 .caso-section p {
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -779,7 +873,7 @@
 
 .resultado-label {
   font-size: var(--font-size-sm);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
@@ -796,7 +890,7 @@
 
 .ideal-para p {
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .ideal-para strong {
@@ -922,15 +1016,16 @@
 }
 
 .cta-content h2 {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
+  line-height: 1.3;
 }
 
 .cta-content p {
-  font-size: var(--font-size-lg);
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.6;
   margin-bottom: var(--spacing-xl);
 }
 
@@ -1003,8 +1098,37 @@
     text-align: center;
   }
 
+  .resumen-header i {
+    font-size: 2rem;
+  }
+
+  .resumen-lead {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .resumen-body p {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    line-height: 1.6;
+  }
+
   .resumen-categories {
     grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .category-box {
+    padding: var(--spacing-md);
+  }
+
+  .category-box h4 {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .category-box p {
+    font-size: clamp(0.875rem, 3vw, 0.9375rem);
+    line-height: 1.5;
   }
 
   .glosario-grid {
@@ -1016,11 +1140,11 @@
   }
 
   .casos-tab__number {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
   }
 
   .casos-tab__title {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
   }
 
   .caso-card__header {
@@ -1037,6 +1161,26 @@
 
   .caso-card__body {
     padding: var(--spacing-lg);
+  }
+
+  .caso-card__title {
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+  }
+
+  .glosario-card__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .glosario-card__section p {
+    font-size: var(--font-size-sm);
+  }
+
+  .resumen-header h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .glosario-header h2 {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
   }
 
   .solucion-grid {
@@ -1060,13 +1204,23 @@
     padding: var(--spacing-sm);
   }
 
-  .cta-buttons {
-    flex-direction: column;
-    align-items: stretch;
+  /* Mobile button improvements */
+  .btn {
+    font-size: 0.9375rem;
+    min-height: 50px;
+    font-weight: 600;
   }
 
   .btn-lg {
+    padding: 0.875rem 1.5rem;
+    height: 52px;
+    font-size: 0.9375rem;
     width: 100%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 
@@ -1287,6 +1441,231 @@ html::-webkit-scrollbar {
 }
 
 /* ============================
+   MODAL PARA CASOS DE USO (MOBILE)
+   ============================ */
+.caso-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.caso-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.caso-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+  z-index: 1;
+}
+
+.caso-modal__container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 85vh;
+  background: linear-gradient(
+    180deg,
+    #1e1640 0%,
+    #16213e 50%,
+    var(--bg-secondary) 100%
+  );
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  -webkit-overflow-scrolling: touch;
+  /* Border glow effect */
+  border-top: 1px solid rgba(0, 212, 255, 0.3);
+  z-index: 2;
+}
+
+.caso-modal.active .caso-modal__container {
+  transform: translateY(0);
+}
+
+/* Drag indicator (visual hint for swipe) */
+.caso-modal__drag-indicator {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin: var(--spacing-md) auto var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+/* Close button */
+.caso-modal__close {
+  position: sticky;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  float: right;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  margin-bottom: calc(-40px - var(--spacing-md));
+  margin-right: var(--spacing-md);
+}
+
+.caso-modal__close:hover {
+  background: rgba(245, 87, 108, 0.2);
+  border-color: #f5576c;
+  transform: scale(1.1);
+}
+
+.caso-modal__close i {
+  color: white;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* Modal content */
+.caso-modal__content {
+  padding: var(--spacing-lg);
+  clear: both;
+  min-height: 200px;
+  width: 100%;
+}
+
+/* Ajustar estilos del caso dentro del modal */
+.caso-modal .caso-content {
+  display: block !important;
+  opacity: 1 !important;
+  animation: none !important;
+  visibility: visible !important;
+}
+
+.caso-modal .caso-card {
+  display: block !important;
+  visibility: visible !important;
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.caso-modal .caso-card * {
+  visibility: visible !important;
+}
+
+.caso-modal .caso-card__header {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.12) 0%,
+    rgba(102, 126, 234, 0.08) 100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.caso-modal .caso-card__body {
+  padding: var(--spacing-xl);
+  background: rgba(22, 33, 62, 0.3);
+}
+
+.caso-modal .caso-card__footer {
+  background: rgba(26, 26, 46, 0.6);
+  border-top: 1px solid var(--border-color);
+  margin-top: 0;
+  padding: var(--spacing-xl);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Desktop: modal centrado tradicional */
+@media (min-width: 769px) {
+  .caso-modal__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%) scale(0.9);
+    max-width: 900px;
+    max-height: 90vh;
+    width: 90%;
+    border-radius: var(--radius-xl);
+    border-top: 1px solid rgba(0, 212, 255, 0.3);
+  }
+
+  .caso-modal.active .caso-modal__container {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .caso-modal__drag-indicator {
+    display: none;
+  }
+
+  .caso-modal__close {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    margin: 0;
+    z-index: 100;
+  }
+
+  .caso-modal__content {
+    padding: var(--spacing-2xl);
+  }
+}
+
+/* Ocultar tabs en mobile cuando el modal está activo */
+@media (max-width: 768px) {
+  .caso-modal.active ~ section .casos-tabs {
+    position: relative;
+  }
+
+  /* Los tabs ahora abrirán el modal en lugar de cambiar contenido */
+  .casos-tab {
+    cursor: pointer;
+  }
+
+  /* Ocultar el contenido debajo de los tabs en mobile (pero NO dentro del modal) */
+  .servicios-casos .caso-content {
+    display: none !important;
+  }
+}
+
+/* Desktop mantiene comportamiento original */
+@media (min-width: 769px) {
+  /* En desktop, el modal es una opción alternativa, pero los tabs funcionan normal */
+  .caso-content {
+    display: none;
+  }
+
+  .caso-content.active {
+    display: block;
+  }
+}
+
+/* ============================
    ACCESSIBILITY
    ============================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1297,6 +1676,14 @@ html::-webkit-scrollbar {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .caso-modal__container {
+    transition: none;
+  }
+
+  .caso-modal__overlay {
+    animation: none;
+  }
 }
 
 /* Focus styles for accessibility */
@@ -1306,6 +1693,11 @@ html::-webkit-scrollbar {
 }
 
 .btn:focus-visible {
+  outline: 2px solid #00d4ff;
+  outline-offset: 4px;
+}
+
+.caso-modal__close:focus-visible {
   outline: 2px solid #00d4ff;
   outline-offset: 4px;
 }

@@ -260,12 +260,16 @@
           <p>Entendé las diferencias entre Bot, Automatización y Agente Inteligente</p>
         </div>
         <div class="glosario-grid">
-          <article class="glosario-card glass-card">
-            <div class="glosario-card__icon">
-              <i class="fi fi-tr-user-robot"></i>
-            </div>
-            <h3 class="glosario-card__title">Bot - Asistente Conversacional</h3>
-            <div class="glosario-card__section">
+          <article class="glosario-card glass-card" data-glosario-item>
+            <button class="glosario-card__header" data-glosario-toggle aria-expanded="false">
+              <div class="glosario-card__icon">
+                <i class="fi fi-tr-user-robot"></i>
+              </div>
+              <h3 class="glosario-card__title">Bot - Asistente Conversacional</h3>
+              <i class="glosario-card__toggle-icon fi fi-rr-angle-down"></i>
+            </button>
+            <div class="glosario-card__content" data-glosario-content>
+              <div class="glosario-card__section">
               <h4>¿Qué es?</h4>
               <p>Un bot es un programa que automatiza conversaciones siguiendo reglas predefinidas. Funciona como un "atendedor automático inteligente" que responde preguntas frecuentes 24/7.</p>
             </div>
@@ -278,19 +282,24 @@
                 <li>Deriva casos complejos a operadores humanos</li>
               </ul>
             </div>
-            <div class="glosario-card__features">
-              <span class="feature-badge">Flujos predefinidos</span>
-              <span class="feature-badge">Palabras clave</span>
-              <span class="feature-badge">Sin aprendizaje</span>
+              <div class="glosario-card__features">
+                <span class="feature-badge">Flujos predefinidos</span>
+                <span class="feature-badge">Palabras clave</span>
+                <span class="feature-badge">Sin aprendizaje</span>
+              </div>
             </div>
           </article>
 
-          <article class="glosario-card glass-card">
-            <div class="glosario-card__icon">
-              <i class="fi fi-tr-chart-network"></i>
-            </div>
-            <h3 class="glosario-card__title">Automatización</h3>
-            <div class="glosario-card__section">
+          <article class="glosario-card glass-card" data-glosario-item>
+            <button class="glosario-card__header" data-glosario-toggle aria-expanded="false">
+              <div class="glosario-card__icon">
+                <i class="fi fi-tr-chart-network"></i>
+              </div>
+              <h3 class="glosario-card__title">Automatización</h3>
+              <i class="glosario-card__toggle-icon fi fi-rr-angle-down"></i>
+            </button>
+            <div class="glosario-card__content" data-glosario-content>
+              <div class="glosario-card__section">
               <h4>¿Qué es?</h4>
               <p>La automatización implementa procesos automáticos que conectan sistemas mediante reglas tipo "si pasa X, entonces hace Y". Actúa como un asistente invisible que ejecuta tareas repetitivas.</p>
             </div>
@@ -303,19 +312,24 @@
                 <li>Genera reportes programados</li>
               </ul>
             </div>
-            <div class="glosario-card__features">
-              <span class="feature-badge">Reglas IF-THEN</span>
-              <span class="feature-badge">Tareas mecánicas</span>
-              <span class="feature-badge">100% predecible</span>
+              <div class="glosario-card__features">
+                <span class="feature-badge">Reglas IF-THEN</span>
+                <span class="feature-badge">Tareas mecánicas</span>
+                <span class="feature-badge">100% predecible</span>
+              </div>
             </div>
           </article>
 
-          <article class="glosario-card glass-card">
-            <div class="glosario-card__icon">
-              <i class="fi fi-tr-brain"></i>
-            </div>
-            <h3 class="glosario-card__title">Agente Inteligente</h3>
-            <div class="glosario-card__section">
+          <article class="glosario-card glass-card" data-glosario-item>
+            <button class="glosario-card__header" data-glosario-toggle aria-expanded="false">
+              <div class="glosario-card__icon">
+                <i class="fi fi-tr-brain"></i>
+              </div>
+              <h3 class="glosario-card__title">Agente Inteligente</h3>
+              <i class="glosario-card__toggle-icon fi fi-rr-angle-down"></i>
+            </button>
+            <div class="glosario-card__content" data-glosario-content>
+              <div class="glosario-card__section">
               <h4>¿Qué es?</h4>
               <p>Un agente inteligente combina automatización avanzada con inteligencia artificial real, permitiéndole pensar, aprender y tomar decisiones complejas como un empleado virtual altamente capacitado.</p>
             </div>
@@ -329,10 +343,11 @@
                 <li>Coordina múltiples acciones de manera inteligente</li>
               </ul>
             </div>
-            <div class="glosario-card__features">
-              <span class="feature-badge">Razonamiento contextual</span>
-              <span class="feature-badge">Aprendizaje continuo</span>
-              <span class="feature-badge">Decisiones autónomas</span>
+              <div class="glosario-card__features">
+                <span class="feature-badge">Razonamiento contextual</span>
+                <span class="feature-badge">Aprendizaje continuo</span>
+                <span class="feature-badge">Decisiones autónomas</span>
+              </div>
             </div>
           </article>
         </div>
@@ -1042,6 +1057,20 @@
         </div>
       </div>
     </section>
+
+    <!-- Modal para casos de uso (mobile) -->
+    <div class="caso-modal" id="casoModal" role="dialog" aria-modal="true" aria-labelledby="casoModalTitle" aria-hidden="true">
+      <div class="caso-modal__overlay" data-modal-close></div>
+      <div class="caso-modal__container">
+        <div class="caso-modal__drag-indicator" aria-hidden="true"></div>
+        <button class="caso-modal__close" data-modal-close aria-label="Cerrar modal">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+        <div class="caso-modal__content" id="casoModalContent">
+          <!-- El contenido del caso se insertará aquí dinámicamente -->
+        </div>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">

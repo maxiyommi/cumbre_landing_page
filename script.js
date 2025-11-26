@@ -557,19 +557,24 @@ class AILandingPage {
     }
 
     handleNavClick(e) {
-        e.preventDefault();
         const targetId = e.target.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const headerHeight = this.header.offsetHeight;
-            const targetPosition = targetSection.offsetTop - headerHeight;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+
+        // Solo prevenir el comportamiento por defecto si es un enlace interno (#)
+        if (targetId && targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                const headerHeight = this.header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
+        // Si no empieza con #, dejarlo navegar normalmente (servicios.html, etc.)
     }
 
     updateActiveNavLink() {

@@ -703,29 +703,41 @@
             <p class="contact__card-subtitle">
               Sesión de 30 minutos por videollamada
             </p>
-            <!-- Google Calendar Appointment Scheduling begin -->
-            <link
-              href="https://calendar.google.com/calendar/scheduling-button-script.css"
-              rel="stylesheet"
-            />
-            <script
-              src="https://calendar.google.com/calendar/scheduling-button-script.js"
-              async
-            ></script>
-            <script>
-              (function () {
-                var target = document.currentScript;
-                window.addEventListener("load", function () {
-                  calendar.schedulingButton.load({
-                    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
-                    color: "#039BE5",
-                    label: "📅  Reservar Ahora",
-                    target,
+
+            <!-- Mobile: Direct link to Google Calendar -->
+            <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn btn-primary btn-lg contact__calendar-btn contact__calendar-btn--mobile">
+              📅  Reservar Ahora
+            </a>
+
+            <!-- Desktop: Google Calendar Modal -->
+            <div class="contact__calendar-btn--desktop">
+              <!-- Google Calendar Appointment Scheduling begin -->
+              <link
+                href="https://calendar.google.com/calendar/scheduling-button-script.css"
+                rel="stylesheet"
+              />
+              <script
+                src="https://calendar.google.com/calendar/scheduling-button-script.js"
+                async
+              ></script>
+              <script>
+                (function () {
+                  var target = document.currentScript;
+                  window.addEventListener("load", function () {
+                    calendar.schedulingButton.load({
+                      url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
+                      color: "#039BE5",
+                      label: "📅  Reservar Ahora",
+                      target,
+                    });
                   });
-                });
-              })();
-            </script>
-            <!-- end Google Calendar Appointment Scheduling -->
+                })();
+              </script>
+              <!-- end Google Calendar Appointment Scheduling -->
+            </div>
           </div>
         </div>
       </div>

@@ -7,6 +7,8 @@ class FacturaScanPage {
     this.setupVideoModal();
     this.setupBentoCards();
     this.setupImageModal();
+    this.setupMobileCarousel();
+    this.setupScreenshotLightbox();
   }
 
   initializeComponents() {
@@ -298,6 +300,149 @@ class FacturaScanPage {
         closeModal();
       }
     });
+  }
+
+  setupMobileCarousel() {
+    const carousel = document.getElementById('screenshotsCarousel');
+    const indicators = document.querySelectorAll('.screenshot-dot');
+    const thumbnails = document.querySelectorAll('.thumbnail-btn');
+
+    if (!carousel || !indicators.length) return;
+
+    // Detectar si estamos en mobile
+    const isMobile = () => window.innerWidth <= 768;
+
+    // Actualizar indicadores basado en scroll
+    const updateIndicators = () => {
+      if (!isMobile()) return;
+
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = carousel.querySelector('.thumbnail-btn').offsetWidth;
+      const gap = 16; // 1rem gap
+      const totalWidth = cardWidth + gap;
+      const currentIndex = Math.round(scrollLeft / totalWidth);
+
+      // Actualizar indicadores
+      indicators.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+
+      // Actualizar botones activos
+      thumbnails.forEach((btn, index) => {
+        btn.classList.toggle('active', index === currentIndex);
+      });
+    };
+
+    // Scroll al hacer click en indicadores
+    indicators.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (!isMobile()) return;
+
+        const cardWidth = carousel.querySelector('.thumbnail-btn').offsetWidth;
+        const gap = 16;
+        const scrollPosition = index * (cardWidth + gap);
+
+        carousel.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Listener para scroll (con throttle para performance)
+    let scrollTimeout;
+    carousel.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(updateIndicators, 50);
+    }, { passive: true });
+
+    // Actualizar en resize
+    window.addEventListener('resize', () => {
+      if (isMobile()) {
+        updateIndicators();
+      }
+    });
+
+    // Inicializar
+    if (isMobile()) {
+      updateIndicators();
+    }
+  }
+
+  setupScreenshotLightbox() {
+    const lightbox = document.getElementById('screenshotLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeLightboxBtn = document.getElementById('closeLightbox');
+    const thumbnails = document.querySelectorAll('.thumbnail-btn');
+
+    if (!lightbox || !lightboxImage || !closeLightboxBtn) return;
+
+    // Abrir lightbox al hacer click en thumbnail
+    thumbnails.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Solo abrir lightbox en mobile, en desktop mantener comportamiento original
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const imgSrc = btn.querySelector('img').src;
+        const caption = btn.querySelector('span').textContent;
+
+        lightboxImage.src = imgSrc;
+        lightboxImage.alt = caption;
+        lightboxCaption.textContent = caption;
+
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Agregar animación de entrada
+        setTimeout(() => {
+          lightbox.querySelector('.screenshot-lightbox__container').style.transform = 'scale(1)';
+          lightbox.querySelector('.screenshot-lightbox__container').style.opacity = '1';
+        }, 10);
+      });
+    });
+
+    // Cerrar lightbox
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+
+      // Reset transform para próxima apertura
+      setTimeout(() => {
+        lightbox.querySelector('.screenshot-lightbox__container').style.transform = 'scale(0.9)';
+        lightbox.querySelector('.screenshot-lightbox__container').style.opacity = '0';
+      }, 300);
+    };
+
+    // Cerrar con botón X
+    closeLightboxBtn.addEventListener('click', closeLightbox);
+
+    // Cerrar al hacer click en el fondo
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    // Prevenir scroll del body cuando el lightbox está abierto
+    lightbox.addEventListener('touchmove', (e) => {
+      if (e.target === lightbox) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   }
 
 }
