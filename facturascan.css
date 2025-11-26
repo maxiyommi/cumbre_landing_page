@@ -12,30 +12,7 @@ body {
   min-height: 100vh;
 }
 
-/* Header Override - Transparent in hero section */
-.header {
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  padding: 1.5rem 0;
-  transition: all 0.3s ease;
-}
-
-.header.scrolled {
-  background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 0.1px solid var(--border-color);
-  padding: 1rem 0;
-}
-
-/* Navbar visibility transition */
-.header__nav {
-  transition: opacity 0.3s ease;
-  will-change: opacity;
-}
-
-/* Navbar visibility classes are defined in style.css with higher specificity */
+/* Header styles are defined in style.css */
 
 /* Fix Flaticon icon centering globally */
 [class*="fi-"]::before {
@@ -1493,6 +1470,37 @@ button.btn-large {
     grid-template-columns: 1fr;
   }
 
+  /* Fix responsive for process section */
+  .process-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .process-diagram {
+    padding: 1rem;
+  }
+
+  .process-node {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .node-decision {
+    width: 70px;
+    height: 70px;
+  }
+
+  .node-success,
+  .node-error {
+    width: 55px;
+    height: 55px;
+  }
+
+  .process-label {
+    font-size: 0.85rem;
+  }
+
   .final-cta-wrapper {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -1993,8 +2001,9 @@ button.btn-large {
 /* Responsive */
 @media (max-width: 768px) {
   .synthetic-hero {
-    padding: 6rem 1.5rem 4rem;
-    min-height: auto;
+    padding: 8rem 1.5rem 4rem;
+    min-height: 100vh;
+    justify-content: center;
   }
 
   .network-node {

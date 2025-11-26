@@ -73,19 +73,23 @@
     <!-- Header -->
     <header class="header" role="banner">
       <div class="container header__container">
-        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
-          <img
+        <div
+          class="header__logo"
+          aria-label="Cumbre IA"
+          style="cursor: pointer"
+          onclick="window.location.href='index.html'"
+        >
+            <img
             src="assets/images/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
             loading="eager"
           />
-        </a>
+        </div>
 
         <button
           class="header__menu-toggle"
           aria-label="Abrir menú"
-          style="display: none"
         >
           <span aria-hidden="true">&#9776;</span>
         </button>
@@ -95,7 +99,7 @@
           aria-label="Navegación principal"
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
-          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <a href="servicios.html" class="header__nav-link">Servicios</a>
           <!-- Desktop: menú desplegable de Soluciones -->
           <div class="header__nav-contact-group">
             <button
@@ -1121,6 +1125,7 @@
       </div>
     </nav>
 
+    <script src="script.js"></script>
     <script src="facturascan.js"></script>
   </body>
 </html>

@@ -648,24 +648,7 @@ class AILandingPage {
     }
 
     handleNavbarVisibility() {
-        const nav = document.querySelector('.header__nav');
-        const menuToggle = document.querySelector('.header__menu-toggle');
-        const inicioSection = document.getElementById('inicio');
-
-        if (!nav || !inicioSection) return;
-
-        const inicioRect = inicioSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        const inInicioSection = inicioRect.bottom > windowHeight * 0.2;
-
-        if (inInicioSection) {
-            nav.classList.remove('header__nav--visible');
-            if (menuToggle) menuToggle.classList.remove('header__menu-toggle--visible');
-        } else {
-            nav.classList.add('header__nav--visible');
-            if (menuToggle) menuToggle.classList.add('header__menu-toggle--visible');
-        }
+        // Navbar is always visible - no special handling needed
     }
 
     handleKeyboardNav(e) {

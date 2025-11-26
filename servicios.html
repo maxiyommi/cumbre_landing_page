@@ -50,6 +50,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="facturascan.css" />
     <link rel="stylesheet" href="servicios.css" />
 
     <!-- Favicon -->
@@ -64,29 +65,33 @@
     <!-- Header -->
     <header class="header" role="banner">
       <div class="container header__container">
-        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
-          <img
+        <div
+          class="header__logo"
+          aria-label="Cumbre IA"
+          style="cursor: pointer"
+          onclick="window.location.href='index.html'"
+        >
+            <img
             src="assets/images/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
             loading="eager"
           />
-        </a>
+        </div>
 
         <button
           class="header__menu-toggle"
           aria-label="Abrir menú"
-          style="display: none"
         >
           <span aria-hidden="true">&#9776;</span>
         </button>
         <nav
-          class="header__nav header__nav--visible"
+          class="header__nav"
           role="navigation"
           aria-label="Navegación principal"
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
-          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <a href="servicios.html" class="header__nav-link">Servicios</a>
           <!-- Desktop: menú desplegable de Soluciones -->
           <div class="header__nav-contact-group">
             <button
@@ -148,33 +153,50 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="servicios-hero">
-      <!-- Animated background elements -->
-      <div class="servicios-hero__bg-elements">
-        <div class="bg-circle bg-circle--1"></div>
-        <div class="bg-circle bg-circle--2"></div>
-        <div class="bg-circle bg-circle--3"></div>
+    <section class="synthetic-hero">
+      <div class="synthetic-hero__background">
+        <!-- Animated network visualization -->
+        <div class="network-viz">
+          <div class="network-node" style="--delay: 0s; --x: 10%; --y: 20%;"></div>
+          <div class="network-node" style="--delay: 0.3s; --x: 85%; --y: 15%;"></div>
+          <div class="network-node" style="--delay: 0.6s; --x: 25%; --y: 75%;"></div>
+          <div class="network-node" style="--delay: 0.9s; --x: 70%; --y: 80%;"></div>
+          <div class="network-node" style="--delay: 1.2s; --x: 50%; --y: 45%;"></div>
+          <div class="network-node" style="--delay: 1.5s; --x: 90%; --y: 60%;"></div>
+          <div class="network-node" style="--delay: 1.8s; --x: 15%; --y: 50%;"></div>
+          <div class="network-node" style="--delay: 2.1s; --x: 60%; --y: 25%;"></div>
+
+          <!-- Connection lines -->
+          <svg class="network-connections" xmlns="http://www.w3.org/2000/svg">
+            <line class="connection-line" x1="10%" y1="20%" x2="85%" y2="15%" style="--delay: 0.5s;"/>
+            <line class="connection-line" x1="85%" y1="15%" x2="70%" y2="80%" style="--delay: 1s;"/>
+            <line class="connection-line" x1="25%" y1="75%" x2="70%" y2="80%" style="--delay: 1.5s;"/>
+            <line class="connection-line" x1="50%" y1="45%" x2="90%" y2="60%" style="--delay: 2s;"/>
+            <line class="connection-line" x1="15%" y1="50%" x2="50%" y2="45%" style="--delay: 2.5s;"/>
+            <line class="connection-line" x1="60%" y1="25%" x2="50%" y2="45%" style="--delay: 3s;"/>
+          </svg>
+        </div>
       </div>
 
       <div class="container">
-        <div class="servicios-hero__content">
-          <div class="servicios-hero__badge">
+        <div class="synthetic-hero__content">
+          <div class="synthetic-hero__badge">
             <i class="fi fi-rr-rocket-lunch"></i>
             <span id="currentDate"></span>
           </div>
-          <h1 class="servicios-hero__title">
-            <span class="servicios-hero__title-text">Casos de Uso que <span class="gradient-text">Transforman</span> tu Empresa</span>
+          <h1 class="synthetic-hero__title">
+            <span class="title-line">Casos de Uso que <span class="gradient-text-animated">Transforman</span> tu Empresa</span>
           </h1>
-          <p class="servicios-hero__subtitle">
+          <p class="synthetic-hero__subtitle">
             Soluciones de inteligencia artificial diseñadas para PyMEs argentinas.
-            ROI demostrable. Propiedad 100% tuya.
+            <strong>ROI demostrable. Propiedad 100% tuya.</strong>
           </p>
-          <div class="servicios-hero__cta">
-            <a href="#casos" class="btn btn-primary btn-lg">
+          <div class="synthetic-hero__ctas">
+            <a href="#casos" class="btn btn-primary btn-large">
               <i class="fi fi-rr-arrow-down"></i>
               Explorar casos de uso
             </a>
-            <a href="index.html#contacto" class="btn btn-secondary btn-lg">
+            <a href="index.html#contacto" class="btn btn-secondary btn-large">
               <i class="fi fi-rr-calendar"></i>
               Agendar auditoría
             </a>
@@ -189,9 +211,6 @@
           <div class="scroll-dot"></div>
         </div>
       </div>
-
-      <!-- Transition gradient -->
-      <div class="servicios-hero__transition"></div>
     </section>
 
     <!-- Resumen Ejecutivo -->
@@ -268,7 +287,7 @@
 
           <article class="glosario-card glass-card">
             <div class="glosario-card__icon">
-              <i class="fi fi-tr-settings"></i>
+              <i class="fi fi-tr-chart-network"></i>
             </div>
             <h3 class="glosario-card__title">Automatización</h3>
             <div class="glosario-card__section">
@@ -1018,7 +1037,7 @@
           <p>Agenda una auditoría técnica de 1.500 USD <strong>bonificada al contratar</strong> y descubrí cuál de estos 6 casos genera el mayor impacto en tu negocio.</p>
           <div class="cta-buttons">
             <a href="index.html#contacto" class="btn btn-primary btn-lg">📅 Agendar Auditoría</a>
-            <a href="https://drive.google.com/file/d/1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS/view?usp=drive_link" target="_blank" class="btn btn-secondary btn-lg">📄 Descargar PDF Completo</a>
+            <a href="https://drive.google.com/file/d/130tonmtNnHHzkrd0AFuyyodLcDtneaBW/view?usp=drive_link" target="_blank" class="btn btn-secondary btn-lg">📄 Descargar PDF Completo</a>
           </div>
         </div>
       </div>
@@ -1031,7 +1050,7 @@
         <div class="footer__content">
           <div class="footer__section">
             <h3>
-              <a href="index.html" class="footer__logo-container" aria-label="Cumbre IA">
+              <div class="footer__logo-container" aria-label="Cumbre IA">
                 <div class="mountain-icon">
                   <img
                     src="assets/images/pitch.svg"
@@ -1040,7 +1059,7 @@
                     loading="eager"
                   />
                 </div>
-              </a>
+              </div>
             </h3>
             <p>
               Soluciones de inteligencia artificial que transforman tu negocio.
@@ -1069,11 +1088,9 @@
             </div>
           </div>
           <div class="footer__section">
-            <h3>Casos de Uso</h3>
-            <p><a href="#caso-1">Chatbot WhatsApp</a></p>
-            <p><a href="#caso-2">Asistente de Ventas</a></p>
-            <p><a href="#caso-3">Análisis de Sentimiento</a></p>
-            <p><a href="#caso-5">Facturación Automática</a></p>
+            <h3>Soluciones</h3>
+            <p><a href="facturascan.html">FacturaScan</a></p>
+            <p><a href="synthetic-audience.html">Synthetic Audience</a></p>
           </div>
           <div class="footer__section">
             <h3>Contacto</h3>

@@ -4,9 +4,7 @@ class FacturaScanPage {
     this.initializeComponents();
     this.setupEventListeners();
     this.setupScrollAnimations();
-    this.handleMobileMenu();
     this.setupVideoModal();
-    this.handleNavbarVisibility();
     this.setupBentoCards();
     this.setupImageModal();
   }
@@ -110,9 +108,6 @@ class FacturaScanPage {
       // Add/remove 'scrolled' class for styling (like index.html)
       const isScrolled = currentScroll > 100;
       this.header.classList.toggle('scrolled', isScrolled);
-
-      // Handle navbar visibility (hide nav links in hero section)
-      this.handleNavbarVisibility();
     });
   }
 
@@ -234,61 +229,6 @@ class FacturaScanPage {
     });
   }
 
-  handleMobileMenu() {
-    const menuToggle = document.querySelector('.header__menu-toggle');
-    const nav = document.querySelector('.header__nav');
-
-    if (menuToggle && nav) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('header__nav--open');
-        menuToggle.setAttribute('aria-expanded', isOpen);
-        menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
-
-        if (isOpen) {
-          menuToggle.innerHTML = '<span aria-hidden="true">&times;</span>';
-          document.body.style.overflow = 'hidden';
-        } else {
-          menuToggle.innerHTML = '<span aria-hidden="true">&#9776;</span>';
-          document.body.style.overflow = '';
-        }
-      });
-
-      // Close menu when clicking on a link
-      const navLinks = document.querySelectorAll('.header__nav-link');
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (nav.classList.contains('header__nav--open')) {
-            nav.classList.remove('header__nav--open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.setAttribute('aria-label', 'Abrir menú');
-            menuToggle.innerHTML = '<span aria-hidden="true">&#9776;</span>';
-            document.body.style.overflow = '';
-          }
-        });
-      });
-    }
-  }
-
-  handleNavbarVisibility() {
-    const nav = document.querySelector('.header__nav');
-    const heroSection = document.querySelector('.facturascan-hero');
-
-    if (!nav || !heroSection) return;
-
-    const heroRect = heroSection.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    // Ocultar nav cuando estás en la sección hero (dejando solo el logo)
-    const inHeroSection = heroRect.bottom > windowHeight * 0.2;
-
-    if (inHeroSection) {
-      nav.classList.add('header__nav--hidden');
-      nav.classList.remove('header__nav--visible');
-    } else {
-      nav.classList.remove('header__nav--hidden');
-      nav.classList.add('header__nav--visible');
-    }
-  }
 
   setupBentoCards() {
     const bentoCards = document.querySelectorAll('.bento-card');

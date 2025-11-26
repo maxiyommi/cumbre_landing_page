@@ -304,19 +304,16 @@ body {
   filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
 }
 
+/* Hide hamburger menu button in desktop */
+.header__menu-toggle {
+  display: none;
+}
+
 .header__nav {
   display: flex;
   gap: var(--spacing-xl); /* Espaciado uniforme entre todos los links */
   list-style: none;
-  transition: opacity 0.3s ease;
   align-items: center;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.header__nav--visible {
-  opacity: 1 !important;
-  pointer-events: auto !important;
 }
 
 .header__nav-link,
@@ -3082,9 +3079,8 @@ body {
     padding: 0 var(--spacing-md);
   }
 
-  .header__nav {
-    display: none;
-  }
+  /* Navbar stays visible on tablet/desktop - only hidden on mobile with hamburger menu */
+  /* .header__nav { display: none; } - REMOVED: This was hiding navbar on tablet screens */
 
   .hero__title {
     font-size: var(--font-size-3xl);
@@ -3765,48 +3761,62 @@ body {
 @media (max-width: 700px) {
   .header__container {
     flex-wrap: wrap;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
   .header__logo {
     font-size: 1.1rem;
     gap: 0.3rem;
   }
   .mountain-icon {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
   }
   .header {
-    padding: 0.6rem 0;
+    padding: 0.75rem 0;
+    /* Header siempre visible en mobile con fondo sólido */
+    background: linear-gradient(135deg, rgba(10, 10, 15, 0.95) 0%, rgba(22, 33, 62, 0.93) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  .header.scrolled {
+    background: linear-gradient(135deg, rgba(10, 10, 15, 0.95) 0%, rgba(22, 33, 62, 0.93) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
   .header__nav {
     position: fixed;
-    top: 95px; /* Antes: top: 56px; Ahora: despliega más abajo para no tapar el logo */
+    top: 90px; /* Altura del header en mobile: logo 90px (sin cambios) */
     left: 0;
     width: 100vw;
-    background: rgba(10, 10, 15, 0.93);
+    background: linear-gradient(180deg, rgba(22, 33, 62, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
     padding: 0.5rem 0 1.2rem 0;
-    box-shadow: 0 8px 32px #0002;
-    z-index: 9999;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(0, 212, 255, 0.1);
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+    z-index: 9998;
     display: none;
     transition: none;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   /* Mobile menu open state */
   .header__nav.open {
-    display: flex;
+    display: flex !important;
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-  /* Visibility classes override for FacturaScan page (higher specificity) */
-  .header__nav.header__nav--hidden:not(.open) {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  .header__nav.header__nav--visible:not(.open) {
-    opacity: 1 !important;
-    pointer-events: auto !important;
+  /* EN MOBILE: El nav está oculto por defecto hasta que se abra el menú con hamburger */
+  .header__nav:not(.open) {
+    display: none !important;
   }
   .header__nav-link {
     width: 100%;
@@ -3836,19 +3846,27 @@ body {
     display: flex !important;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
-    background: none;
-    border: none;
+    width: 42px;
+    height: 42px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1.5px solid rgba(0, 212, 255, 0.3);
+    border-radius: var(--radius-md);
     color: #00d4ff;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     margin-left: auto;
-    margin-right: 0.2rem;
+    margin-right: 0;
     z-index: 10001;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+  }
+
+  .header__menu-toggle:hover,
+  .header__menu-toggle:active {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: rgba(0, 212, 255, 0.5);
+    transform: scale(1.05);
   }
 
   .header__menu-toggle--visible {
@@ -3975,20 +3993,6 @@ body {
   }
   .header__nav-contact-item:last-child {
     border-bottom: none;
-  }
-}
-
-/* Navbar visibility classes for scroll behavior (FacturaScan page) */
-/* Desktop and tablet - always apply when class is present */
-@media (min-width: 701px) {
-  .header__nav.header__nav--hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-
-  .header__nav.header__nav--visible {
-    opacity: 1 !important;
-    pointer-events: auto !important;
   }
 }
 
