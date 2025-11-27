@@ -59,7 +59,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="facturascan.css" />
+    <link rel="stylesheet" href="synthetic-audience.css" />
 
     <!-- Favicon -->
     <link
@@ -73,19 +73,23 @@
     <!-- Header -->
     <header class="header" role="banner">
       <div class="container header__container">
-        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
-          <img
+        <div
+          class="header__logo"
+          aria-label="Cumbre IA"
+          style="cursor: pointer"
+          onclick="window.location.href='index.html'"
+        >
+            <img
             src="assets/images/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
             loading="eager"
           />
-        </a>
+        </div>
 
         <button
           class="header__menu-toggle"
           aria-label="Abrir menú"
-          style="display: none"
         >
           <span aria-hidden="true">&#9776;</span>
         </button>
@@ -95,7 +99,7 @@
           aria-label="Navegación principal"
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
-          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <a href="servicios.html" class="header__nav-link">Servicios</a>
           <!-- Desktop: menú desplegable de Soluciones -->
           <div class="header__nav-contact-group">
             <button
@@ -229,11 +233,19 @@
               <i class="fi fi-rr-calendar"></i>
               Solicitar demo
             </a>
-            <button id="openVideoModal" class="btn btn-secondary btn-large">
+            <button type="button" id="openVideoModal" class="btn btn-secondary btn-large">
               <i class="fi fi-rr-play-circle"></i>
               Ver video
             </button>
           </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-indicator__label">Descubrí más</span>
+        <div class="scroll-indicator__mouse">
+          <div class="scroll-dot"></div>
         </div>
       </div>
     </section>
@@ -245,7 +257,7 @@
           <h2>Cómo funciona <span class="gradient-text">Synthetic Audience</span></h2>
           <p class="section-subtitle">
             <strong>El problema</strong>: confiar en un solo modelo LLM para simular todas las perspectivas resulta limitado.<br>
-            <strong>La solución</strong>: una arquitectura multi-agente donde cada usuario sintético aporta su propia personalidad, sesgos y marco cognitivo.
+            <strong>La solución</strong>: una arquitectura multi-agente donde cada usuario sintético aporta su propia personalidad, sesgos y marco cognitivo. Conocé los 3 pilares clave:
           </p>
         </div>
 
@@ -375,7 +387,8 @@
             <span style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">👥 Evaluación de talento</span>
             <span style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">🔬 Investigación cualitativa</span>
           </div>
-          <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary">
+          <a href="mailto:hola@cumbre.cloud" class="btn btn-primary btn-large custom-use-case-btn">
+            <i class="fi fi-rr-messages"></i>
             Consultanos por otros casos de uso
           </a>
         </div>
@@ -392,20 +405,25 @@
 
         <div style="max-width: 1400px; margin: 0 auto;">
           <!-- STEP 1: Contexto + Campaña (left) + Imagen (right) -->
-          <div style="display: grid; grid-template-columns: 1fr 0.85fr; gap: 2rem; margin-bottom: 3rem; align-items: stretch;">
+          <div class="example-step-grid" style="display: grid; grid-template-columns: 1fr 0.85fr; gap: 2rem; margin-bottom: 3rem; align-items: stretch;">
             <!-- Left Column: Contexto + Tu Campaña stacked -->
-            <div style="display: flex; flex-direction: column; gap: 1.5rem; height: 100%;">
+            <div class="example-left-column" style="display: flex; flex-direction: column; gap: 1.5rem; height: 100%;">
               <!-- Contexto -->
-              <div class="glass-card" style="padding: 2rem; flex: 1; display: flex; flex-direction: column;">
+              <div class="glass-card context-card" style="padding: 2rem; display: flex; flex-direction: column;">
                 <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
                   <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #9333ea, #7e22ce); display: flex; align-items: center; justify-content: center;">
                     <i class="fi fi-rr-info" style="color: white; font-size: 18px;"></i>
                   </div>
                   <h3 style="margin: 0; font-size: 1.1rem; color: var(--accent-purple);">Contexto</h3>
                 </div>
-                <p style="opacity: 0.9; line-height: 1.7; font-size: 0.95rem; margin: 0;">
-                  <strong>Bolt Energy</strong>, una marca líder en bebidas energéticas, quiere introducir <strong>"Bolt Pure"</strong>, una nueva línea con ingredientes 100% naturales, cero azúcares añadidos y envases reciclados, dirigida a un público preocupado por la salud y la sostenibilidad. El desafío es convencer a su base de consumidores existente de que es un producto genuino y atractivo, mientras atraen a un nuevo segmento que desconfía de la marca. Una validación incorrecta podría canibalizar ventas o, peor aún, dañar la reputación de la marca.
-                </p>
+                <div class="context-text">
+                  <p class="context-preview" style="opacity: 0.9; line-height: 1.7; font-size: 0.95rem; margin: 0;">
+                    <strong>Bolt Energy</strong>, una marca líder en bebidas energéticas, quiere introducir <strong>"Bolt Pure"</strong>, una nueva línea con ingredientes 100% naturales, cero azúcares añadidos y envases reciclados, dirigida a un público preocupado por la salud y la sostenibilidad.
+                  </p>
+                  <p class="context-full" style="opacity: 0.9; line-height: 1.7; font-size: 0.95rem; margin: 0; display: none;">
+                    <strong>Bolt Energy</strong>, una marca líder en bebidas energéticas, quiere introducir <strong>"Bolt Pure"</strong>, una nueva línea con ingredientes 100% naturales, cero azúcares añadidos y envases reciclados, dirigida a un público preocupado por la salud y la sostenibilidad. El desafío es convencer a su base de consumidores existente de que es un producto genuino y atractivo, mientras atraen a un nuevo segmento que desconfía de la marca. Una validación incorrecta podría canibalizar ventas o, peor aún, dañar la reputación de la marca.
+                  </p>
+                </div>
               </div>
 
               <!-- Tu Campaña -->
@@ -448,7 +466,7 @@
           </div>
 
           <!-- STEP 2: Análisis (Agentes + Orquestador side by side) -->
-          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; margin-bottom: 3rem;">
+          <div class="example-step-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; margin-bottom: 3rem;">
             <!-- Los agentes responden -->
             <div class="glass-card" style="padding: 2.5rem;">
               <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
@@ -476,7 +494,7 @@
                       POSITIVO
                     </div>
                   </div>
-                  <div style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
+                  <div class="agent-response-content" style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
                     "¡Exactamente lo que estaba esperando! La imagen muestra el contraste perfecto: energía potente (lata negra) vs. energía limpia (lata blanca). El copy 'Energía Real. Sin Compromisos' me resuena 100%. Estoy cansado de productos 'naturales' que no funcionan. Si Bolt logra mantener el rendimiento con ingredientes limpios, esto es un game-changer para mis entrenamientos."
                   </div>
                 </div>
@@ -495,7 +513,7 @@
                       NEGATIVO
                     </div>
                   </div>
-                  <div style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
+                  <div class="agent-response-content" style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
                     "Paso totalmente. La imagen me muestra que desapareció el rayo icónico de Bolt y apareció una lata blanca aburrida con plantas. El copy 'estilo de vida activo y consciente' no tiene nada que ver conmigo. Esto NO es Bolt. Bolt es energía pura, sabor intenso, adrenalina. Esto parece bebida para yoga y meditación. Si quiero algo 'natural' tomo agua."
                   </div>
                 </div>
@@ -514,7 +532,7 @@
                       ESCÉPTICO
                     </div>
                   </div>
-                  <div style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
+                  <div class="agent-response-content" style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
                     "No me lo creo. La imagen muestra hojas y naturaleza, pero esto es Bolt, una marca que siempre fue pura cafeína y marketing agresivo. El copy dice 'Sin Compromisos' pero veo puro <em>greenwashing</em>. ¿Dónde están las certificaciones? ¿Quién audita esto? Necesito transparencia radical, no solo plantas bonitas en el packaging."
                   </div>
                 </div>
@@ -533,7 +551,7 @@
                       NEUTRAL
                     </div>
                   </div>
-                  <div style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
+                  <div class="agent-response-content" style="padding-left: 2.5rem; opacity: 0.9; line-height: 1.5; font-style: italic; font-size: 0.85rem;">
                     "Interesante. La imagen compara ambas latas, lo cual ayuda a entender el posicionamiento. El copy promete 'ingredientes 100% naturales' y 'envases reciclados', pero como padre necesito más información: ¿tabla nutricional? ¿certificaciones? ¿contenido de cafeína? El packaging premium sugiere precio alto. Podría considerarlo si el valor justifica el costo y hay transparencia total."
                   </div>
                 </div>
@@ -639,11 +657,11 @@
           </div>
 
           <!-- STEP 3: Insights Detallados (Full Width) -->
-          <div class="glass-card" style="padding: 2.5rem; margin-bottom: 3rem;">
+          <div class="glass-card insights-card" style="padding: 2.5rem; margin-bottom: 3rem;">
             <h4 style="margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--accent-purple); display: flex; align-items: center; gap: 0.75rem;">
             Insights Clave del Orquestador
             </h4>
-            <div style="display: grid; gap: 1rem;">
+            <div class="insights-content" style="display: grid; gap: 1rem;">
               <div style="padding: 1rem; background: rgba(16, 185, 129, 0.15); border-radius: 8px; border-left: 4px solid #10b981;">
                 <strong style="color: #10b981;">✓ Convergencia (señal fuerte):</strong> El 62% de los agentes reconocen la necesidad de transparencia total: certificaciones, tablas nutricionales y datos concretos. Tanto escépticos como entusiastas coinciden en que la credibilidad depende de pruebas verificables, no solo del packaging o el copy.
               </div>
@@ -659,13 +677,13 @@
           </div>
 
           <!-- STEP 4: Resultados (Full Width con Grid interno) -->
-          <div class="glass-card" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);">
+          <div class="glass-card results-card" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);">
             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
               <h4 style="margin: 0; font-size: 1.2rem;">Análisis de Resultados</h4>
             </div>
 
             <!-- Action Items Grid en 2 columnas -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem;">
+            <div class="results-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem;">
               <!-- Item 1 - CRÍTICO (Span full width) -->
               <div style="grid-column: 1 / -1; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 0; right: 0; background: #ef4444; color: white; padding: 0.25rem 0.75rem; font-size: 0.7rem; font-weight: 700; border-bottom-left-radius: 8px;">
@@ -743,60 +761,51 @@
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
 
-            <!-- Impacto Estimado - Full Width -->
-            <div style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.1);">
-              <h5 style="margin: 0 0 1.5rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                <span>📈</span> Impacto Estimado con Implementación
-              </h5>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem;">
-                <div style="text-align: center;">
-                  <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">CTR Mejorado</div>
-                  <div style="font-size: 2rem; font-weight: 700; color: #10b981;">6.5%</div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+71%</div>
-                </div>
-                <div style="text-align: center;">
-                  <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Sentimiento</div>
-                  <div style="font-size: 2rem; font-weight: 700; color: #10b981;">68%</div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+31%</div>
-                </div>
-                <div style="text-align: center;">
-                  <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Riesgo</div>
-                  <div style="font-size: 2rem; font-weight: 700, color: #eab308;">Medio</div>
-                  <div style="font-size: 0.75rem; color: #eab308; margin-top: 0.25rem;">↓ De Alto</div>
-                </div>
-                <div style="text-align: center;">
-                  <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Engagement</div>
-                  <div style="font-size: 2rem; font-weight: 700; color: #10b981;">82</div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+41%</div>
+              <!-- Impacto Estimado - Full Width -->
+              <div style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h5 style="margin: 0 0 1.5rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <span>📈</span> Impacto Estimado con Implementación
+                </h5>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem;">
+                  <div style="text-align: center;">
+                    <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">CTR Mejorado</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #10b981;">6.5%</div>
+                    <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+71%</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Sentimiento</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #10b981;">68%</div>
+                    <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+31%</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Riesgo</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #eab308;">Medio</div>
+                    <div style="font-size: 0.75rem; color: #eab308; margin-top: 0.25rem;">↓ De Alto</div>
+                  </div>
+                  <div style="text-align: center;">
+                    <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0.5rem;">Engagement</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #10b981;">82</div>
+                    <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.25rem;">+41%</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Desastre evitado - Full Width Outside Container -->
-      <div style="width: 100%; padding:2rem;">
-        <div class="container">
-          <div style="max-width: 1400px; margin: 0 auto;">
-            <div class="glass-card" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);">
-              <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                <h5 style="margin: 0; font-size: 1.2rem; color: var(--accent-purple);">Desastre evitado</h5>
-              </div>
-              <p style="opacity: 0.9; margin: 0 0 1.5rem 0; line-height: 1.8; font-size: 1rem;">
-                Sin este análisis, Bolt hubiera lanzado con diseño que aliena al <strong>35% de base fiel</strong>, generando backlash en redes y posible boicot. La polarización detectada era <strong>invisible en focus groups tradicionales</strong> donde la presión social sesga respuestas.
-              </p>
+          <!-- Desastre evitado -->
+          <div class="glass-card" style="padding: 2.5rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%); margin-top: 3rem;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+              <h5 style="margin: 0; font-size: 1.2rem; color: var(--accent-purple);">Desastre evitado</h5>
             </div>
+            <p style="opacity: 0.9; margin: 0 0 1.5rem 0; line-height: 1.8; font-size: 1rem;">
+              Sin este análisis, Bolt hubiera lanzado con diseño que aliena al <strong>35% de base fiel</strong>, generando backlash en redes y posible boicot. La polarización detectada era <strong>invisible en focus groups tradicionales</strong> donde la presión social sesga respuestas.
+            </p>
           </div>
-        </div>
-      </div>
 
-      <!-- Disclaimer - Full Width Outside Container -->
-      <div style="width: 100%; padding: 0.5rem">
-        <div class="container">
-          <div style="max-width: 1400px; margin: 0 auto; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 12px; border-left: 3px solid rgba(255, 255, 255, 0.3);">
+          <!-- Nota disclaimer -->
+          <div class="glass-card" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border-left: 3px solid rgba(255, 255, 255, 0.3); margin-top: 3rem;">
             <p style="font-size: 0.9rem; opacity: 0.7; line-height: 1.8; margin: 0;">
               <strong>Nota:</strong> La marca 'Bolt Energy', el producto 'Bolt Pure' y las interacciones de los agentes son completamente ficticios y se utilizan únicamente con fines ilustrativos para demostrar el funcionamiento de Synthetic Audience.
             </p>
@@ -806,7 +815,7 @@
     </section>
 
     <!-- Industry Features + Differentiators -->
-    <section class="facturascan-how-it-works section-transition-from-purple-gradient">
+    <section id="differentiators" class="facturascan-how-it-works section-transition-from-purple-gradient">
       <div class="container">
         <div class="section-header">
           <h2>Por qué Synthetic Audience es <span class="gradient-text">diferente</span></h2>
@@ -909,19 +918,26 @@
             />
           </div>
 
-          <div class="screenshots-thumbnails">
-            <button class="thumbnail-btn active" data-screenshot="assets/images/synthetic_audience_platform_dashboard.png">
+          <div class="screenshots-thumbnails" id="screenshotsCarousel">
+            <button type="button" class="thumbnail-btn active" data-screenshot="assets/images/synthetic_audience_platform_dashboard.png" data-index="0">
               <img src="assets/images/synthetic_audience_platform_dashboard.png" alt="Dashboard" loading="lazy" />
               <span>Dashboard</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_generar_audiencia.png">
+            <button type="button" class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_generar_audiencia.png" data-index="1">
               <img src="assets/images/synthetic_audience_platform_generar_audiencia.png" alt="Generar Audiencia" loading="lazy" />
               <span>Generar Audiencia</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_analizar_campaña.png">
+            <button type="button" class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_analizar_campaña.png" data-index="2">
               <img src="assets/images/synthetic_audience_platform_analizar_campaña.png" alt="Analizar Campaña" loading="lazy" />
               <span>Analizar Campaña</span>
             </button>
+          </div>
+
+          <!-- Indicadores de progreso (solo visible en mobile) -->
+          <div class="screenshots-indicators" id="screenshotsIndicators">
+            <span class="screenshot-dot active" data-index="0"></span>
+            <span class="screenshot-dot" data-index="1"></span>
+            <span class="screenshot-dot" data-index="2"></span>
           </div>
         </div>
       </div>
@@ -992,11 +1008,22 @@
     <div id="imageModal" class="image-modal" style="display: none;">
       <div class="image-modal-overlay"></div>
       <div class="image-modal-content">
-        <button class="image-modal-close" aria-label="Cerrar">
+        <button type="button" class="image-modal-close" aria-label="Cerrar">
           <i class="fi fi-rr-cross"></i>
         </button>
-        <img id="modalImage" src="" alt="">
+        <img id="modalImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         <p id="modalCaption" class="image-modal-caption"></p>
+      </div>
+    </div>
+
+    <!-- Screenshot Lightbox -->
+    <div id="screenshotLightbox" class="screenshot-lightbox">
+      <div class="screenshot-lightbox__overlay"></div>
+      <div class="screenshot-lightbox__content">
+        <button type="button" class="screenshot-lightbox__close" aria-label="Cerrar">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+        <img id="lightboxScreenshot" src="" alt="">
       </div>
     </div>
 
@@ -1006,18 +1033,16 @@
       <div class="container footer__container">
         <div class="footer__content">
           <div class="footer__section">
-            <h3>
-              <div class="footer__logo-container" aria-label="Cumbre IA">
-                <div class="mountain-icon">
-                  <img
-                    src="assets/images/pitch.svg"
-                    alt="Logo Cumbre IA"
-                    class="logo-svg"
-                    loading="eager"
-                  />
-                </div>
+            <div class="footer__logo-container" role="img" aria-label="Cumbre IA">
+              <div class="mountain-icon">
+                <img
+                  src="assets/images/pitch.svg"
+                  alt="Logo Cumbre IA"
+                  class="logo-svg"
+                  loading="eager"
+                />
               </div>
-            </h3>
+            </div>
             <p>
               Soluciones de inteligencia artificial que transforman tu negocio.
               Desarrollo de agentes IA, chatbots inteligentes y consultoría
@@ -1073,7 +1098,7 @@
     <div id="videoModal" class="video-modal">
       <div class="video-modal__backdrop"></div>
       <div class="video-modal__content">
-        <button class="video-modal__close" aria-label="Cerrar video">
+        <button type="button" class="video-modal__close" aria-label="Cerrar video">
           <i class="fi fi-rr-cross"></i>
         </button>
         <div class="video-modal__player">
@@ -1085,6 +1110,38 @@
       </div>
     </div>
 
-    <script src="facturascan.js"></script>
+    <!-- Scroll Progress Indicator -->
+    <nav class="scroll-progress" aria-label="Progreso de lectura">
+      <div class="scroll-progress__track">
+        <div class="scroll-progress__fill"></div>
+        <div class="scroll-progress__stations">
+          <div class="scroll-progress__station" data-section="hero">
+            <span class="scroll-progress__label">Inicio</span>
+          </div>
+          <div class="scroll-progress__station" data-section="features">
+            <span class="scroll-progress__label">Cómo funciona</span>
+          </div>
+          <div class="scroll-progress__station" data-section="documents">
+            <span class="scroll-progress__label">Aplicaciones</span>
+          </div>
+          <div class="scroll-progress__station" data-section="example">
+            <span class="scroll-progress__label">Caso de uso</span>
+          </div>
+          <div class="scroll-progress__station" data-section="differentiators">
+            <span class="scroll-progress__label">Por qué</span>
+          </div>
+          <div class="scroll-progress__station" data-section="screenshots">
+            <span class="scroll-progress__label">Plataforma</span>
+          </div>
+          <div class="scroll-progress__station" data-section="cta">
+            <span class="scroll-progress__label">Demo</span>
+          </div>
+        </div>
+        <div class="scroll-progress__current"></div>
+      </div>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="synthetic-audience.js"></script>
   </body>
 </html>

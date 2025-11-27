@@ -73,12 +73,8 @@ class AILandingPage {
             optimizeVideo();
         }
 
-        // Manejar eventos para reproducción continua
-        this.backgroundVideo.addEventListener('ended', () => {
-            // Reiniciar inmediatamente para evitar saltos
-            this.backgroundVideo.currentTime = 0;
-            this.backgroundVideo.play();
-        });
+        // Manejar eventos para reproducción continua con fade in/out
+        this.setupVideoFadeLoop();
 
         // Prevenir pausas no deseadas
         this.backgroundVideo.addEventListener('pause', () => {
@@ -120,6 +116,88 @@ class AILandingPage {
         document.addEventListener('click', playOnInteraction, { once: true });
         document.addEventListener('touchstart', playOnInteraction, { once: true });
         document.addEventListener('scroll', playOnInteraction, { once: true });
+    }
+
+    // Configurar fade in/out para loop suave del video con crossfade
+    setupVideoFadeLoop() {
+        if (!this.backgroundVideo) return;
+
+        const fadeDuration = 400; // 0.4 segundos de fade (transición rápida)
+        const crossfadeThreshold = 0.5; // Reiniciar cuando opacity llegue a 0.5 (mitad del fade)
+        let fadeInterval;
+        let isFading = false;
+        let hasTriggeredFade = false;
+
+        // Función para hacer crossfade (fade out + reinicio + fade in simultáneos)
+        const startCrossfade = () => {
+            if (isFading) return; // Prevenir múltiples fades simultáneos
+            isFading = true;
+
+            let opacity = 1;
+            const fadeStep = 0.05;
+            const stepTime = fadeDuration / (1 / fadeStep);
+            let hasRestarted = false;
+
+            if (fadeInterval) clearInterval(fadeInterval);
+
+            fadeInterval = setInterval(() => {
+                opacity -= fadeStep;
+
+                // Cuando llegamos al threshold del crossfade, reiniciar el video
+                if (!hasRestarted && opacity <= crossfadeThreshold) {
+                    hasRestarted = true;
+                    this.backgroundVideo.currentTime = 0;
+
+                    // Iniciar fade in inmediatamente
+                    let newOpacity = crossfadeThreshold;
+                    if (fadeInterval) clearInterval(fadeInterval);
+
+                    fadeInterval = setInterval(() => {
+                        newOpacity += fadeStep;
+                        if (newOpacity >= 1) {
+                            newOpacity = 1;
+                            clearInterval(fadeInterval);
+                            this.backgroundVideo.style.opacity = '1';
+                            isFading = false; // Permitir el siguiente fade
+                            hasTriggeredFade = false; // Reset para el próximo ciclo
+                        } else {
+                            this.backgroundVideo.style.opacity = newOpacity.toString();
+                        }
+                    }, stepTime);
+                } else if (!hasRestarted) {
+                    this.backgroundVideo.style.opacity = opacity.toString();
+                }
+            }, stepTime);
+        };
+
+        // Monitorear el progreso del video para iniciar el crossfade antes de que termine
+        this.backgroundVideo.addEventListener('timeupdate', () => {
+            if (isFading || hasTriggeredFade) return; // No verificar si ya está haciendo fade
+
+            const duration = this.backgroundVideo.duration;
+            const currentTime = this.backgroundVideo.currentTime;
+            const timeRemaining = duration - currentTime;
+
+            // Iniciar crossfade 1 segundo antes de que termine
+            if (timeRemaining <= (fadeDuration / 1000) && timeRemaining > 0) {
+                hasTriggeredFade = true;
+                startCrossfade();
+            }
+        });
+
+        // Asegurar que el video se reinicie si llega al final sin fade
+        this.backgroundVideo.addEventListener('ended', () => {
+            if (!isFading) {
+                this.backgroundVideo.currentTime = 0;
+                this.backgroundVideo.style.opacity = '1';
+                this.backgroundVideo.play();
+                hasTriggeredFade = false;
+            }
+        });
+
+        // Establecer opacidad inicial
+        this.backgroundVideo.style.opacity = '1';
+        this.backgroundVideo.style.transition = 'none'; // Desactivar transiciones CSS para control manual
     }
 
     // Inicializar transiciones suaves y efectos parallax
@@ -399,27 +477,45 @@ class AILandingPage {
     }
 
     handleScrollIndicator() {
-        const indicator = document.querySelector('.scroll-indicator');
+        const indicator = document.querySelector('.scroll-indicator--minimal');
         const hero = document.getElementById('inicio');
         if (!indicator || !hero) return;
-        
-        const scrollY = window.scrollY || window.pageYOffset;
-        const heroRect = hero.getBoundingClientRect();
-        
-        const fadeStart = 50;
-        const fadeEnd = 300;
-        
-        let opacity = 0.7;
-        
-        if (scrollY >= fadeStart) {
-            const fadeRange = fadeEnd - fadeStart;
-            const fadeProgress = Math.min((scrollY - fadeStart) / fadeRange, 1);
-            opacity = 0.7 * (1 - fadeProgress);
+
+        // Setup inicial: esperar a que termine la animación CSS
+        if (!this.scrollIndicatorReady) {
+            indicator.addEventListener('animationend', () => {
+                // Remover la animación CSS y preparar para control JS
+                indicator.style.animation = 'none';
+                indicator.style.transition = 'opacity 0.6s ease-out';
+                this.scrollIndicatorReady = true;
+
+                // Forzar opacidad 1 después de la animación
+                indicator.style.opacity = '1';
+            }, { once: true });
+            return;
         }
-        
-        indicator.style.opacity = opacity;
-        
-        if (heroRect.bottom < 0) {
+
+        const heroRect = hero.getBoundingClientRect();
+        const heroBottomPosition = heroRect.bottom;
+        const viewportHeight = window.innerHeight;
+
+        // El indicator debe:
+        // - Mantenerse visible mientras está en la parte superior
+        // - Empezar a desvanecerse cuando el bottom del hero esté a 80% del viewport
+        // - Desaparecer completamente a 50% del viewport (fade out rápido)
+
+        if (heroBottomPosition > viewportHeight * 0.8) {
+            // Hero todavía en la parte superior, mantener indicator visible
+            indicator.style.opacity = '1';
+        } else if (heroBottomPosition > viewportHeight * 0.5) {
+            // Fade out rápido en la primera mitad del scroll
+            const fadeStart = viewportHeight * 0.8;
+            const fadeEnd = viewportHeight * 0.5;
+            const fadeRange = fadeStart - fadeEnd;
+            const fadeProgress = (heroBottomPosition - fadeEnd) / fadeRange;
+            indicator.style.opacity = Math.max(0, fadeProgress).toString();
+        } else {
+            // Ocultar completamente
             indicator.style.opacity = '0';
         }
     }
@@ -461,19 +557,24 @@ class AILandingPage {
     }
 
     handleNavClick(e) {
-        e.preventDefault();
         const targetId = e.target.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const headerHeight = this.header.offsetHeight;
-            const targetPosition = targetSection.offsetTop - headerHeight;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+
+        // Solo prevenir el comportamiento por defecto si es un enlace interno (#)
+        if (targetId && targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                const headerHeight = this.header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
+        // Si no empieza con #, dejarlo navegar normalmente (servicios.html, etc.)
     }
 
     updateActiveNavLink() {
@@ -552,23 +653,7 @@ class AILandingPage {
     }
 
     handleNavbarVisibility() {
-        const nav = document.querySelector('.header__nav');
-        const inicioSection = document.getElementById('inicio');
-        
-        if (!nav || !inicioSection) return;
-        
-        const inicioRect = inicioSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        const inInicioSection = inicioRect.bottom > windowHeight * 0.2;
-        
-        if (inInicioSection) {
-            nav.style.opacity = '0';
-            nav.style.pointerEvents = 'none';
-        } else {
-            nav.style.opacity = '1';
-            nav.style.pointerEvents = 'auto';
-        }
+        // Navbar is always visible - no special handling needed
     }
 
     handleKeyboardNav(e) {
@@ -705,7 +790,54 @@ let aiLandingPage;
 document.addEventListener('DOMContentLoaded', () => {
     aiLandingPage = new AILandingPage();
     window.aiLandingPage = aiLandingPage; // Hacer accesible globalmente
+
+    // Initialize hero stats counter animation
+    initHeroStatsCounter();
 });
+
+// Hero Stats Counter Animation
+function initHeroStatsCounter() {
+    const stats = document.querySelectorAll('.hero__stat-value[data-count]');
+    if (!stats.length) return;
+
+    const animateCounter = (el, target) => {
+        const duration = 2000;
+        const startTime = performance.now();
+        const startValue = 0;
+
+        const update = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
+
+            el.textContent = currentValue;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(update);
+    };
+
+    // Use Intersection Observer to trigger animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.dataset.count);
+                animateCounter(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    stats.forEach(stat => observer.observe(stat));
+}
 
 // FAQ toggle functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -1019,6 +1151,7 @@ class SmartBannerController {
         this.scrollCount = 0;
         this.scrollThreshold = 15; // Ocultar al 3er scroll
         this.lastScrollY = 0;
+        this.tuCumbreSection = document.getElementById('tu_cumbre');
 
         if (this.banner && this.tab) {
             this.init();
@@ -1026,8 +1159,8 @@ class SmartBannerController {
     }
 
     init() {
-        // Mostrar solo el tab al inicio
-        this.tab.classList.add('visible');
+        // NO mostrar el tab al inicio - solo después de la sección "Tu Cumbre"
+        // this.tab.classList.add('visible');
 
         // Click en tab para mostrar banner
         this.tab.addEventListener('click', (e) => {
@@ -1035,8 +1168,21 @@ class SmartBannerController {
             this.showBanner();
         });
 
-        // Cerrar banner al hacer scroll
+        // Controlar visibilidad del tab según scroll y cerrar banner al hacer scroll
         window.addEventListener('scroll', () => {
+            // Mostrar/ocultar tab basado en sección "Tu Cumbre"
+            if (this.tuCumbreSection && !this.banner.classList.contains('visible')) {
+                const tuCumbreTop = this.tuCumbreSection.offsetTop;
+                const scrollTop = window.pageYOffset;
+
+                if (scrollTop >= tuCumbreTop - 100) {
+                    this.tab.classList.add('visible');
+                } else {
+                    this.tab.classList.remove('visible');
+                }
+            }
+
+            // Cerrar banner al hacer scroll
             if (this.banner.classList.contains('visible')) {
                 this.hideBanner();
             }
@@ -1087,3 +1233,126 @@ class SmartBannerController {
 document.addEventListener('DOMContentLoaded', () => {
     new SmartBannerController();
 });
+
+// Scroll Progress Indicator
+function setupScrollProgress() {
+  const scrollProgress = document.querySelector(".scroll-progress");
+  const progressFill = document.querySelector(".scroll-progress__fill");
+  const progressCurrent = document.querySelector(".scroll-progress__current");
+  const stations = document.querySelectorAll(".scroll-progress__station");
+  const scrollIndicator = document.querySelector(".scroll-indicator");
+
+  if (!scrollProgress || !progressFill || !progressCurrent) return;
+
+  // Map sections by their IDs
+  const sectionMap = {
+    inicio: document.getElementById("inicio"),
+    tu_cumbre: document.getElementById("tu_cumbre"),
+    servicios: document.getElementById("servicios"),
+    soluciones: document.getElementById("soluciones"),
+    faq: document.getElementById("faq"),
+    contacto: document.getElementById("contacto")
+  };
+
+  const trackHeight = 300;
+  let ticking = false;
+
+  const positionStations = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const scrollToShowTitle = Math.max(0, sectionTop - 150);
+        const sectionPercent = Math.min(scrollToShowTitle / docHeight, 1);
+        const stationTop = sectionPercent * (trackHeight - 10);
+
+        station.style.position = "absolute";
+        station.style.top = `${stationTop}px`;
+      }
+    });
+  };
+
+  const updateProgress = () => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollTop / docHeight, 1);
+
+    if (scrollTop > 200) {
+      scrollProgress.classList.add("visible");
+      if (scrollIndicator) scrollIndicator.classList.add("hidden");
+    } else {
+      scrollProgress.classList.remove("visible");
+      if (scrollIndicator) scrollIndicator.classList.remove("hidden");
+    }
+
+    progressFill.style.height = `${scrollPercent * 100}%`;
+
+    const currentTop = scrollPercent * (trackHeight - 14);
+    progressCurrent.style.top = `${currentTop}px`;
+
+    stations.forEach((station) => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const titleVisibleAt = sectionTop - 120;
+        const viewportTop = scrollTop;
+
+        station.classList.remove("active", "passed");
+
+        if (viewportTop >= titleVisibleAt && viewportTop < sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("active");
+        } else if (viewportTop >= sectionBottom - window.innerHeight * 0.3) {
+          station.classList.add("passed");
+        }
+      }
+    });
+
+    ticking = false;
+  };
+
+  const requestTick = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  };
+
+  stations.forEach((station) => {
+    station.style.pointerEvents = "auto";
+    station.style.cursor = "pointer";
+    station.addEventListener("click", () => {
+      const sectionId = station.dataset.section;
+      const section = sectionMap[sectionId];
+      if (section) {
+        const targetPosition = section.offsetTop - 100;
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", positionStations, { passive: true });
+
+  positionStations();
+  updateProgress();
+}
+
+// Initialize scroll progress after DOM is loaded
+// Only run if we're on index.html (not on facturascan or synthetic-audience)
+if (!window.location.pathname.includes('facturascan') && !window.location.pathname.includes('synthetic-audience')) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupScrollProgress);
+  } else {
+    setupScrollProgress();
+  }
+}

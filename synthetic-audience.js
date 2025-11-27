@@ -1,5 +1,5 @@
-// FacturaScan Page Script
-class FacturaScanPage {
+// Synthetic Audience Page Script
+class SyntheticAudiencePage {
   constructor() {
     this.initializeComponents();
     this.setupEventListeners();
@@ -7,8 +7,10 @@ class FacturaScanPage {
     this.setupVideoModal();
     this.setupBentoCards();
     this.setupImageModal();
-    this.setupMobileCarousel();
     this.setupScreenshotLightbox();
+    this.setupScreenshotsCarousel();
+    this.setupAgentResponseCards();
+    this.setupValuePropsText();
   }
 
   initializeComponents() {
@@ -116,7 +118,7 @@ class FacturaScanPage {
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
 
-      // Add/remove 'scrolled' class for styling (like index.html)
+      // Add/remove 'scrolled' class for styling
       const isScrolled = currentScroll > 100;
       this.header.classList.toggle('scrolled', isScrolled);
     });
@@ -132,15 +134,11 @@ class FacturaScanPage {
 
   openScreenshotLightbox(imageSrc, imageAlt) {
     const lightbox = document.getElementById('screenshotLightbox');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxImg = document.getElementById('lightboxScreenshot');
 
     if (lightbox && lightboxImg) {
       lightboxImg.src = imageSrc;
       lightboxImg.alt = imageAlt;
-      if (lightboxCaption) {
-        lightboxCaption.textContent = imageAlt;
-      }
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -157,23 +155,18 @@ class FacturaScanPage {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
-
-          // Trigger stat counter animation
-          if (entry.target.classList.contains('facturascan-stats')) {
-            this.animateStats();
-          }
         }
       });
     }, observerOptions);
 
-    // Observe all cards and sections
+    // Observe all cards and sections (excluding example section)
     const animatedElements = document.querySelectorAll(
-      '.glass-card, .how-it-works-step, .benefit-card, .document-type-item, .facturascan-stats'
+      '.glass-card, .bento-card, .document-type-item'
     );
 
     animatedElements.forEach((el, index) => {
-      // Skip animation for cards inside facturascan-how-it-works section
-      if (el.closest('.facturascan-how-it-works.section-transition-from-purple-gradient')) {
+      // Skip animation for cards inside example section
+      if (el.closest('.example-section-no-animate')) {
         return;
       }
 
@@ -184,70 +177,12 @@ class FacturaScanPage {
     });
   }
 
-  animateStats() {
-    const statValues = document.querySelectorAll('.stat-value');
-
-    statValues.forEach(stat => {
-      // Evitar re-animar si ya se animó
-      if (stat.classList.contains('animated')) return;
-      stat.classList.add('animated');
-
-      const finalText = stat.textContent;
-      const isPercentage = finalText.includes('%');
-      const hasMultiplier = finalText.includes('x');
-
-      // Extraer el número
-      let targetNumber = parseInt(finalText.replace(/[^\d]/g, ''));
-
-      // Configuración de la animación
-      const duration = 2000; // 2 segundos
-      const frameDuration = 1000 / 60; // 60 FPS
-      const totalFrames = Math.round(duration / frameDuration);
-      const easeOutQuad = t => t * (2 - t); // Easing function
-
-      let frame = 0;
-      const counter = setInterval(() => {
-        frame++;
-        const progress = easeOutQuad(frame / totalFrames);
-        const currentNumber = Math.round(targetNumber * progress);
-
-        // Formatear el número según el tipo
-        if (hasMultiplier) {
-          stat.textContent = `x${currentNumber}`;
-        } else if (isPercentage) {
-          stat.textContent = `${currentNumber}%`;
-        } else {
-          stat.textContent = currentNumber;
-        }
-
-        // Agregar clase de pulsación en ciertos frames
-        if (frame % 10 === 0) {
-          stat.style.transform = 'scale(1.1)';
-          setTimeout(() => {
-            stat.style.transform = 'scale(1)';
-          }, 100);
-        }
-
-        if (frame === totalFrames) {
-          clearInterval(counter);
-          stat.textContent = finalText; // Asegurar el valor final
-
-          // Animación de "completado"
-          stat.style.transform = 'scale(1.15)';
-          setTimeout(() => {
-            stat.style.transform = 'scale(1)';
-          }, 200);
-        }
-      }, frameDuration);
-    });
-  }
-
-
   setupBentoCards() {
     const bentoCards = document.querySelectorAll('.bento-card');
     const agentCards = document.querySelectorAll('.agent-response-card');
 
     bentoCards.forEach(card => {
+      // Mouse tracking effect (desktop)
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -255,6 +190,17 @@ class FacturaScanPage {
 
         card.style.setProperty('--mouse-x', `${x}%`);
         card.style.setProperty('--mouse-y', `${y}%`);
+      });
+
+      // Collapsible functionality (mobile only)
+      card.addEventListener('click', (e) => {
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) return;
+
+        // Evitar que el click en elementos internos expanda/colapse
+        if (e.target.closest('a, button')) return;
+
+        card.classList.toggle('expanded');
       });
     });
 
@@ -267,6 +213,30 @@ class FacturaScanPage {
         card.style.setProperty('--mouse-x', `${x}%`);
         card.style.setProperty('--mouse-y', `${y}%`);
       });
+    });
+
+    // Inicializar estado de cards según viewport
+    const initializeCards = () => {
+      const isMobile = window.innerWidth <= 768;
+      bentoCards.forEach(card => {
+        if (!isMobile) {
+          // En desktop, todas las cards están expandidas
+          card.classList.add('expanded');
+        } else {
+          // En mobile, ninguna card está expandida inicialmente
+          card.classList.remove('expanded');
+        }
+      });
+    };
+
+    // Inicializar estado de las cards
+    initializeCards();
+
+    // Reinicializar en resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(initializeCards, 200);
     });
   }
 
@@ -313,7 +283,44 @@ class FacturaScanPage {
     });
   }
 
-  setupMobileCarousel() {
+  setupScreenshotLightbox() {
+    const lightbox = document.getElementById('screenshotLightbox');
+    const lightboxImage = document.getElementById('lightboxScreenshot');
+    const closeLightboxBtn = document.querySelector('.screenshot-lightbox__close');
+    const overlay = document.querySelector('.screenshot-lightbox__overlay');
+
+    if (!lightbox || !lightboxImage || !closeLightboxBtn) return;
+
+    // Cerrar lightbox
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    // Cerrar con botón X
+    closeLightboxBtn.addEventListener('click', closeLightbox);
+
+    // Cerrar al hacer click en el overlay
+    if (overlay) {
+      overlay.addEventListener('click', closeLightbox);
+    }
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    // Prevenir scroll del body cuando el lightbox está abierto
+    lightbox.addEventListener('touchmove', (e) => {
+      if (e.target === lightbox || e.target === overlay) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
+
+  setupScreenshotsCarousel() {
     const carousel = document.getElementById('screenshotsCarousel');
     const indicators = document.querySelectorAll('.screenshot-dot');
     const thumbnails = document.querySelectorAll('.thumbnail-btn');
@@ -382,53 +389,183 @@ class FacturaScanPage {
     }
   }
 
-  setupScreenshotLightbox() {
-    const lightbox = document.getElementById('screenshotLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const closeLightboxBtn = document.getElementById('closeLightbox');
+  setupAgentResponseCards() {
+    const agentCards = document.querySelectorAll('.agent-response-card');
+    const contextCard = document.querySelector('.context-card');
+    const insightsCard = document.querySelector('.insights-card');
+    const resultsCard = document.querySelector('.results-card');
 
-    if (!lightbox || !lightboxImage || !closeLightboxBtn) return;
+    // Función para inicializar el estado de las cards según viewport
+    const initializeAgentCards = () => {
+      const isMobile = window.innerWidth <= 768;
 
-    // Cerrar lightbox
-    const closeLightbox = () => {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
+      // Agent response cards
+      agentCards.forEach(card => {
+        if (isMobile) {
+          // En mobile, colapsar todas las cards inicialmente
+          card.classList.add('collapsed');
+
+          // Agregar evento de click solo en mobile
+          const clickHandler = (e) => {
+            // Evitar que el click en links/botones active el colapso
+            if (e.target.closest('a, button')) return;
+
+            card.classList.toggle('collapsed');
+          };
+
+          // Guardar referencia al handler para poder removerlo después
+          card._clickHandler = clickHandler;
+          card.addEventListener('click', clickHandler);
+        } else {
+          // En desktop, expandir todas y remover eventos de click
+          card.classList.remove('collapsed');
+
+          if (card._clickHandler) {
+            card.removeEventListener('click', card._clickHandler);
+            card._clickHandler = null;
+          }
+        }
+      });
+
+      // Context card
+      if (contextCard) {
+        if (isMobile) {
+          // En mobile, colapsar inicialmente
+          contextCard.classList.add('collapsed');
+
+          // Agregar evento de click solo en mobile
+          const clickHandler = (e) => {
+            // Evitar que el click en links/botones active el colapso
+            if (e.target.closest('a, button')) return;
+
+            contextCard.classList.toggle('collapsed');
+          };
+
+          // Guardar referencia al handler
+          contextCard._clickHandler = clickHandler;
+          contextCard.addEventListener('click', clickHandler);
+        } else {
+          // En desktop, expandir y remover evento de click
+          contextCard.classList.remove('collapsed');
+
+          if (contextCard._clickHandler) {
+            contextCard.removeEventListener('click', contextCard._clickHandler);
+            contextCard._clickHandler = null;
+          }
+        }
+      }
+
+      // Insights card
+      if (insightsCard) {
+        if (isMobile) {
+          // En mobile, colapsar inicialmente
+          insightsCard.classList.add('collapsed');
+
+          // Agregar evento de click solo en mobile
+          const clickHandler = (e) => {
+            // Evitar que el click en links/botones active el colapso
+            if (e.target.closest('a, button')) return;
+
+            insightsCard.classList.toggle('collapsed');
+          };
+
+          // Guardar referencia al handler
+          insightsCard._clickHandler = clickHandler;
+          insightsCard.addEventListener('click', clickHandler);
+        } else {
+          // En desktop, expandir y remover evento de click
+          insightsCard.classList.remove('collapsed');
+
+          if (insightsCard._clickHandler) {
+            insightsCard.removeEventListener('click', insightsCard._clickHandler);
+            insightsCard._clickHandler = null;
+          }
+        }
+      }
+
+      // Results card
+      if (resultsCard) {
+        if (isMobile) {
+          // En mobile, colapsar inicialmente
+          resultsCard.classList.add('collapsed');
+
+          // Agregar evento de click solo en mobile
+          const clickHandler = (e) => {
+            // Evitar que el click en links/botones active el colapso
+            if (e.target.closest('a, button')) return;
+
+            resultsCard.classList.toggle('collapsed');
+          };
+
+          // Guardar referencia al handler
+          resultsCard._clickHandler = clickHandler;
+          resultsCard.addEventListener('click', clickHandler);
+        } else {
+          // En desktop, expandir y remover evento de click
+          resultsCard.classList.remove('collapsed');
+
+          if (resultsCard._clickHandler) {
+            resultsCard.removeEventListener('click', resultsCard._clickHandler);
+            resultsCard._clickHandler = null;
+          }
+        }
+      }
     };
 
-    // Cerrar con botón X
-    closeLightboxBtn.addEventListener('click', closeLightbox);
+    // Inicializar estado
+    initializeAgentCards();
 
-    // Cerrar al hacer click en el fondo
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
+    // Reinicializar en resize con debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(initializeAgentCards, 200);
     });
-
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        closeLightbox();
-      }
-    });
-
-    // Prevenir scroll del body cuando el lightbox está abierto
-    lightbox.addEventListener('touchmove', (e) => {
-      if (e.target === lightbox) {
-        e.preventDefault();
-      }
-    }, { passive: false });
   }
 
+  setupValuePropsText() {
+    const valueProps = document.querySelectorAll('.value-prop .value-text strong');
+
+    // Mobile-friendly short titles
+    const mobileTexts = [
+      'Perspectivas diversas',
+      'Convergencias y divergencias',
+      'Validación acelerada'
+    ];
+
+    // Desktop full titles
+    const desktopTexts = [
+      'Perspectivas diversas al instante',
+      'Convergencias, divergencias, outliers',
+      'Inteligencia temprana que acelera tu validación'
+    ];
+
+    const updateTexts = () => {
+      const isMobile = window.innerWidth <= 768;
+      valueProps.forEach((prop, index) => {
+        prop.textContent = isMobile ? mobileTexts[index] : desktopTexts[index];
+      });
+    };
+
+    // Inicializar
+    updateTexts();
+
+    // Actualizar en resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateTexts, 200);
+    });
+  }
 }
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    new FacturaScanPage();
+    new SyntheticAudiencePage();
   });
 } else {
-  new FacturaScanPage();
+  new SyntheticAudiencePage();
 }
 
 // Performance optimization: lazy load images
@@ -460,15 +597,34 @@ function setupScrollProgress() {
 
   if (!scrollProgress || !progressFill || !progressCurrent) return;
 
-  // FacturaScan section mapping
-  const sectionMap = {
-    hero: document.querySelector(".synthetic-hero"),
-    features: document.querySelector(".facturascan-how-it-works"),
-    documents: document.querySelector(".facturascan-document-types"),
-    screenshots: document.querySelector(".facturascan-screenshots"),
-    process: document.querySelector(".facturascan-process"),
-    cta: document.querySelector(".facturascan-final-cta")
-  };
+  // Detect which page we're on by checking for unique elements
+  // Synthetic Audience has the example section with "Un ejemplo concreto"
+  const isSyntheticAudience = document.querySelector('.example-section-no-animate') !== null;
+
+  let sectionMap = {};
+
+  if (isSyntheticAudience) {
+    // Synthetic Audience page mapping
+    sectionMap = {
+      hero: document.querySelector(".synthetic-hero"),
+      features: document.querySelector("#features"),
+      documents: document.querySelector(".facturascan-document-types"),
+      example: document.querySelector(".example-section-no-animate"),
+      differentiators: document.querySelector("#differentiators"),
+      screenshots: document.querySelector(".facturascan-screenshots"),
+      cta: document.querySelector(".facturascan-final-cta")
+    };
+  } else {
+    // FacturaScan page mapping (fallback)
+    sectionMap = {
+      hero: document.querySelector(".synthetic-hero"),
+      features: document.querySelector(".facturascan-how-it-works"),
+      documents: document.querySelector(".facturascan-document-types"),
+      screenshots: document.querySelector(".facturascan-screenshots"),
+      process: document.querySelector(".facturascan-process"),
+      cta: document.querySelector(".facturascan-final-cta")
+    };
+  }
 
   const trackHeight = 300;
   let ticking = false;
@@ -517,13 +673,11 @@ function setupScrollProgress() {
       if (section) {
         const sectionTop = section.offsetTop;
         const sectionBottom = sectionTop + section.offsetHeight;
-        // Usar el título visible (con offset de 120px para el header)
         const titleVisibleAt = sectionTop - 120;
         const viewportTop = scrollTop;
 
         station.classList.remove("active", "passed");
 
-        // Activo cuando el título está visible en la parte superior del viewport
         if (viewportTop >= titleVisibleAt && viewportTop < sectionBottom - window.innerHeight * 0.3) {
           station.classList.add("active");
         } else if (viewportTop >= sectionBottom - window.innerHeight * 0.3) {

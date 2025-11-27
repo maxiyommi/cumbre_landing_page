@@ -64,19 +64,23 @@
     <!-- Header -->
     <header class="header" role="banner">
       <div class="container header__container">
-        <a href="index.html" class="header__logo" aria-label="Cumbre IA">
-          <img
+        <div
+          class="header__logo"
+          aria-label="Cumbre IA"
+          style="cursor: pointer"
+          onclick="window.location.href='index.html'"
+        >
+            <img
             src="assets/images/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
             loading="eager"
           />
-        </a>
+        </div>
 
         <button
           class="header__menu-toggle"
           aria-label="Abrir menú"
-          style="display: none"
         >
           <span aria-hidden="true">&#9776;</span>
         </button>
@@ -86,7 +90,7 @@
           aria-label="Navegación principal"
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
-          <a href="index.html#servicios" class="header__nav-link">Servicios</a>
+          <a href="servicios.html" class="header__nav-link">Servicios</a>
           <!-- Desktop: menú desplegable de Soluciones -->
           <div class="header__nav-contact-group">
             <button
@@ -200,6 +204,14 @@
               Ver video
             </button>
           </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-indicator__label">Descubrí más</span>
+        <div class="scroll-indicator__mouse">
+          <div class="scroll-dot"></div>
         </div>
       </div>
     </section>
@@ -320,23 +332,31 @@
             />
           </div>
 
-          <div class="screenshots-thumbnails">
-            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png">
+          <div class="screenshots-thumbnails" id="screenshotsCarousel">
+            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png" data-index="0">
               <img src="assets/images/facturascan_dashboard.png" alt="Dashboard" loading="lazy" />
               <span>Dashboard</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png" data-index="1">
               <img src="assets/images/facturascan_detalles.png" alt="Detalles" loading="lazy" />
               <span>Detalles</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png" data-index="2">
               <img src="assets/images/facturascan_reportes.png" alt="Reportes" loading="lazy" />
               <span>Reportes</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png">
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png" data-index="3">
               <img src="assets/images/facturascan_login.png" alt="Login" loading="lazy" />
               <span>Login</span>
             </button>
+          </div>
+
+          <!-- Indicadores de progreso (solo visible en mobile) -->
+          <div class="screenshots-indicators" id="screenshotsIndicators">
+            <span class="screenshot-dot active" data-index="0"></span>
+            <span class="screenshot-dot" data-index="1"></span>
+            <span class="screenshot-dot" data-index="2"></span>
+            <span class="screenshot-dot" data-index="3"></span>
           </div>
         </div>
       </div>
@@ -346,6 +366,32 @@
     <section class="facturascan-process">
       <div class="container">
         <div class="process-content">
+          <div class="process-info">
+            <h2>Nos adaptamos a <span class="gradient-text">tus procesos</span></h2>
+            <p class="process-description">
+              Podemos aplicar las reglas de negocio que necesites. Transformar, agrupar datos,
+              generar reportes o informes según tu flujo de trabajo específico.
+            </p>
+            <ul class="process-features">
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Validaciones automáticas personalizadas</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Transformación de datos según tus reglas</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Generación de reportes automáticos</span>
+              </li>
+              <li>
+                <i class="fi fi-rr-check"></i>
+                <span>Integración con tus sistemas existentes</span>
+              </li>
+            </ul>
+          </div>
+
           <div class="process-visual">
             <div class="process-diagram">
               <!-- Paso 1: Cargar Documento -->
@@ -404,32 +450,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="process-info">
-            <h2>Nos adaptamos a <span class="gradient-text">tus procesos</span></h2>
-            <p class="process-description">
-              Podemos aplicar las reglas de negocio que necesites. Transformar, agrupar datos,
-              generar reportes o informes según tu flujo de trabajo específico.
-            </p>
-            <ul class="process-features">
-              <li>
-                <i class="fi fi-rr-check"></i>
-                <span>Validaciones automáticas personalizadas</span>
-              </li>
-              <li>
-                <i class="fi fi-rr-check"></i>
-                <span>Transformación de datos según tus reglas</span>
-              </li>
-              <li>
-                <i class="fi fi-rr-check"></i>
-                <span>Generación de reportes automáticos</span>
-              </li>
-              <li>
-                <i class="fi fi-rr-check"></i>
-                <span>Integración con tus sistemas existentes</span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -543,7 +563,7 @@
           <div class="footer__section">
             <h3>Soluciones</h3>
             <p><a href="facturascan.html">FacturaScan</a></p>
-            <p><a href="index.html#soluciones">Synthetic Audience</a></p>
+            <p><a href="synthetic-audience.html">Synthetic Audience</a></p>
           </div>
           <div class="footer__section">
             <h3>Contacto</h3>
@@ -581,6 +601,46 @@
       </div>
     </div>
 
+    <!-- Scroll Progress Indicator -->
+    <nav class="scroll-progress" aria-label="Progreso de lectura">
+      <div class="scroll-progress__track">
+        <div class="scroll-progress__fill"></div>
+        <div class="scroll-progress__stations">
+          <div class="scroll-progress__station" data-section="hero">
+            <span class="scroll-progress__label">Inicio</span>
+          </div>
+          <div class="scroll-progress__station" data-section="features">
+            <span class="scroll-progress__label">Cómo funciona</span>
+          </div>
+          <div class="scroll-progress__station" data-section="documents">
+            <span class="scroll-progress__label">Documentos</span>
+          </div>
+          <div class="scroll-progress__station" data-section="screenshots">
+            <span class="scroll-progress__label">Capturas</span>
+          </div>
+          <div class="scroll-progress__station" data-section="process">
+            <span class="scroll-progress__label">Proceso</span>
+          </div>
+          <div class="scroll-progress__station" data-section="cta">
+            <span class="scroll-progress__label">Demo</span>
+          </div>
+        </div>
+        <div class="scroll-progress__current"></div>
+      </div>
+    </nav>
+
+    <!-- Screenshot Lightbox Modal -->
+    <div class="screenshot-lightbox" id="screenshotLightbox">
+      <div class="screenshot-lightbox__container">
+        <button class="screenshot-lightbox__close" id="closeLightbox" aria-label="Cerrar vista ampliada">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+        <img class="screenshot-lightbox__image" id="lightboxImage" src="" alt="">
+        <div class="screenshot-lightbox__caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
     <script src="facturascan.js"></script>
   </body>
 </html>
