@@ -1322,7 +1322,7 @@ html::-webkit-scrollbar {
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
-  opacity: 0;
+  opacity: 60;
   transition: opacity 0.3s ease, color 0.3s ease;
   pointer-events: auto;
   cursor: pointer;

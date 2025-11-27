@@ -1348,8 +1348,11 @@ function setupScrollProgress() {
 }
 
 // Initialize scroll progress after DOM is loaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupScrollProgress);
-} else {
-  setupScrollProgress();
+// Only run if we're on index.html (not on facturascan or synthetic-audience)
+if (!window.location.pathname.includes('facturascan') && !window.location.pathname.includes('synthetic-audience')) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupScrollProgress);
+  } else {
+    setupScrollProgress();
+  }
 }

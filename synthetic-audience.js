@@ -597,28 +597,31 @@ function setupScrollProgress() {
 
   if (!scrollProgress || !progressFill || !progressCurrent) return;
 
-  // Detect which page we're on and map sections accordingly
-  const isFacturaScan = document.querySelector('.facturascan-document-types') !== null;
+  // Detect which page we're on by checking for unique elements
+  // Synthetic Audience has the example section with "Un ejemplo concreto"
   const isSyntheticAudience = document.querySelector('.example-section-no-animate') !== null;
 
   let sectionMap = {};
 
-  if (isFacturaScan) {
+  if (isSyntheticAudience) {
+    // Synthetic Audience page mapping
+    sectionMap = {
+      hero: document.querySelector(".synthetic-hero"),
+      features: document.querySelector("#features"),
+      documents: document.querySelector(".facturascan-document-types"),
+      example: document.querySelector(".example-section-no-animate"),
+      differentiators: document.querySelector("#differentiators"),
+      screenshots: document.querySelector(".facturascan-screenshots"),
+      cta: document.querySelector(".facturascan-final-cta")
+    };
+  } else {
+    // FacturaScan page mapping (fallback)
     sectionMap = {
       hero: document.querySelector(".synthetic-hero"),
       features: document.querySelector(".facturascan-how-it-works"),
       documents: document.querySelector(".facturascan-document-types"),
       screenshots: document.querySelector(".facturascan-screenshots"),
       process: document.querySelector(".facturascan-process"),
-      cta: document.querySelector(".facturascan-final-cta")
-    };
-  } else if (isSyntheticAudience) {
-    sectionMap = {
-      hero: document.querySelector(".synthetic-hero"),
-      features: document.querySelector("#features"),
-      documents: document.querySelector(".facturascan-document-types"),
-      example: document.querySelector(".example-section-no-animate"),
-      screenshots: document.querySelector(".facturascan-screenshots"),
       cta: document.querySelector(".facturascan-final-cta")
     };
   }

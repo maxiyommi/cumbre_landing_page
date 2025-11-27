@@ -1452,7 +1452,7 @@ html::-webkit-scrollbar {
 .scroll-progress__track {
   position: relative;
   width: 2px;
-  height: 300px;
+  height: 286px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }

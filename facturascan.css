@@ -1322,7 +1322,7 @@ html::-webkit-scrollbar {
 .scroll-progress__track {
   position: relative;
   width: 2px;
-  height: 300px;
+  height: 286px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }
@@ -1378,7 +1378,7 @@ html::-webkit-scrollbar {
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
-  opacity: 0;
+  opacity: 0.6;
   transition: opacity 0.3s ease, color 0.3s ease;
   pointer-events: auto;
   cursor: pointer;
