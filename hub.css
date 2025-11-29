@@ -117,12 +117,25 @@
 }
 
 /* Iconos de botones secundarios (Ajuste clave: color base grisáceo) */
-.hub-link-btn i, 
+.hub-link-btn i,
 .hub-link-btn svg {
     font-size: 1.35rem;
-    margin-right: 1rem;
     color: var(--text-icon-color); /* Iconos de color grisáceo */
     transition: color 0.3s ease;
+}
+
+/* Eliminar padding/margin del pseudo-elemento ::before de los iconos */
+.hub-link-btn i::before {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Asegurar que el icono mismo no tenga espaciado interno */
+.hub-link-btn i {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    vertical-align: middle;
 }
 
 /* Botón Primario (Agendar Sesión) */

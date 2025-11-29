@@ -1,0 +1,61 @@
+/* ============================================
+   GLASS CARD COMPONENT
+   ============================================ */
+
+.glass-card {
+  background: var(--card-bg-modern);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border-modern);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--card-shadow-subtle), var(--card-inner-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+/* Border glow effect */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-2xl);
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(0, 212, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card:hover {
+  background: var(--card-hover-bg);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--card-shadow-hover);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+/* Card without hover effect */
+.glass-card--static:hover {
+  transform: none;
+}
+
+/* Card Padding Variants */
+.glass-card--padded {
+  padding: var(--card-padding-modern);
+}
+
+.glass-card--compact {
+  padding: var(--spacing-lg);
+}

@@ -1,0 +1,44 @@
+/* ============================================
+   SERVICES SECTION LAYOUT
+   ============================================ */
+
+.services {
+  background: linear-gradient(180deg, #1a1a2e 0%, #1e1640 100%);
+  margin-top: -2px;
+  position: relative;
+}
+
+.services__header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.services__header h2 {
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  background: var(--neural-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.services__header p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+}
