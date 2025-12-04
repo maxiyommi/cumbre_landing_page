@@ -6,6 +6,8 @@
   background: linear-gradient(180deg, #1e1640 0%, #241552 100%);
   margin-top: -2px;
   position: relative;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .soluciones__header {
@@ -14,20 +16,23 @@
 }
 
 .soluciones__header h2 {
-  font-size: var(--font-size-5xl);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 .soluciones__header p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--text-secondary);
-  font-size: var(--font-size-lg);
   max-width: 700px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 .soluciones__grid {
@@ -36,17 +41,12 @@
   gap: var(--spacing-2xl);
   max-width: 950px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .soluciones__header h2 {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .soluciones__header p {
-    font-size: var(--font-size-base);
+  .soluciones__header {
     margin-bottom: var(--spacing-xl);
   }
 }

@@ -49,7 +49,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="facturascan.css" />
 
     <!-- Favicon -->
@@ -91,59 +91,10 @@
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="servicios.html" class="header__nav-link">Servicios</a>
-          <!-- Desktop: menú desplegable de Soluciones -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de soluciones"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Soluciones
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
-              <a
-                href="facturascan.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >FacturaScan</a
-              >
-              <a
-                href="synthetic-audience.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >Synthetic Audience</a
-              >
-            </div>
-          </div>
-          <!-- Link directo a sección soluciones en mobile -->
-          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
+          <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Desktop: menú agrupado -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de contacto"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Contacto
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
-              <a
-                href="mailto:hola@cumbre.cloud"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >hola@cumbre.cloud</a
-              >
-            </div>
-          </div>
-          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
           <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -504,7 +455,7 @@
             <div class="final-cta-actions">
               <a href="index.html#contacto" class="btn btn-primary btn-large cta-primary">
                 <i class="fi fi-rr-calendar"></i>
-                Agendar demo gratuita
+                Agendar Sesión
               </a>
               <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary btn-large cta-secondary">
                 <i class="fi fi-rr-comment-alt"></i>

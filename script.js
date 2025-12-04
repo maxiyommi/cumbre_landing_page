@@ -392,67 +392,59 @@ class AILandingPage {
             menuToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
                 nav.classList.toggle('open');
-                menuToggle.setAttribute('aria-label', nav.classList.contains('open') ? 'Cerrar menú' : 'Abrir menú');
+                menuToggle.classList.toggle('open');
+                const isOpen = nav.classList.contains('open');
+                menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+                // Bloquear/desbloquear scroll del body
+                if (isOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             });
-            
+
             // Cerrar menú al hacer click en un link
             nav.querySelectorAll('.header__nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     nav.classList.remove('open');
+                    menuToggle.classList.remove('open');
                     menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
                 });
             });
-            
+
             // Prevenir que clicks dentro del nav cierren el menú
             nav.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
-            
+
             // Cerrar menú al hacer click fuera de él
             document.addEventListener('click', (e) => {
                 if (nav.classList.contains('open') && !nav.contains(e.target) && !menuToggle.contains(e.target)) {
                     nav.classList.remove('open');
+                    menuToggle.classList.remove('open');
                     menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
                 }
             });
-            
+
             // Cerrar menú con tecla Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && nav.classList.contains('open')) {
                     nav.classList.remove('open');
+                    menuToggle.classList.remove('open');
                     menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    menuToggle.setAttribute('aria-expanded', 'false');
                     menuToggle.focus();
+                    document.body.style.overflow = '';
                 }
             });
         }
 
-        // Contact dropdown (mobile/click)
-        const contactToggle = document.querySelector('.header__nav-contact-toggle');
-        const contactDropdown = document.querySelector('.header__nav-contact-dropdown');
-        if (contactToggle && contactDropdown) {
-            // Desktop: handled by CSS hover
-            // Mobile: toggle on click
-            contactToggle.addEventListener('click', (e) => {
-                if (window.innerWidth <= 700) {
-                    e.preventDefault();
-                    const expanded = contactDropdown.style.display === 'block';
-                    contactDropdown.style.display = expanded ? 'none' : 'block';
-                    contactToggle.setAttribute('aria-expanded', !expanded);
-                }
-            });
-            // Close dropdown on outside click (mobile)
-            document.addEventListener('click', (e) => {
-                if (
-                    window.innerWidth <= 700 &&
-                    contactDropdown.style.display === 'block' &&
-                    !contactDropdown.contains(e.target) &&
-                    !contactToggle.contains(e.target)
-                ) {
-                    contactDropdown.style.display = 'none';
-                    contactToggle.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
 
         // Logo scroll to top functionality
         const logo = document.querySelector('.header__logo');

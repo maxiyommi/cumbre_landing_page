@@ -244,6 +244,175 @@ Embedded en sección contacto:
         loading="lazy"></iframe>
 ```
 
+### PDF Download Modal con Captura de Leads (servicios.html)
+
+El modal de descarga del PDF está completamente funcional y listo para capturar leads. Actualmente permite la descarga del PDF inmediatamente después de la validación del formulario, mientras envía los datos a n8n en segundo plano (cuando esté configurado).
+
+#### ✅ Estado Actual (Funcional)
+- ✅ Formulario con validación completa de campos
+- ✅ Descarga inmediata del PDF desde Google Drive
+- ✅ Diseño glassmorphism coherente con la web
+- ✅ UX optimizada: el usuario no espera al webhook
+- ✅ Código preparado para integración con n8n
+
+#### 🔧 Configuración de n8n Webhook (Pendiente)
+
+Para activar el envío automático de leads a n8n, seguí estos pasos:
+
+**1. Crear el Webhook en n8n**
+- Creá un nuevo workflow en tu instancia de n8n
+- Agregá un nodo "Webhook" como trigger
+- Configurá el método: `POST`
+- Configurá el path: `/webhook/cumbre-pdf-leads` (o el que prefieras)
+- Guardá el workflow y copiá la URL del webhook
+
+**2. Configurar la URL en el código**
+
+Editá el archivo `servicios.js` en la línea 868:
+
+```javascript
+// ANTES (configuración de ejemplo)
+webhookURL: 'https://tu-n8n-instance.app/webhook/pdf-download',
+
+// DESPUÉS (tu URL real de n8n)
+webhookURL: 'https://tu-dominio.n8n.cloud/webhook/cumbre-pdf-leads',
+```
+
+**3. Estructura de Datos Enviados**
+
+El webhook recibe un objeto JSON con la siguiente estructura:
+
+```javascript
+{
+  "fullName": "Juan Pérez",
+  "email": "juan@empresa.com",
+  "company": "Tu Empresa S.A.",
+  "industry": "retail",           // Opciones: retail, servicios, salud, gastronomia, inmobiliaria, educacion, tecnologia, manufactura, logistica, otro
+  "phone": "+54 9 11 1234-5678",  // Opcional
+  "useCase": "chatbot-ventas",    // Opciones: chatbot-ventas, facturascan, analisis-sentimiento, organizador-leads, asistente-gestion, automatizacion-email, todos
+  "timestamp": "2025-01-15T10:30:00.000Z",
+  "source": "servicios.html - PDF Download",
+  "userAgent": "Mozilla/5.0..."
+}
+```
+
+**4. Workflow Sugerido en n8n**
+
+```
+1. Webhook Trigger (recibe los datos)
+   ↓
+2. Google Sheets (guardar lead en spreadsheet)
+   ↓
+3. Gmail/SendGrid (enviar notificación al equipo)
+   ↓
+4. [Opcional] CRM Integration (Hubspot, Pipedrive, etc.)
+   ↓
+5. [Opcional] Slack Notification
+   ↓
+6. Respond to Webhook (success: true)
+```
+
+**5. Testing**
+
+Para verificar que funciona correctamente:
+
+```bash
+# Probar con curl
+curl -X POST https://tu-dominio.n8n.cloud/webhook/cumbre-pdf-leads \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": "Test User",
+    "email": "test@example.com",
+    "company": "Test Company",
+    "industry": "tecnologia",
+    "phone": "+54 9 11 1234-5678",
+    "useCase": "chatbot-ventas",
+    "timestamp": "2025-01-15T10:30:00.000Z",
+    "source": "servicios.html - PDF Download",
+    "userAgent": "curl/test"
+  }'
+```
+
+**6. Configuración Adicional (Opcional)**
+
+Si necesitás cambiar la URL del PDF, editá en `servicios.js` línea 871:
+
+```javascript
+// URL del PDF para descargar (Google Drive direct download link)
+pdfURL: 'https://drive.google.com/uc?export=download&id=130tonmtNnHHzkrd0AFuyyodLcDtneaBW',
+```
+
+**7. Control Programático (Opcional)**
+
+También podés controlar el modal por JavaScript:
+
+```javascript
+// Abrir modal programáticamente
+window.PDFModalController.open();
+
+// Cerrar modal
+window.PDFModalController.close();
+
+// Cambiar webhook URL en runtime
+window.PDFModalController.setWebhookURL('https://nueva-url.com/webhook');
+
+// Cambiar PDF URL en runtime
+window.PDFModalController.setPDFURL('https://nueva-url-pdf.com/file.pdf');
+```
+
+#### 📊 Comportamiento del Sistema
+
+**Escenario 1: Webhook NO configurado (actual)**
+```
+Usuario → Completa formulario → Click "Descargar PDF"
+   ↓
+✅ Validación exitosa
+   ↓
+✅ Mensaje: "¡Perfecto! Tu descarga comenzará en breve..."
+   ↓
+✅ PDF se descarga (800ms)
+   ↓
+ℹ️ Console log: "Webhook de n8n no configurado. Los datos NO se enviaron."
+   ↓
+✅ Modal se cierra (1.5s)
+```
+
+**Escenario 2: Webhook configurado y funcionando**
+```
+Usuario → Completa formulario → Click "Descargar PDF"
+   ↓
+✅ Validación exitosa
+   ↓
+✅ Mensaje: "¡Perfecto! Tu descarga comenzará en breve..."
+   ↓
+✅ PDF se descarga (800ms)
+   ↓
+🔄 Envío a n8n en segundo plano
+   ↓
+✅ Console log: "Datos enviados exitosamente a n8n"
+   ↓
+✅ Modal se cierra (1.5s)
+```
+
+**Escenario 3: Webhook configurado pero falla**
+```
+Usuario → Completa formulario → Click "Descargar PDF"
+   ↓
+✅ Validación exitosa
+   ↓
+✅ Mensaje: "¡Perfecto! Tu descarga comenzará en breve..."
+   ↓
+✅ PDF se descarga (800ms) ← Usuario recibe su PDF sin problemas
+   ↓
+❌ Error al enviar a n8n
+   ↓
+⚠️ Console warn: "No se pudieron enviar los datos a n8n, pero el PDF se descargó correctamente"
+   ↓
+✅ Modal se cierra (1.5s)
+```
+
+**Ventaja clave**: El usuario SIEMPRE obtiene su PDF, independientemente del estado del webhook.
+
 ### Analytics (Opcional)
 - Google Tag Manager
 - Google Analytics 4
