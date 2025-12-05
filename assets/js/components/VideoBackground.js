@@ -49,11 +49,9 @@ export class VideoBackground {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('Video background playing smoothly');
             this.video.setAttribute('data-loaded', 'true');
           })
-          .catch(error => {
-            console.log('Video autoplay prevented:', error);
+          .catch(() => {
             this.setupVideoFallback();
           });
       }
@@ -178,7 +176,6 @@ export class VideoBackground {
     // Error recovery
     window.addEventListener('error', (e) => {
       if (e.target && e.target.tagName === 'VIDEO') {
-        console.warn('Video error detected, attempting recovery...');
         setTimeout(() => {
           this.video.load();
         }, 1000);

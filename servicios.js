@@ -375,7 +375,6 @@ class ServiciosPage {
    */
   openModal(casoNumber) {
     if (!this.modal || !this.modalContent) {
-      console.error('Modal elements not found');
       return;
     }
 
@@ -391,14 +390,12 @@ class ServiciosPage {
     // Obtener el contenido del caso
     const casoContent = document.getElementById(`caso-${casoNumber}`);
     if (!casoContent) {
-      console.error(`Caso ${casoNumber} content not found`);
       return;
     }
 
     // Obtener la tarjeta del caso (el contenido real)
     const casoCard = casoContent.querySelector('.caso-card');
     if (!casoCard) {
-      console.error(`Caso card not found for caso ${casoNumber}`);
       return;
     }
 
@@ -910,7 +907,6 @@ if (typeof module !== "undefined" && module.exports) {
 
     // Verificar que existan los elementos antes de continuar
     if (!modal || !form) {
-      console.warn('PDF Download Modal elements not found');
       return;
     }
 
@@ -1144,14 +1140,9 @@ if (typeof module !== "undefined" && module.exports) {
       // Verificar si el webhook está configurado (no es la URL de ejemplo)
       if (CONFIG.webhookURL && !CONFIG.webhookURL.includes('tu-n8n-instance')) {
         await sendToWebhook(formData);
-        console.log('✅ Datos enviados exitosamente a n8n');
-      } else {
-        console.log('ℹ️ Webhook de n8n no configurado. Los datos NO se enviaron.');
-        console.log('📋 Datos del formulario:', formData);
       }
     } catch (error) {
       // Si falla el webhook, no importa - el usuario ya tiene su PDF
-      console.warn('⚠️ No se pudieron enviar los datos a n8n, pero el PDF se descargó correctamente:', error);
     }
   }
 

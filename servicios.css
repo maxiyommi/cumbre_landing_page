@@ -4,6 +4,16 @@
    Diseño moderno con glassmorphism y gradientes
    ============================================ */
 
+/* Mobile browser theme color support */
+html {
+  background-color: #0a0a0f;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 /* ============================
    HERO SECTION
    ============================ */
@@ -1239,10 +1249,12 @@
    ============================ */
 html {
   scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
 }
 
 /* ============================

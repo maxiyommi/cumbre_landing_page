@@ -47,11 +47,9 @@ class AILandingPage {
                 if (playPromise !== undefined) {
                     playPromise
                         .then(() => {
-                            console.log('Video background playing smoothly');
                             this.backgroundVideo.setAttribute('data-loaded', 'true');
                         })
-                        .catch(error => {
-                            console.log('Video autoplay prevented:', error);
+                        .catch(() => {
                             // Fallback: intentar reproducir en la primera interacción del usuario
                             this.setupVideoFallback();
                         });
@@ -865,7 +863,6 @@ window.addEventListener('resize', () => {
 // Manejo de errores global para el video
 window.addEventListener('error', (e) => {
     if (e.target && e.target.tagName === 'VIDEO') {
-        console.warn('Video error detected, attempting recovery...');
         setTimeout(() => {
             if (window.aiLandingPage && window.aiLandingPage.backgroundVideo) {
                 window.aiLandingPage.backgroundVideo.load();

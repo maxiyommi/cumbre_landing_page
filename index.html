@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -30,6 +37,20 @@
       content="ixDb3AlQ3Ybe4Bkjep7XHE7HJMgVWeYzKEoTpU5_mgM"
     />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/" />
+    <meta property="og:title" content="Cumbre IA - Inteligencia Artificial para el Futuro" />
+    <meta property="og:description" content="Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/" />
+    <meta property="twitter:title" content="Cumbre IA - Inteligencia Artificial para el Futuro" />
+    <meta property="twitter:description" content="Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
+
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,12 +76,40 @@
     />
     <link rel="stylesheet" href="assets/css/main.css" />
 
+    <!-- Google Calendar Scheduling CSS -->
+    <link
+      href="https://calendar.google.com/calendar/scheduling-button-script.css"
+      rel="stylesheet"
+    />
+
     <!-- Favicon -->
     <link
       rel="icon"
       type="image/svg+xml"
       href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='2,28 10,10 12,14 16,6 30,28' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>"
     />
+
+    <!-- Schema.org Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Cumbre IA",
+      "url": "https://cumbre.cloud",
+      "logo": "https://cumbre.cloud/assets/images/pitch.svg",
+      "description": "Soluciones de inteligencia artificial y automatización para PyMEs argentinas",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "hola@cumbre.cloud",
+        "availableLanguage": ["Spanish"]
+      }
+    }
+    </script>
   </head>
 
   <body>
@@ -347,14 +396,6 @@
           <!-- Desktop: Google Calendar Modal -->
           <div class="features__cta--desktop">
             <!-- Google Calendar Appointment Scheduling begin -->
-            <link
-              href="https://calendar.google.com/calendar/scheduling-button-script.css"
-              rel="stylesheet"
-            />
-            <script
-              src="https://calendar.google.com/calendar/scheduling-button-script.js"
-              async
-            ></script>
             <script>
               (function () {
                 var target = document.currentScript;
@@ -699,14 +740,6 @@
             <!-- Desktop: Google Calendar Modal -->
             <div class="contact__calendar-btn--desktop">
               <!-- Google Calendar Appointment Scheduling begin -->
-              <link
-                href="https://calendar.google.com/calendar/scheduling-button-script.css"
-                rel="stylesheet"
-              />
-              <script
-                src="https://calendar.google.com/calendar/scheduling-button-script.js"
-                async
-              ></script>
               <script>
                 (function () {
                   var target = document.currentScript;
@@ -761,6 +794,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -874,6 +908,12 @@
         <div class="scroll-progress__current"></div>
       </div>
     </nav>
+
+    <!-- Google Calendar Scheduling Script -->
+    <script
+      src="https://calendar.google.com/calendar/scheduling-button-script.js"
+      async
+    ></script>
 
     <script src="script.js"></script>
   </body>

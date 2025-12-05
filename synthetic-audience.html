@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -16,15 +23,6 @@
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
 
-    <!-- ADDED: explicación rápida sobre los iconos usados -->
-    <!--
-      Los iconos con clases como "fi fi-rr-users-alt" provienen de Flaticon UIcons (webfont).
-      - Galería/Buscador: https://uicons.flaticon.com/  (o https://www.flaticon.com/uicons)
-      - Cómo copiar: busca el icono > pestaña "Webfont" o "Use this icon" > copia la clase (ej: <i class="fi fi-rr-users-alt"></i>)
-      - Notas de sintaxis: "fi" = prefijo; "fi-rr" / "fi-rs" / "fi-sr" indican estilo; el sufijo es el nombre del icono.
-      - Alternativas: puedes descargar el SVG desde la galería o usar otra clase del mismo CDN CSS.
-    -->
-
     <title>Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA</title>
     <meta
       name="description"
@@ -34,6 +32,20 @@
       name="keywords"
       content="inteligencia colectiva simulada, synthetic audience, validación campañas, marketing IA, audiencias sintéticas, agentes IA"
     />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/synthetic-audience.html" />
+    <meta property="og:title" content="Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA" />
+    <meta property="og:description" content="No un agente más inteligente, un ejército de agentes. Validá campañas con Inteligencia Colectiva Simulada: perspectivas diversas que replican cómo piensan audiencias reales." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/synthetic_audience_platform_dashboard.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/synthetic-audience.html" />
+    <meta property="twitter:title" content="Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA" />
+    <meta property="twitter:description" content="No un agente más inteligente, un ejército de agentes. Validá campañas con Inteligencia Colectiva Simulada: perspectivas diversas que replican cómo piensan audiencias reales." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/synthetic_audience_platform_dashboard.png" />
 
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -871,7 +883,7 @@
 
           <div class="screenshots-thumbnails" id="screenshotsCarousel">
             <button type="button" class="thumbnail-btn active" data-screenshot="assets/images/synthetic_audience_platform_dashboard.png" data-index="0">
-              <img src="assets/images/synthetic_audience_platform_dashboard.png" alt="Dashboard" loading="lazy" />
+              <img src="assets/images/synthetic_audience_platform_dashboard.png" alt="Dashboard de Synthetic Audience mostrando métricas de audiencia simulada y análisis de campañas" loading="lazy" />
               <span>Dashboard</span>
             </button>
             <button type="button" class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_generar_audiencia.png" data-index="1">
@@ -1012,6 +1024,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

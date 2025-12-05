@@ -91,6 +91,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 17px;
+  /* Mobile browser theme color support */
+  background-color: #0a0a0f;
 }
 
 body {
@@ -100,6 +102,9 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  /* Ensure mobile browser UI matches theme */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 /* Responsive base font size */
@@ -4419,10 +4424,12 @@ body {
    ============================ */
 html {
   scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
 }
 
 /* ============================

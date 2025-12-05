@@ -63,10 +63,12 @@
    ============================ */
 html {
   scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
 }
 
 /* Hide scroll indicator when scrolled */

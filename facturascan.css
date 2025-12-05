@@ -1,6 +1,11 @@
 /* FacturaScan Specific Styles */
 
 /* Global Background Gradient */
+html {
+  /* Mobile browser theme color support */
+  background-color: #0a0a0f;
+}
+
 body {
   background: linear-gradient(
     180deg,
@@ -10,6 +15,8 @@ body {
   );
   background-attachment: fixed;
   min-height: 100vh;
+  /* Ensure mobile browser UI matches theme */
+  min-height: -webkit-fill-available;
 }
 
 /* Fix Flaticon icon centering globally */
@@ -1295,10 +1302,12 @@ button.btn-large {
    ============================ */
 html {
   scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
 }
 
 /* ============================

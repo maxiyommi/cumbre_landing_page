@@ -61,8 +61,8 @@ class SyntheticAudiencePage {
 
     // Reproducir video automáticamente
     if (this.demoVideo) {
-      this.demoVideo.play().catch(error => {
-        console.log('Autoplay prevented:', error);
+      this.demoVideo.play().catch(() => {
+        // Autoplay prevented
       });
     }
   }
