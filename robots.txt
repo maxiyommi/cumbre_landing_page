@@ -1,0 +1,17 @@
+# robots.txt para cumbre.cloud
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cumbre.cloud/sitemap.xml
+
+# Bloquear archivos de configuración y documentación
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /CLAUDE.md
+Disallow: /REFACTORING.md
+Disallow: /PHASE3_REPORT.md
+Disallow: /PRODUCTION_CHECKLIST.md
+Disallow: /README.md
+Disallow: /MEJORAS_PROPUESTAS.md
+Disallow: /_headers

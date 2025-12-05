@@ -1,0 +1,103 @@
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* Section */
+.section {
+  min-height: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-2xl) 0;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Keyboard Navigation */
+.keyboard-nav *:focus {
+  outline: 2px solid #00d4ff !important;
+  outline-offset: 2px !important;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================
+   HIDE BROWSER SCROLLBAR
+   ============================ */
+html {
+  scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Hide scroll indicator when scrolled */
+.scroll-indicator.hidden {
+  opacity: 0;
+}
+
+/* ============================
+   SECTION HEADER STYLES
+   ============================ */
+
+/* Section title - common style for all section h2 */
+.section__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  background: var(--neural-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+/* Section subtitle - common style for all section paragraphs */
+.section__subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+}

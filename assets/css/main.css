@@ -1,0 +1,47 @@
+/* ============================================
+   CUMBRE IA - MAIN STYLESHEET
+   Modular CSS Architecture
+   ============================================ */
+
+/* BASE STYLES */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+
+/* UTILITIES */
+@import url('./utilities/helpers.css');
+@import url('./utilities/animations.css');
+
+/* COMPONENTS */
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/header.css');
+@import url('./components/notifications.css');
+@import url('./components/service-card.css');
+@import url('./components/solucion-card.css');
+@import url('./components/carousel.css');
+@import url('./components/scroll-progress.css');
+@import url('./components/smart-banner.css');
+
+/* LAYOUTS */
+@import url('./layouts/hero.css');
+@import url('./layouts/features.css');
+@import url('./layouts/services.css');
+@import url('./layouts/soluciones.css');
+@import url('./layouts/faq.css');
+@import url('./layouts/contact.css');
+@import url('./layouts/footer.css');
+
+/*
+  NOTA: Migración completada al 100%.
+  Todos los componentes principales han sido migrados a esta arquitectura modular.
+
+  Componentes migrados en Fase 3:
+  - Soluciones section (layout + cards horizontales)
+  - Carousel de imágenes
+  - Scroll Progress indicator
+  - Smart Banner lateral con tab
+
+  Componentes de páginas secundarias (servicios.html, facturascan.html,
+  synthetic-audience.html) permanecen en style.css por ser específicos de esas páginas.
+*/

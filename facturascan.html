@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -25,6 +32,20 @@
       name="keywords"
       content="facturascan, lectura automática facturas, OCR facturas, IA contabilidad, automatización contable"
     />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/facturascan.html" />
+    <meta property="og:title" content="FacturaScan - Lectura Automática de Comprobantes con IA | Cumbre IA" />
+    <meta property="og:description" content="FacturaScan automatiza la lectura y carga de comprobantes fiscales. Extrae datos de facturas, tickets y recibos en segundos con inteligencia artificial." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/facturascan_dashboard.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/facturascan.html" />
+    <meta property="twitter:title" content="FacturaScan - Lectura Automática de Comprobantes con IA | Cumbre IA" />
+    <meta property="twitter:description" content="FacturaScan automatiza la lectura y carga de comprobantes fiscales. Extrae datos de facturas, tickets y recibos en segundos con inteligencia artificial." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/facturascan_dashboard.png" />
 
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,7 +70,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="facturascan.css" />
 
     <!-- Favicon -->
@@ -91,59 +112,10 @@
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="servicios.html" class="header__nav-link">Servicios</a>
-          <!-- Desktop: menú desplegable de Soluciones -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de soluciones"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Soluciones
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
-              <a
-                href="facturascan.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >FacturaScan</a
-              >
-              <a
-                href="synthetic-audience.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >Synthetic Audience</a
-              >
-            </div>
-          </div>
-          <!-- Link directo a sección soluciones en mobile -->
-          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
+          <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Desktop: menú agrupado -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de contacto"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Contacto
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
-              <a
-                href="mailto:hola@cumbre.cloud"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >hola@cumbre.cloud</a
-              >
-            </div>
-          </div>
-          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
           <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -334,19 +306,19 @@
 
           <div class="screenshots-thumbnails" id="screenshotsCarousel">
             <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png" data-index="0">
-              <img src="assets/images/facturascan_dashboard.png" alt="Dashboard" loading="lazy" />
+              <img src="assets/images/facturascan_dashboard.png" alt="Dashboard de FacturaScan mostrando métricas de procesamiento de facturas en tiempo real" loading="lazy" />
               <span>Dashboard</span>
             </button>
             <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png" data-index="1">
-              <img src="assets/images/facturascan_detalles.png" alt="Detalles" loading="lazy" />
+              <img src="assets/images/facturascan_detalles.png" alt="Vista de detalles de factura con datos extraídos automáticamente por IA" loading="lazy" />
               <span>Detalles</span>
             </button>
             <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png" data-index="2">
-              <img src="assets/images/facturascan_reportes.png" alt="Reportes" loading="lazy" />
+              <img src="assets/images/facturascan_reportes.png" alt="Reportes analíticos de FacturaScan con estadísticas de procesamiento" loading="lazy" />
               <span>Reportes</span>
             </button>
             <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png" data-index="3">
-              <img src="assets/images/facturascan_login.png" alt="Login" loading="lazy" />
+              <img src="assets/images/facturascan_login.png" alt="Pantalla de inicio de sesión de FacturaScan con autenticación segura" loading="lazy" />
               <span>Login</span>
             </button>
           </div>
@@ -504,7 +476,7 @@
             <div class="final-cta-actions">
               <a href="index.html#contacto" class="btn btn-primary btn-large cta-primary">
                 <i class="fi fi-rr-calendar"></i>
-                Agendar demo gratuita
+                Agendar Sesión
               </a>
               <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary btn-large cta-secondary">
                 <i class="fi fi-rr-comment-alt"></i>
@@ -545,6 +517,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

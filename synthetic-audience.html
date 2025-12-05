@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -16,15 +23,6 @@
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
 
-    <!-- ADDED: explicación rápida sobre los iconos usados -->
-    <!--
-      Los iconos con clases como "fi fi-rr-users-alt" provienen de Flaticon UIcons (webfont).
-      - Galería/Buscador: https://uicons.flaticon.com/  (o https://www.flaticon.com/uicons)
-      - Cómo copiar: busca el icono > pestaña "Webfont" o "Use this icon" > copia la clase (ej: <i class="fi fi-rr-users-alt"></i>)
-      - Notas de sintaxis: "fi" = prefijo; "fi-rr" / "fi-rs" / "fi-sr" indican estilo; el sufijo es el nombre del icono.
-      - Alternativas: puedes descargar el SVG desde la galería o usar otra clase del mismo CDN CSS.
-    -->
-
     <title>Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA</title>
     <meta
       name="description"
@@ -34,6 +32,20 @@
       name="keywords"
       content="inteligencia colectiva simulada, synthetic audience, validación campañas, marketing IA, audiencias sintéticas, agentes IA"
     />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/synthetic-audience.html" />
+    <meta property="og:title" content="Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA" />
+    <meta property="og:description" content="No un agente más inteligente, un ejército de agentes. Validá campañas con Inteligencia Colectiva Simulada: perspectivas diversas que replican cómo piensan audiencias reales." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/synthetic_audience_platform_dashboard.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/synthetic-audience.html" />
+    <meta property="twitter:title" content="Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA" />
+    <meta property="twitter:description" content="No un agente más inteligente, un ejército de agentes. Validá campañas con Inteligencia Colectiva Simulada: perspectivas diversas que replican cómo piensan audiencias reales." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/synthetic_audience_platform_dashboard.png" />
 
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,7 +70,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="synthetic-audience.css" />
 
     <!-- Favicon -->
@@ -100,59 +112,10 @@
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="servicios.html" class="header__nav-link">Servicios</a>
-          <!-- Desktop: menú desplegable de Soluciones -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de soluciones"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Soluciones
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
-              <a
-                href="facturascan.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >FacturaScan</a
-              >
-              <a
-                href="synthetic-audience.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >Synthetic Audience</a
-              >
-            </div>
-          </div>
-          <!-- Link directo a sección soluciones en mobile -->
-          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
+          <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Desktop: menú agrupado -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de contacto"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Contacto
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
-              <a
-                href="mailto:hola@cumbre.cloud"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >hola@cumbre.cloud</a
-              >
-            </div>
-          </div>
-          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
           <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -920,7 +883,7 @@
 
           <div class="screenshots-thumbnails" id="screenshotsCarousel">
             <button type="button" class="thumbnail-btn active" data-screenshot="assets/images/synthetic_audience_platform_dashboard.png" data-index="0">
-              <img src="assets/images/synthetic_audience_platform_dashboard.png" alt="Dashboard" loading="lazy" />
+              <img src="assets/images/synthetic_audience_platform_dashboard.png" alt="Dashboard de Synthetic Audience mostrando métricas de audiencia simulada y análisis de campañas" loading="lazy" />
               <span>Dashboard</span>
             </button>
             <button type="button" class="thumbnail-btn" data-screenshot="assets/images/synthetic_audience_platform_generar_audiencia.png" data-index="1">
@@ -1029,20 +992,27 @@
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
+      <!-- Background image with lazy loading -->
       <div class="footer__background" aria-hidden="true"></div>
       <div class="container footer__container">
         <div class="footer__content">
           <div class="footer__section">
-            <div class="footer__logo-container" role="img" aria-label="Cumbre IA">
-              <div class="mountain-icon">
-                <img
-                  src="assets/images/pitch.svg"
-                  alt="Logo Cumbre IA"
-                  class="logo-svg"
-                  loading="eager"
-                />
+            <h3>
+              <div
+                class="footer__logo-container"
+                aria-label="Cumbre IA"
+                style="cursor: pointer"
+              >
+                <div class="mountain-icon">
+                  <img
+                    src="assets/images/pitch.svg"
+                    alt="Logo Cumbre IA"
+                    class="logo-svg"
+                    loading="eager"
+                  />
+                </div>
               </div>
-            </div>
+            </h3>
             <p>
               Soluciones de inteligencia artificial que transforman tu negocio.
               Desarrollo de agentes IA, chatbots inteligentes y consultoría
@@ -1054,6 +1024,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1070,10 +1041,12 @@
             </div>
           </div>
           <div class="footer__section">
-            <h3>Soluciones</h3>
-            <p><a href="facturascan.html">FacturaScan</a></p>
-            <p><a href="synthetic-audience.html">Synthetic Audience</a></p>
+            <h3>Servicios de IA</h3>
+            <p><a href="index.html#servicios">Agentes IA</a></p>
+            <p><a href="index.html#servicios">Chatbots Inteligentes</a></p>
+            <p><a href="index.html#servicios">Consultoría tecnológica</a></p>
           </div>
+          <!-- Nueva columna de contacto -->
           <div class="footer__section">
             <h3>Contacto</h3>
             <p><a href="mailto:hola@cumbre.cloud">hola@cumbre.cloud</a></p>

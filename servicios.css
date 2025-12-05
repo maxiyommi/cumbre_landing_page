@@ -4,6 +4,16 @@
    Diseño moderno con glassmorphism y gradientes
    ============================================ */
 
+/* Mobile browser theme color support */
+html {
+  background-color: #0a0a0f;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 /* ============================
    HERO SECTION
    ============================ */
@@ -1239,117 +1249,23 @@
    ============================ */
 html {
   scrollbar-width: none; /* Firefox */
+  scrollbar-gutter: stable; /* Prevent layout shift */
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
 }
 
 /* ============================
    SCROLL PROGRESS INDICATOR
    ============================ */
-.scroll-progress {
-  position: fixed;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
+/* ============================================
+   SCROLL PROGRESS - NOW IN assets/css/components/scroll-progress.css
+   Commented out to avoid duplication
+   ============================================ */
 
-.scroll-progress.visible {
-  opacity: 1;
-}
-
-.scroll-progress__track {
-  position: relative;
-  width: 2px;
-  height: 300px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-}
-
-.scroll-progress__fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(to bottom, #667eea, #00d4ff);
-  border-radius: 2px;
-  transition: height 0.1s ease-out;
-}
-
-/* Stations/checkpoints */
-.scroll-progress__stations {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100%;
-  width: 10px;
-}
-
-.scroll-progress__station {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.scroll-progress__station.active {
-  background: #00d4ff;
-  border-color: #00d4ff;
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-}
-
-.scroll-progress__station.passed {
-  background: #667eea;
-  border-color: #667eea;
-}
-
-/* Station labels */
-.scroll-progress__label {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.4);
-  white-space: nowrap;
-  opacity: 60;
-  transition: opacity 0.3s ease, color 0.3s ease;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.scroll-progress__station:hover .scroll-progress__label,
-.scroll-progress__station.active .scroll-progress__label {
-  opacity: 1;
-}
-
-.scroll-progress__station.active .scroll-progress__label {
-  color: #00d4ff;
-}
-
-/* Current position indicator */
-.scroll-progress__current {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
-  background: linear-gradient(135deg, #f093fb, #00d4ff);
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
-  transition: top 0.1s ease-out;
-  z-index: 2;
-}
+/* All scroll-progress styles moved to modular CSS */
 
 /* ============================
    SCROLL INDICATOR (HERO)
@@ -1700,4 +1616,418 @@ html::-webkit-scrollbar {
 .caso-modal__close:focus-visible {
   outline: 2px solid #00d4ff;
   outline-offset: 4px;
+}
+
+/* ===================================================================
+   PDF DOWNLOAD MODAL - GLASSMORPHISM DESIGN
+   Estilos para el modal de captura de leads antes de descarga
+   Diseño oscuro con glassmorphism coherente con el resto de la web
+   =================================================================== */
+
+/* Modal Overlay y Container */
+.pdf-download-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pdf-download-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.pdf-download-modal.active .pdf-modal__container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Overlay con backdrop blur */
+.pdf-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+}
+
+/* Container principal con glassmorphism OSCURO */
+.pdf-modal__container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  /* Glassmorphism oscuro coherente con la web */
+  background: rgba(26, 26, 46, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 212, 255, 0.1) inset,
+    0 8px 32px rgba(0, 212, 255, 0.15);
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10001;
+}
+
+/* Scrollbar personalizado con tema oscuro */
+.pdf-modal__container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pdf-modal__container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.pdf-modal__container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00d4ff, #0066ff);
+  border-radius: 4px;
+}
+
+.pdf-modal__container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #00e4ff, #0076ff);
+}
+
+/* Botón de cerrar con tema oscuro */
+.pdf-modal__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10002;
+}
+
+.pdf-modal__close:hover {
+  background: rgba(245, 87, 108, 0.2);
+  border-color: #f5576c;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.pdf-modal__close i {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Header del modal */
+.pdf-modal__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pdf-modal__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00d4ff, #0066ff);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+  position: relative;
+}
+
+.pdf-modal__icon::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #00d4ff, #0066ff);
+  border-radius: 22px;
+  opacity: 0.3;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.pdf-modal__icon i {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.pdf-modal__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.pdf-modal__subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pdf-modal__subtitle strong {
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+/* Formulario */
+.pdf-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-label i {
+  font-size: 1.1rem;
+  color: #00d4ff;
+}
+
+.required {
+  color: #f5576c;
+  font-weight: 700;
+}
+
+.optional {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+/* Form Inputs con glassmorphism oscuro */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #00d4ff;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.15);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300d4ff' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+}
+
+/* Select options styling */
+.form-select option {
+  background: #1a1a2e;
+  color: var(--text-primary);
+  padding: 0.5rem;
+}
+
+/* Form Errors */
+.form-error {
+  display: none;
+  font-size: 0.85rem;
+  color: #f5576c;
+  padding-left: 0.5rem;
+}
+
+.form-group.has-error .form-input,
+.form-group.has-error .form-select {
+  border-color: #f5576c;
+  background: rgba(245, 87, 108, 0.1);
+}
+
+.form-group.has-error .form-error {
+  display: block;
+}
+
+/* Form Status Messages */
+.form-status {
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  text-align: center;
+  display: none;
+}
+
+.form-status.success {
+  display: block;
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 2px solid rgba(34, 197, 94, 0.3);
+}
+
+.form-status.error {
+  display: block;
+  background: rgba(245, 87, 108, 0.15);
+  color: #f5576c;
+  border: 2px solid rgba(245, 87, 108, 0.3);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-actions .btn {
+  flex: 1;
+  justify-content: center;
+  position: relative;
+}
+
+.btn-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-loader i {
+  font-size: 1.25rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn.loading .btn-text {
+  visibility: hidden;
+}
+
+.btn.loading .btn-loader {
+  display: block !important;
+}
+
+/* Privacy Note */
+.form-privacy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.form-privacy i {
+  color: #22c55e;
+  font-size: 1rem;
+}
+
+/* Responsive Design - PDF Modal */
+@media (max-width: 768px) {
+  .pdf-modal__container {
+    padding: 2rem 1.5rem;
+    max-height: 95vh;
+    border-radius: 20px 20px 0 0;
+    margin-top: auto;
+  }
+
+  .pdf-modal__title {
+    font-size: 1.5rem;
+  }
+
+  .pdf-modal__subtitle {
+    font-size: 0.95rem;
+  }
+
+  .pdf-modal__icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+
+  .pdf-modal__icon i {
+    font-size: 2rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-modal__container {
+    padding: 1.5rem 1rem;
+  }
+
+  .pdf-modal__title {
+    font-size: 1.25rem;
+  }
+
+  .form-input,
+  .form-select {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+}
+
+/* Reduced motion support - PDF Modal */
+@media (prefers-reduced-motion: reduce) {
+  .pdf-download-modal,
+  .pdf-modal__container,
+  .pdf-modal__close,
+  .form-input,
+  .form-select,
+  .btn {
+    transition: none;
+    animation: none;
+  }
 }

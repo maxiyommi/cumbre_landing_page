@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -30,6 +37,20 @@
       content="ixDb3AlQ3Ybe4Bkjep7XHE7HJMgVWeYzKEoTpU5_mgM"
     />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/" />
+    <meta property="og:title" content="Cumbre IA - Inteligencia Artificial para el Futuro" />
+    <meta property="og:description" content="Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/" />
+    <meta property="twitter:title" content="Cumbre IA - Inteligencia Artificial para el Futuro" />
+    <meta property="twitter:description" content="Soluciones de inteligencia artificial que transforman tu negocio. Desarrollo de agentes IA, chatbots inteligentes y consultoría tecnológica." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
+
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +74,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <!-- Google Calendar Scheduling CSS -->
+    <link
+      href="https://calendar.google.com/calendar/scheduling-button-script.css"
+      rel="stylesheet"
+    />
 
     <!-- Favicon -->
     <link
@@ -61,6 +88,28 @@
       type="image/svg+xml"
       href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='2,28 10,10 12,14 16,6 30,28' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>"
     />
+
+    <!-- Schema.org Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Cumbre IA",
+      "url": "https://cumbre.cloud",
+      "logo": "https://cumbre.cloud/assets/images/pitch.svg",
+      "description": "Soluciones de inteligencia artificial y automatización para PyMEs argentinas",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "hola@cumbre.cloud",
+        "availableLanguage": ["Spanish"]
+      }
+    }
+    </script>
   </head>
 
   <body>
@@ -83,7 +132,6 @@
         <button
           class="header__menu-toggle"
           aria-label="Abrir menú"
-          style="display: none"
         >
           <span aria-hidden="true">&#9776;</span>
         </button>
@@ -94,59 +142,10 @@
         >
           <a href="#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="servicios.html" class="header__nav-link">Servicios</a>
-          <!-- Desktop: menú desplegable de Soluciones -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de soluciones"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Soluciones
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
-              <a
-                href="facturascan.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >FacturaScan</a
-              >
-              <a
-                href="synthetic-audience.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >Synthetic Audience</a
-              >
-            </div>
-          </div>
-          <!-- Link directo a sección soluciones en mobile -->
-          <a href="#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
+          <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Desktop: menú agrupado -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de contacto"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Contacto
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
-              <a
-                href="mailto:hola@cumbre.cloud"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >hola@cumbre.cloud</a
-              >
-            </div>
-          </div>
-          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
           <a href="#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -217,9 +216,9 @@
       <div class="container">
         <!-- Header centralizado -->
         <div class="features__header">
-          <h2 class="features__title">¿En qué etapa del ascenso se encuentra Tu PyME?</h2>
+          <h2 class="features__title">¿En qué etapa del ascenso se encuentra tu empresa?</h2>
           <p class="features__subtitle">
-            Cada PyME exitosa pasa por estas 4 etapas para alcanzar su cumbre.
+            Cada empresa exitosa pasa por estas 4 etapas para alcanzar su cumbre.
             Identificá dónde estás hoy y descubrí cuál es tu próximo paso hacia la automatización total
           </p>
         </div>
@@ -385,7 +384,33 @@
             <strong>No tenés que hacer el ascenso solo</strong><br />
             Te acompañamos paso a paso hasta que veas tu negocio en la cima
           </p>
-          <a href="#contacto" class="btn btn-primary features__cta">🏔️ Hacer Cumbre</a>
+
+          <!-- Mobile: Direct link to Google Calendar -->
+          <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn btn-primary btn-lg features__cta features__cta--mobile">
+            📅 Reservar Sesión
+          </a>
+
+          <!-- Desktop: Google Calendar Modal -->
+          <div class="features__cta--desktop">
+            <!-- Google Calendar Appointment Scheduling begin -->
+            <script>
+              (function () {
+                var target = document.currentScript;
+                window.addEventListener("load", function () {
+                  calendar.schedulingButton.load({
+                    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
+                    color: "#039BE5",
+                    label: "📅 Reservar Sesión",
+                    target,
+                  });
+                });
+              })();
+            </script>
+            <!-- end Google Calendar Appointment Scheduling -->
+          </div>
         </div>
       </div>
     </section>
@@ -394,8 +419,8 @@
     <section id="servicios" class="section services">
       <div class="container">
         <div class="services__header">
-          <h2>Servicios de IA Especializados</h2>
-          <p>
+          <h2 class="section__title">Servicios de IA Especializados</h2>
+          <p class="section__subtitle">
             Desarrollamos soluciones de inteligencia artificial a medida que se
             adaptan a las necesidades específicas de tu industria y objetivos
             empresariales
@@ -468,8 +493,8 @@
     <section id="soluciones" class="section soluciones">
       <div class="container">
         <div class="soluciones__header">
-          <h2>Nuestras Soluciones</h2>
-          <p>
+          <h2 class="section__title">Nuestras Soluciones</h2>
+          <p class="section__subtitle">
             Creamos tecnología y herramientas para automatizar tareas complejas y liberar tiempo valioso
           </p>
         </div>
@@ -563,8 +588,8 @@
     <section id="faq" class="section faq">
       <div class="container">
         <div class="faq__header">
-          <h2>Preguntas Frecuentes</h2>
-          <p>Las respuestas a tus preguntas están acá</p>
+          <h2 class="section__title">Preguntas Frecuentes</h2>
+          <p class="section__subtitle">Las respuestas a tus preguntas están acá</p>
         </div>
         <div class="faq__items">
           <div class="faq__item">
@@ -638,11 +663,11 @@
             </button>
             <div class="faq__answer">
               <p>
-                Implementamos protocolos de seguridad de nivel empresarial para
-                garantizar que tu información confidencial permanezca
-                completamente privada. Nunca compartimos datos con terceros ni
-                los utilizamos para entrenar otros sistemas. La confidencialidad
-                de tu negocio es nuestra máxima prioridad.
+                Realizamos pruebas exhaustivas y optimización previa al
+                lanzamiento para minimizar errores. Incluimos monitoreo continuo
+                para mejorar el rendimiento constantemente, y siempre
+                implementamos supervisión humana como respaldo, asegurando que
+                tu operación nunca se vea comprometida.
               </p>
             </div>
           </div>
@@ -653,11 +678,11 @@
             </button>
             <div class="faq__answer">
               <p>
-                Realizamos pruebas exhaustivas y optimización previa al
-                lanzamiento para minimizar errores. Incluimos monitoreo continuo
-                para mejorar el rendimiento constantemente, y siempre
-                implementamos supervisión humana como respaldo, asegurando que
-                tu operación nunca se vea comprometida.
+                Implementamos protocolos de seguridad de nivel empresarial para
+                garantizar que tu información confidencial permanezca
+                completamente privada. Nunca compartimos datos con terceros ni
+                los utilizamos para entrenar otros sistemas. La confidencialidad
+                de tu negocio es nuestra máxima prioridad.
               </p>
             </div>
           </div>
@@ -670,7 +695,7 @@
       <div class="container">
         <!-- Título centrado -->
         <div class="contact__header">
-          <h2 class="contact__title-style">Transforma tu PyME</h2>
+          <h2 class="section__title">Transforma tu PyME</h2>
         </div>
 
         <!-- Contenido en dos columnas -->
@@ -715,14 +740,6 @@
             <!-- Desktop: Google Calendar Modal -->
             <div class="contact__calendar-btn--desktop">
               <!-- Google Calendar Appointment Scheduling begin -->
-              <link
-                href="https://calendar.google.com/calendar/scheduling-button-script.css"
-                rel="stylesheet"
-              />
-              <script
-                src="https://calendar.google.com/calendar/scheduling-button-script.js"
-                async
-              ></script>
               <script>
                 (function () {
                   var target = document.currentScript;
@@ -777,6 +794,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -822,8 +840,8 @@
     <!-- Smart Banner Lateral para PDF de Casos de Uso -->
     <aside class="smart-banner" id="smartBanner" aria-label="Descarga casos de uso">
       <a
-        href="https://drive.google.com/file/d/1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS/view?usp=drive_link"
-        target="_blank"
+        href="https://drive.google.com/uc?export=download&id=1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS"
+        download="Roadmap-Cumbre.pdf"
         rel="noopener noreferrer"
         class="smart-banner__content"
         id="downloadCTA"
@@ -890,6 +908,12 @@
         <div class="scroll-progress__current"></div>
       </div>
     </nav>
+
+    <!-- Google Calendar Scheduling Script -->
+    <script
+      src="https://calendar.google.com/calendar/scheduling-button-script.js"
+      async
+    ></script>
 
     <script src="script.js"></script>
   </body>

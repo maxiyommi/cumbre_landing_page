@@ -2,7 +2,14 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Theme color for mobile browsers (matches navbar) -->
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
@@ -25,6 +32,20 @@
       name="keywords"
       content="casos de uso IA, automatización PyME, chatbot WhatsApp, FacturaScan, análisis sentimiento"
     />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cumbre.cloud/servicios.html" />
+    <meta property="og:title" content="Casos de Uso - Cumbre IA" />
+    <meta property="og:description" content="Descubrí los 6 casos de uso de IA que transforman PyMEs argentinas: chatbots, automatización de ventas, análisis de sentimiento y más." />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cumbre.cloud/servicios.html" />
+    <meta property="twitter:title" content="Casos de Uso - Cumbre IA" />
+    <meta property="twitter:description" content="Descubrí los 6 casos de uso de IA que transforman PyMEs argentinas: chatbots, automatización de ventas, análisis de sentimiento y más." />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/cumbre.ai" />
 
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,7 +70,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="facturascan.css" />
     <link rel="stylesheet" href="servicios.css" />
 
@@ -92,59 +113,10 @@
         >
           <a href="index.html#tu_cumbre" class="header__nav-link">Tu Cumbre</a>
           <a href="servicios.html" class="header__nav-link">Servicios</a>
-          <!-- Desktop: menú desplegable de Soluciones -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de soluciones"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Soluciones
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Nuestras soluciones">
-              <a
-                href="facturascan.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >FacturaScan</a
-              >
-              <a
-                href="synthetic-audience.html"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >Synthetic Audience</a
-              >
-            </div>
-          </div>
-          <!-- Link directo a sección soluciones en mobile -->
-          <a href="index.html#soluciones" class="header__nav-link header__nav-mail-mobile">Soluciones</a>
+          <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
+          <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Desktop: menú agrupado -->
-          <div class="header__nav-contact-group">
-            <button
-              class="header__nav-link header__nav-contact-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label="Abrir menú de contacto"
-              type="button"
-              style="padding:0;background:none;border:none;font:inherit;"
-            >
-              Contacto
-            </button>
-            <div class="header__nav-contact-dropdown" role="menu" aria-label="Opciones de contacto">
-              <a
-                href="mailto:hola@cumbre.cloud"
-                class="header__nav-contact-item"
-                role="menuitem"
-                >hola@cumbre.cloud</a
-              >
-            </div>
-          </div>
-          <!-- Link directo al mail en mobile, debajo de Preguntas Frecuentes -->
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link header__nav-mail-mobile">hola@cumbre.cloud</a>
+          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
           <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
             >📅 Agendar Sesión</a
           >
@@ -198,7 +170,7 @@
             </a>
             <a href="index.html#contacto" class="btn btn-secondary btn-large">
               <i class="fi fi-rr-calendar"></i>
-              Agendar auditoría
+              Agendar Sesión
             </a>
           </div>
         </div>
@@ -227,7 +199,7 @@
               que determina quién sobrevive y quién crece en el mercado actual.
             </p>
             <p>
-              Este documento presenta 6 casos de uso de IA diseñados específicamente
+              Esta sección presenta 6 casos de uso de IA diseñados específicamente
               para PyMEs argentinas, priorizando soluciones de bajo costo, alto impacto y
               ROI demostrable en 60-90 días.
             </p>
@@ -690,7 +662,7 @@
           <div class="caso-card glass-card">
             <div class="caso-card__header">
               <div class="caso-card__icon">
-                <i class="fi fi-tr-magic-wand"></i>
+                <i class="fi fi-tr-book"></i>
               </div>
               <div class="caso-card__header-text">
                 <span class="caso-card__label">Caso 4</span>
@@ -887,7 +859,7 @@
           <div class="caso-card glass-card">
             <div class="caso-card__header">
               <div class="caso-card__icon">
-                <i class="fi fi-tr-receipt"></i>
+                <i class="fi fi-rr-rocket-lunch"></i>
               </div>
               <div class="caso-card__header-text">
                 <span class="caso-card__label">Caso 6</span>
@@ -1039,7 +1011,6 @@
           <p class="matriz-cta__text">
             <strong>Recomendación:</strong> Comenzá con tu punto de dolor más crítico, no con el caso más atractivo.
           </p>
-          <a href="index.html#contacto" class="btn btn-primary">Agenda tu auditoría técnica</a>
         </div>
       </div>
     </section>
@@ -1051,8 +1022,8 @@
           <h2>¿Listo para transformar tu PyME?</h2>
           <p>Agenda una auditoría técnica de 1.500 USD <strong>bonificada al contratar</strong> y descubrí cuál de estos 6 casos genera el mayor impacto en tu negocio.</p>
           <div class="cta-buttons">
-            <a href="index.html#contacto" class="btn btn-primary btn-lg">📅 Agendar Auditoría</a>
-            <a href="https://drive.google.com/file/d/130tonmtNnHHzkrd0AFuyyodLcDtneaBW/view?usp=drive_link" target="_blank" class="btn btn-secondary btn-lg">📄 Descargar PDF Completo</a>
+            <a href="index.html#contacto" class="btn btn-primary btn-lg">📅 Agendar Sesión</a>
+            <a href="https://drive.google.com/file/d/130tonmtNnHHzkrd0AFuyyodLcDtneaBW/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">📄 Descargar PDF Completo</a>
           </div>
         </div>
       </div>
@@ -1101,6 +1072,7 @@
                 class="footer__social-link"
                 aria-label="LinkedIn"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1168,6 +1140,171 @@
         <div class="scroll-progress__current"></div>
       </div>
     </nav>
+
+    <!-- Modal para captura de datos antes de descargar PDF -->
+    <div class="pdf-download-modal" id="pdfDownloadModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle" aria-hidden="true">
+      <div class="pdf-modal__overlay" data-pdf-modal-close></div>
+      <div class="pdf-modal__container">
+        <button class="pdf-modal__close" data-pdf-modal-close aria-label="Cerrar modal">
+          <i class="fi fi-rr-cross"></i>
+        </button>
+
+        <div class="pdf-modal__header">
+          <div class="pdf-modal__icon">
+            <i class="fi fi-rr-file-pdf"></i>
+          </div>
+          <h2 class="pdf-modal__title" id="pdfModalTitle">Descargá el Roadmap Completo</h2>
+          <p class="pdf-modal__subtitle">
+            Accedé a los <strong>6 casos de uso con valores detallados</strong> para transformar tu PyME
+          </p>
+        </div>
+
+        <form class="pdf-modal__form" id="pdfDownloadForm">
+          <!-- Nombre completo -->
+          <div class="form-group">
+            <label for="fullName" class="form-label">
+              <i class="fi fi-rr-user"></i>
+              Nombre completo <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="form-input"
+              placeholder="Ej: Juan Pérez"
+              required
+              autocomplete="name"
+            />
+            <span class="form-error" id="fullNameError"></span>
+          </div>
+
+          <!-- Email empresarial -->
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="fi fi-rr-envelope"></i>
+              Email empresarial <span class="required">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="tu@empresa.com"
+              required
+              autocomplete="email"
+            />
+            <span class="form-error" id="emailError"></span>
+          </div>
+
+          <!-- Nombre de la empresa -->
+          <div class="form-group">
+            <label for="company" class="form-label">
+              <i class="fi fi-rr-building"></i>
+              Nombre de la empresa <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="form-input"
+              placeholder="Tu Empresa S.A."
+              required
+              autocomplete="organization"
+            />
+            <span class="form-error" id="companyError"></span>
+          </div>
+
+          <!-- Rubro/Industria -->
+          <div class="form-group">
+            <label for="industry" class="form-label">
+              <i class="fi fi-rr-briefcase"></i>
+              Rubro/Industria <span class="required">*</span>
+            </label>
+            <select
+              id="industry"
+              name="industry"
+              class="form-select"
+              required
+            >
+              <option value="">Seleccioná tu rubro</option>
+              <option value="retail">Retail / Comercio</option>
+              <option value="servicios">Servicios Profesionales</option>
+              <option value="salud">Salud / Clínicas</option>
+              <option value="gastronomia">Gastronomía / Hotelería</option>
+              <option value="inmobiliaria">Inmobiliaria</option>
+              <option value="educacion">Educación / Capacitación</option>
+              <option value="tecnologia">Tecnología / Software</option>
+              <option value="manufactura">Manufactura / Industria</option>
+              <option value="logistica">Logística / Transporte</option>
+              <option value="otro">Otro</option>
+            </select>
+            <span class="form-error" id="industryError"></span>
+          </div>
+
+          <!-- Teléfono (opcional) -->
+          <div class="form-group">
+            <label for="phone" class="form-label">
+              <i class="fi fi-rr-phone-call"></i>
+              Teléfono <span class="optional">(opcional)</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder="+54 9 11 1234-5678"
+              autocomplete="tel"
+            />
+          </div>
+
+          <!-- Caso de uso de interés -->
+          <div class="form-group">
+            <label for="useCase" class="form-label">
+              <i class="fi fi-rr-star"></i>
+              ¿Qué caso de uso te interesa más? <span class="required">*</span>
+            </label>
+            <select
+              id="useCase"
+              name="useCase"
+              class="form-select"
+              required
+            >
+              <option value="">Seleccioná un caso de uso</option>
+              <option value="chatbot-ventas">Chatbot de Ventas 24/7</option>
+              <option value="facturascan">FacturaScan - Lectura de Comprobantes</option>
+              <option value="analisis-sentimiento">Análisis de Sentimiento de Clientes</option>
+              <option value="organizador-leads">Organizador de Leads Inteligente</option>
+              <option value="asistente-gestion">Asistente de Gestión Interna</option>
+              <option value="automatizacion-email">Automatización de Email Marketing</option>
+              <option value="todos">Todos me interesan</option>
+            </select>
+            <span class="form-error" id="useCaseError"></span>
+          </div>
+
+          <!-- Mensaje de estado -->
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+          <!-- Botones -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" data-pdf-modal-close>
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="btn-text">Descargar PDF</span>
+              <span class="btn-loader" style="display: none;">
+                <i class="fi fi-rr-spinner"></i>
+              </span>
+            </button>
+          </div>
+
+          <!-- Nota de privacidad -->
+          <p class="form-privacy">
+            <i class="fi fi-rr-shield-check"></i>
+            Tus datos están protegidos. No compartimos información con terceros.
+          </p>
+        </form>
+      </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="servicios.js"></script>
