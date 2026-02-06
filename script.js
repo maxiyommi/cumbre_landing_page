@@ -779,7 +779,7 @@ document.head.insertAdjacentHTML('beforeend', additionalStyles);
 let aiLandingPage;
 document.addEventListener('DOMContentLoaded', () => {
     aiLandingPage = new AILandingPage();
-    window.aiLandingPage = aiLandingPage; // Hacer accesible globalmente
+    // aiLandingPage instance kept local (not exposed on window for security)
 
     // Initialize hero stats counter animation
     initHeroStatsCounter();
@@ -913,8 +913,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Optimización global en resize
 window.addEventListener('resize', () => {
-    if (window.aiLandingPage) {
-        window.aiLandingPage.optimizeForMobile();
+    if (aiLandingPage) {
+        aiLandingPage.optimizeForMobile();
     }
 });
 
@@ -922,8 +922,8 @@ window.addEventListener('resize', () => {
 window.addEventListener('error', (e) => {
     if (e.target && e.target.tagName === 'VIDEO') {
         setTimeout(() => {
-            if (window.aiLandingPage && window.aiLandingPage.backgroundVideo) {
-                window.aiLandingPage.backgroundVideo.load();
+            if (aiLandingPage && aiLandingPage.backgroundVideo) {
+                aiLandingPage.backgroundVideo.load();
             }
         }, 1000);
     }
@@ -1287,7 +1287,7 @@ class SmartBannerController {
         if (!trimmed) {
             return { valid: false, message: 'Ingresá tu email para descargar' };
         }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
             return { valid: false, message: 'Ingresá un email válido' };
         }
         return { valid: true, message: '' };

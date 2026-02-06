@@ -15,3 +15,6 @@ Disallow: /PRODUCTION_CHECKLIST.md
 Disallow: /README.md
 Disallow: /MEJORAS_PROPUESTAS.md
 Disallow: /_headers
+Disallow: /hub_max.html
+Disallow: /hub_pau.html
+Disallow: /assets/files/
