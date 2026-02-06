@@ -42,6 +42,15 @@
       content="facturascan, lectura automática facturas, OCR facturas, IA contabilidad, automatización contable"
     />
 
+    <!-- SEO: Canonical URL y robots -->
+    <link rel="canonical" href="https://cumbre.cloud/facturascan.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Hreflang para SEO regional -->
+    <link rel="alternate" hreflang="es-AR" href="https://cumbre.cloud/facturascan.html" />
+    <link rel="alternate" hreflang="es" href="https://cumbre.cloud/facturascan.html" />
+    <link rel="alternate" hreflang="x-default" href="https://cumbre.cloud/facturascan.html" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cumbre.cloud/facturascan.html" />
@@ -80,6 +89,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
     <link rel="stylesheet" href="facturascan.css" />
 
     <!-- Favicon -->
@@ -124,11 +134,23 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
-          <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
-            >📅 Agendar Sesión</a
-          >
         </nav>
+        <!-- Google Calendar Scheduling Button in Header -->
+        <div class="header__nav-cta-wrapper">
+          <script>
+            (function () {
+              var target = document.currentScript;
+              window.addEventListener("load", function () {
+                calendar.schedulingButton.load({
+                  url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
+                  color: "#039BE5",
+                  label: "📅 Agendar Sesión Gratis",
+                  target,
+                });
+              });
+            })();
+          </script>
+        </div>
       </div>
     </header>
 
@@ -617,10 +639,13 @@
         <button class="screenshot-lightbox__close" id="closeLightbox" aria-label="Cerrar vista ampliada">
           <i class="fi fi-rr-cross"></i>
         </button>
-        <img class="screenshot-lightbox__image" id="lightboxImage" src="" alt="">
+        <img class="screenshot-lightbox__image" id="lightboxImage" src="" alt="Imagen ampliada de FacturaScan">
         <div class="screenshot-lightbox__caption" id="lightboxCaption"></div>
       </div>
     </div>
+
+    <!-- Google Calendar Scheduling Script -->
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 
     <script src="script.js"></script>
     <script src="facturascan.js"></script>

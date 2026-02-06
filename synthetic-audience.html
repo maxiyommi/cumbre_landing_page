@@ -15,6 +15,15 @@
     <!-- Theme color for mobile browsers (matches navbar) -->
     <meta name="theme-color" content="#0a0a0f" />
 
+    <!-- SEO: Canonical URL y robots -->
+    <link rel="canonical" href="https://cumbre.cloud/synthetic-audience.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Hreflang para SEO regional -->
+    <link rel="alternate" hreflang="es-AR" href="https://cumbre.cloud/synthetic-audience.html" />
+    <link rel="alternate" hreflang="es" href="https://cumbre.cloud/synthetic-audience.html" />
+    <link rel="alternate" hreflang="x-default" href="https://cumbre.cloud/synthetic-audience.html" />
+
     <!-- Preconnect for external resources -->
     <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
@@ -80,6 +89,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
     <link rel="stylesheet" href="synthetic-audience.css" />
 
     <!-- Favicon -->
@@ -124,11 +134,23 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
-          <a href="index.html#contacto" class="btn btn-primary header__nav-cta"
-            >📅 Agendar Sesión</a
-          >
         </nav>
+        <!-- Google Calendar Scheduling Button in Header -->
+        <div class="header__nav-cta-wrapper">
+          <script>
+            (function () {
+              var target = document.currentScript;
+              window.addEventListener("load", function () {
+                calendar.schedulingButton.load({
+                  url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
+                  color: "#039BE5",
+                  label: "📅 Agendar Sesión Gratis",
+                  target,
+                });
+              });
+            })();
+          </script>
+        </div>
       </div>
     </header>
 
@@ -983,7 +1005,7 @@
         <button type="button" class="image-modal-close" aria-label="Cerrar">
           <i class="fi fi-rr-cross"></i>
         </button>
-        <img id="modalImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        <img id="modalImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista ampliada de imagen">
         <p id="modalCaption" class="image-modal-caption"></p>
       </div>
     </div>
@@ -995,7 +1017,7 @@
         <button type="button" class="screenshot-lightbox__close" aria-label="Cerrar">
           <i class="fi fi-rr-cross"></i>
         </button>
-        <img id="lightboxScreenshot" src="" alt="">
+        <img id="lightboxScreenshot" src="" alt="Captura de pantalla ampliada">
       </div>
     </div>
 
@@ -1122,6 +1144,9 @@
         <div class="scroll-progress__current"></div>
       </div>
     </nav>
+
+    <!-- Google Calendar Scheduling Script -->
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 
     <script src="script.js"></script>
     <script src="synthetic-audience.js"></script>

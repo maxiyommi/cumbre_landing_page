@@ -342,11 +342,23 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <a href="mailto:hola@cumbre.cloud" class="header__nav-link">hola@cumbre.cloud</a>
-          <a href="#contacto" class="btn btn-primary header__nav-cta"
-            >📅 Agendar Sesión</a
-          >
         </nav>
+        <!-- Google Calendar Scheduling Button in Header -->
+        <div class="header__nav-cta-wrapper">
+          <script>
+            (function () {
+              var target = document.currentScript;
+              window.addEventListener("load", function () {
+                calendar.schedulingButton.load({
+                  url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
+                  color: "#039BE5",
+                  label: "📅 Agendar Sesión Gratis",
+                  target,
+                });
+              });
+            })();
+          </script>
+        </div>
       </div>
     </header>
 
@@ -588,7 +600,7 @@
              target="_blank"
              rel="noopener noreferrer"
              class="btn btn-primary btn-lg features__cta features__cta--mobile">
-            📅 Reservar Sesión
+            📅 Agendar Sesión Gratis
           </a>
 
           <!-- Desktop: Google Calendar Modal -->
@@ -601,7 +613,7 @@
                   calendar.schedulingButton.load({
                     url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
                     color: "#039BE5",
-                    label: "📅 Reservar Sesión",
+                    label: "📅 Agendar Sesión Gratis",
                     target,
                   });
                 });
@@ -922,7 +934,7 @@
             <div class="contact__badge">
               <span class="contact__badge-span"><i class="fi fi-tr-sparkles"></i> Sesión 100% Gratuita</span>
             </div>
-            <h3 class="contact__card-title">Agenda tu Sesión</h3>
+            <h3 class="contact__card-title">Agendá tu Sesión Gratis</h3>
             <p class="contact__card-subtitle">
               Sesión de 30 minutos por videollamada
             </p>
@@ -932,7 +944,7 @@
                target="_blank"
                rel="noopener noreferrer"
                class="btn btn-primary btn-lg contact__calendar-btn contact__calendar-btn--mobile">
-              📅  Reservar Ahora
+              📅 Agendar Sesión Gratis
             </a>
 
             <!-- Desktop: Google Calendar Modal -->
@@ -945,7 +957,7 @@
                     calendar.schedulingButton.load({
                       url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
                       color: "#039BE5",
-                      label: "📅  Reservar Ahora",
+                      label: "📅 Agendar Sesión Gratis",
                       target,
                     });
                   });
@@ -1036,38 +1048,68 @@
 
     <!-- Smart Banner Lateral para PDF de Casos de Uso -->
     <aside class="smart-banner" id="smartBanner" aria-label="Descarga casos de uso">
-      <a
-        href="https://drive.google.com/uc?export=download&id=1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS"
-        download="Roadmap-Cumbre.pdf"
-        rel="noopener noreferrer"
-        class="smart-banner__content"
-        id="downloadCTA"
-      >
-        <div class="smart-banner__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
+      <div class="smart-banner__content" id="downloadCTA">
+        <!-- Fase 1: Formulario de captura -->
+        <div class="smart-banner__form-phase" id="bannerFormPhase">
+          <div class="smart-banner__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+
+          <div class="smart-banner__text">
+            <h3 class="smart-banner__title">¿Cómo lo hicieron otras PyMEs?</h3>
+            <p class="smart-banner__description">Dejá tu email y descargá el roadmap completo de transformación digital</p>
+          </div>
+
+          <form class="smart-banner__form" id="bannerLeadForm" novalidate>
+            <div class="smart-banner__input-group">
+              <input
+                type="email"
+                class="smart-banner__input"
+                id="bannerEmailInput"
+                name="email"
+                placeholder="tu@email.com"
+                required
+                autocomplete="email"
+                aria-label="Tu email"
+              />
+              <button type="submit" class="smart-banner__submit" id="bannerSubmitBtn">
+                <span class="smart-banner__submit-text">Descargar</span>
+                <span class="smart-banner__submit-loader" aria-hidden="true"></span>
+              </button>
+            </div>
+            <p class="smart-banner__error" id="bannerEmailError" role="alert" aria-live="polite"></p>
+            <p class="smart-banner__privacy">
+              <i class="fi fi-rr-lock"></i> No compartimos tu información
+            </p>
+          </form>
         </div>
 
-        <div class="smart-banner__text">
-          <h3 class="smart-banner__title">¿Cómo lo hicieron otras PyMEs?</h3>
-          <p class="smart-banner__description">Descargá el roadmap completo de transformación digital</p>
-        </div>
-
-        <div class="smart-banner__thumbnail">
-          <div class="smart-banner__thumbnail-icon">
-            <i class="fi fi-rr-file-pdf"></i>
+        <!-- Fase 2: Estado de éxito -->
+        <div class="smart-banner__success-phase" id="bannerSuccessPhase" aria-hidden="true">
+          <div class="smart-banner__success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
           </div>
-          <div class="smart-banner__thumbnail-label">
-            <span class="smart-banner__badge">Descarga gratuita</span>
-            <span class="smart-banner__filename">Roadmap Cumbre.pdf</span>
+          <p class="smart-banner__success-text">¡Listo! Tu descarga comenzará en segundos...</p>
+          <div class="smart-banner__thumbnail">
+            <div class="smart-banner__thumbnail-icon">
+              <i class="fi fi-rr-file-pdf"></i>
+            </div>
+            <div class="smart-banner__thumbnail-label">
+              <span class="smart-banner__badge">Descarga gratuita</span>
+              <span class="smart-banner__filename">Roadmap Cumbre.pdf</span>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </aside>
 
     <!-- Indicador lateral (tab) para mostrar el banner cuando está oculto -->
