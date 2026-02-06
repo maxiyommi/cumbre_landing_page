@@ -23,7 +23,7 @@
 
 .header__container {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
@@ -49,6 +49,7 @@
   align-items: center;
   gap: var(--spacing-sm);
   line-height: 1.8;
+  justify-self: start;
 }
 
 .logo-svg {
@@ -100,11 +101,20 @@
   justify-content: center;
 }
 
+/* CTA: Show/hide based on device */
+.header__nav-cta--mobile {
+  display: none;
+}
+
+.header__nav-cta--desktop {
+  display: flex;
+}
+
 /* CTA wrapper in third column */
 .header__nav-cta-wrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-self: end;
 }
 
 .header__nav-link,
@@ -322,6 +332,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    justify-self: end;
+    grid-column: -1;
     width: 44px;
     height: 44px;
     background: transparent;
@@ -387,6 +399,32 @@
   .header__nav-link:hover,
   .header__nav-link.active {
     color: #00d4ff;
+  }
+
+  /* Show mobile link, hide desktop widget */
+  .header__nav-cta--mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(45deg, #00d4ff, #0066ff);
+    border-radius: var(--radius-lg, 0.75rem);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .header__nav-cta--mobile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+  }
+
+  .header__nav-cta--desktop {
+    display: none;
   }
 
   /* Mobile CTA Button */

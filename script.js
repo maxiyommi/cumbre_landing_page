@@ -835,6 +835,64 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const faqItem = button.closest('.faq__item');
             faqItem.classList.toggle('open');
+
+            // GA4: Trackear qué preguntas interesan a los visitantes
+            if (faqItem.classList.contains('open') && typeof gtag === 'function') {
+                var questionText = button.textContent.trim().substring(0, 100);
+                gtag('event', 'faq_click', {
+                    event_category: 'FAQ',
+                    event_label: questionText
+                });
+            }
+        });
+    });
+});
+
+// GA4: Tracking de eventos clave
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Click en "Agendar Sesión Gratis" (mobile links directos)
+    document.querySelectorAll('a[href*="calendar.app.google"], a[href*="calendar.google.com"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                var section = link.closest('section, header, footer');
+                gtag('event', 'cta_agendar_sesion', {
+                    event_category: 'CTA',
+                    event_label: 'Agendar Sesion Gratis',
+                    link_location: section ? section.className.split(' ')[0] : 'unknown'
+                });
+            }
+        });
+    });
+
+    // 2. Click en botones de Google Calendar scheduling (desktop modals)
+    //    Usa event delegation en los contenedores padre del widget
+    var calendarContainers = document.querySelectorAll(
+        '.header__nav-cta-wrapper, .features__cta--desktop, .contact__calendar-btn--desktop'
+    );
+    calendarContainers.forEach(function(container) {
+        container.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                var section = container.closest('section, header, footer');
+                gtag('event', 'cta_agendar_sesion', {
+                    event_category: 'CTA',
+                    event_label: 'Agendar Sesion Gratis (Calendar Widget)',
+                    link_location: section ? section.className.split(' ')[0] : 'unknown'
+                });
+            }
+        });
+    });
+
+    // 3. Click en links a páginas de producto
+    document.querySelectorAll('a[href="facturascan.html"], a[href="synthetic-audience.html"], a[href="servicios.html"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                var productName = link.getAttribute('href').replace('.html', '');
+                gtag('event', 'cta_ver_producto', {
+                    event_category: 'CTA',
+                    event_label: productName,
+                    link_text: link.textContent.trim().substring(0, 50)
+                });
+            }
         });
     });
 });

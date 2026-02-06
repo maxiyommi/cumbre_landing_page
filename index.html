@@ -7,7 +7,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-EC61RE7G2N');
+      gtag('config', 'G-EC61RE7G2N', { 'debug_mode': true });
     </script>
 
     <meta charset="UTF-8" />
@@ -342,9 +342,16 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
+          <!-- Mobile: Direct link to Google Calendar -->
+          <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="header__nav-cta--mobile">
+            📅 Agendar Sesión Gratis
+          </a>
         </nav>
-        <!-- Google Calendar Scheduling Button in Header -->
-        <div class="header__nav-cta-wrapper">
+        <!-- Desktop: Google Calendar Modal -->
+        <div class="header__nav-cta-wrapper header__nav-cta--desktop">
           <script>
             (function () {
               var target = document.currentScript;
