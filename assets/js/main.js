@@ -29,8 +29,7 @@ class CumbreIA {
     this.setupKeyboardNavigation();
     this.setupFAQ();
 
-    // Make instance globally accessible for debugging
-    window.cumbreIA = this;
+    // Instance kept local (not exposed on window for security)
   }
 
   setupScrollIndicator() {

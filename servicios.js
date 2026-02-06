@@ -1029,7 +1029,7 @@ if (typeof module !== "undefined" && module.exports) {
         break;
 
       case 'email':
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         if (!field.value.trim()) {
           isValid = false;
           errorMessage = 'Por favor ingresá tu email';
@@ -1262,9 +1262,7 @@ if (typeof module !== "undefined" && module.exports) {
   // =========================================
   window.PDFModalController = {
     open: openModal,
-    close: closeModal,
-    setWebhookURL: (url) => { CONFIG.webhookURL = url; },
-    setPDFURL: (url) => { CONFIG.pdfURL = url; }
+    close: closeModal
   };
 
 })();
