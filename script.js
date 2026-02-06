@@ -1135,12 +1135,17 @@ class SmartBannerController {
     constructor() {
         this.banner = document.getElementById('smartBanner');
         this.tab = document.getElementById('smartBannerTab');
-        this.autoHideDelay = 5000; // 5 segundos
+        this.form = document.getElementById('bannerLeadForm');
+        this.emailInput = document.getElementById('bannerEmailInput');
+        this.submitBtn = document.getElementById('bannerSubmitBtn');
+        this.errorEl = document.getElementById('bannerEmailError');
+        this.autoHideDelay = 5000;
         this.autoHideTimer = null;
         this.scrollCount = 0;
-        this.scrollThreshold = 15; // Ocultar al 3er scroll
         this.lastScrollY = 0;
+        this.isInteracting = false;
         this.tuCumbreSection = document.getElementById('tu_cumbre');
+        this.downloadURL = 'https://drive.google.com/uc?export=download&id=1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS';
 
         if (this.banner && this.tab) {
             this.init();
@@ -1148,18 +1153,22 @@ class SmartBannerController {
     }
 
     init() {
-        // NO mostrar el tab al inicio - solo después de la sección "Tu Cumbre"
-        // this.tab.classList.add('visible');
+        // Configurar formulario de captura
+        this.setupForm();
+
+        // Si el usuario ya dejó su email, mostrar descarga directa
+        if (this.checkPreviousLead()) {
+            this.showSuccessState();
+        }
 
         // Click en tab para mostrar banner
         this.tab.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evitar que se propague el click
+            e.stopPropagation();
             this.showBanner();
         });
 
         // Controlar visibilidad del tab según scroll y cerrar banner al hacer scroll
         window.addEventListener('scroll', () => {
-            // Mostrar/ocultar tab basado en sección "Tu Cumbre"
             if (this.tuCumbreSection && !this.banner.classList.contains('visible')) {
                 const tuCumbreTop = this.tuCumbreSection.offsetTop;
                 const scrollTop = window.pageYOffset;
@@ -1171,28 +1180,162 @@ class SmartBannerController {
                 }
             }
 
-            // Cerrar banner al hacer scroll
-            if (this.banner.classList.contains('visible')) {
+            // No ocultar si el usuario está interactuando con el formulario
+            if (this.banner.classList.contains('visible') && !this.isInteracting) {
                 this.hideBanner();
             }
         }, { passive: true });
 
-        // Cerrar banner al hacer clic fuera de él
+        // Cerrar banner al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (this.banner.classList.contains('visible')) {
-                // Verificar si el clic fue fuera del banner
-                if (!this.banner.contains(e.target) && !this.tab.contains(e.target)) {
+                if (!this.banner.contains(e.target) && !this.tab.contains(e.target) && !this.isInteracting) {
                     this.hideBanner();
                 }
             }
         });
     }
 
+    setupForm() {
+        if (!this.form) return;
+
+        // Pausar auto-hide cuando el input tiene foco
+        this.emailInput.addEventListener('focus', () => {
+            this.isInteracting = true;
+            this.clearAutoHideTimer();
+        });
+
+        this.emailInput.addEventListener('blur', () => {
+            this.isInteracting = false;
+            if (this.banner.classList.contains('visible')) {
+                this.startAutoHideTimer();
+            }
+        });
+
+        // Limpiar error al escribir
+        this.emailInput.addEventListener('input', () => {
+            this.clearError();
+        });
+
+        // Manejar envío del formulario
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.handleSubmit();
+        });
+    }
+
+    validateEmail(email) {
+        const trimmed = email.trim();
+        if (!trimmed) {
+            return { valid: false, message: 'Ingresá tu email para descargar' };
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+            return { valid: false, message: 'Ingresá un email válido' };
+        }
+        return { valid: true, message: '' };
+    }
+
+    showError(message) {
+        this.errorEl.textContent = message;
+        this.errorEl.classList.add('smart-banner__error--visible');
+        this.emailInput.classList.add('smart-banner__input--error');
+    }
+
+    clearError() {
+        this.errorEl.textContent = '';
+        this.errorEl.classList.remove('smart-banner__error--visible');
+        this.emailInput.classList.remove('smart-banner__input--error');
+    }
+
+    handleSubmit() {
+        const email = this.emailInput.value.trim();
+        const validation = this.validateEmail(email);
+
+        if (!validation.valid) {
+            this.showError(validation.message);
+            this.emailInput.focus();
+            return;
+        }
+
+        // Estado de carga
+        this.submitBtn.classList.add('smart-banner__submit--loading');
+        this.submitBtn.disabled = true;
+        this.isInteracting = true;
+        this.clearAutoHideTimer();
+
+        // Trackear en GA4
+        this.trackLeadEvent(email);
+
+        // Mostrar estado de éxito
+        setTimeout(() => {
+            this.showSuccessState();
+            this.submitBtn.classList.remove('smart-banner__submit--loading');
+            this.submitBtn.disabled = false;
+        }, 500);
+
+        // Disparar descarga
+        setTimeout(() => {
+            this.triggerDownload();
+        }, 1500);
+
+        // Ocultar banner después de la descarga
+        setTimeout(() => {
+            this.isInteracting = false;
+            this.hideBanner();
+        }, 4000);
+
+        // Recordar en localStorage
+        try {
+            localStorage.setItem('cumbre_lead_captured', 'true');
+        } catch (e) {
+            // localStorage no disponible
+        }
+    }
+
+    showSuccessState() {
+        this.banner.classList.add('smart-banner--submitted');
+    }
+
+    triggerDownload() {
+        var isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            window.location.href = this.downloadURL;
+        } else {
+            window.open(this.downloadURL, '_blank');
+        }
+    }
+
+    trackLeadEvent(email) {
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+                event_category: 'Lead Capture',
+                event_label: 'Smart Banner PDF Download',
+                method: 'email',
+                content_id: 'roadmap-cumbre-pdf'
+            });
+
+            // Evento específico con dominio del email (no PII)
+            var domain = email.split('@')[1] || 'unknown';
+            gtag('event', 'banner_email_submit', {
+                event_category: 'Smart Banner',
+                event_label: domain
+            });
+        }
+    }
+
+    checkPreviousLead() {
+        try {
+            return localStorage.getItem('cumbre_lead_captured') === 'true';
+        } catch (e) {
+            return false;
+        }
+    }
+
     showBanner() {
         this.banner.classList.add('visible');
         this.tab.classList.remove('visible');
-        this.scrollCount = 0; // Resetear contador de scrolls
-        this.lastScrollY = window.scrollY; // Actualizar posición inicial
+        this.scrollCount = 0;
+        this.lastScrollY = window.scrollY;
         this.startAutoHideTimer();
     }
 
@@ -1200,13 +1343,25 @@ class SmartBannerController {
         this.clearAutoHideTimer();
         this.banner.classList.remove('visible');
         this.tab.classList.add('visible');
-        this.scrollCount = 0; // Resetear contador
+        this.scrollCount = 0;
+        this.isInteracting = false;
+
+        // Resetear formulario si no hay lead previo
+        if (!this.checkPreviousLead()) {
+            this.banner.classList.remove('smart-banner--submitted');
+            if (this.emailInput) this.emailInput.value = '';
+            this.clearError();
+        }
     }
 
     startAutoHideTimer() {
         this.clearAutoHideTimer();
         this.autoHideTimer = setTimeout(() => {
-            this.hideBanner();
+            if (!this.isInteracting) {
+                this.hideBanner();
+            } else {
+                this.startAutoHideTimer();
+            }
         }, this.autoHideDelay);
     }
 
