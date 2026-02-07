@@ -43,5 +43,5 @@
   - Smart Banner lateral con tab
 
   Componentes de páginas secundarias (servicios.html, facturascan.html,
-  synthetic-audience.html) permanecen en style.css por ser específicos de esas páginas.
+  synthetic-audience.html) permanecen en assets/css/pages/style.css por ser específicos de esas páginas.
 */
