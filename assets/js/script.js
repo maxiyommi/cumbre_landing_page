@@ -848,6 +848,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// Calendar CTA: en desktop dispara el widget del navbar (mismo modal),
+// en mobile abre en ventana nueva
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-calendar-popup]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      if (window.innerWidth > 768) {
+        e.preventDefault();
+        var navbarWidget = document.querySelector('.header__nav-cta--desktop button, .header__nav-cta--desktop a');
+        if (navbarWidget) {
+          navbarWidget.click();
+        }
+      }
+    });
+  });
+});
+
 // GA4: Tracking de eventos clave
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Click en "Agendar Sesión Gratis" (mobile links directos)
@@ -867,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Click en botones de Google Calendar scheduling (desktop modals)
     //    Usa event delegation en los contenedores padre del widget
     var calendarContainers = document.querySelectorAll(
-        '.header__nav-cta-wrapper, .features__cta--desktop, .contact__calendar-btn--desktop'
+        '.header__nav-cta-wrapper, .features__cta--desktop, .contact__calendar-btn--desktop, .calendar-cta--desktop'
     );
     calendarContainers.forEach(function(container) {
         container.addEventListener('click', function() {
@@ -1203,7 +1220,7 @@ class SmartBannerController {
         this.lastScrollY = 0;
         this.isInteracting = false;
         this.tuCumbreSection = document.getElementById('tu_cumbre');
-        this.downloadURL = 'https://drive.google.com/uc?export=download&id=1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS';
+        this.downloadURL = 'https://drive.usercontent.google.com/download?id=1lfiPrm-84SZqWpG7AyFyoY0Bj43xylVS&export=download&confirm=t';
 
         if (this.banner && this.tab) {
             this.init();
@@ -1355,12 +1372,13 @@ class SmartBannerController {
     }
 
     triggerDownload() {
-        var isMobile = window.innerWidth <= 768;
-        if (isMobile) {
-            window.location.href = this.downloadURL;
-        } else {
-            window.open(this.downloadURL, '_blank');
-        }
+        var a = document.createElement('a');
+        a.href = this.downloadURL;
+        a.download = 'Roadmap-Cumbre-IA.pdf';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     trackLeadEvent(email) {

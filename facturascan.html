@@ -15,6 +15,13 @@
     <!-- Theme color for mobile browsers (matches navbar) -->
     <meta name="theme-color" content="#0a0a0f" />
 
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/assets/images/favicons/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png" />
+
     <!-- Preconnect for external resources -->
     <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
@@ -56,14 +63,14 @@
     <meta property="og:url" content="https://cumbre.cloud/facturascan.html" />
     <meta property="og:title" content="FacturaScan - Lectura Automática de Comprobantes con IA | Cumbre IA" />
     <meta property="og:description" content="FacturaScan automatiza la lectura y carga de comprobantes fiscales. Extrae datos de facturas, tickets y recibos en segundos con inteligencia artificial." />
-    <meta property="og:image" content="https://cumbre.cloud/assets/images/facturascan_dashboard.png" />
+    <meta property="og:image" content="https://cumbre.cloud/assets/images/facturascan/facturascan_dashboard.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://cumbre.cloud/facturascan.html" />
     <meta property="twitter:title" content="FacturaScan - Lectura Automática de Comprobantes con IA | Cumbre IA" />
     <meta property="twitter:description" content="FacturaScan automatiza la lectura y carga de comprobantes fiscales. Extrae datos de facturas, tickets y recibos en segundos con inteligencia artificial." />
-    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/facturascan_dashboard.png" />
+    <meta property="twitter:image" content="https://cumbre.cloud/assets/images/facturascan/facturascan_dashboard.png" />
 
     <!-- Preconnect for external fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -90,7 +97,7 @@
     />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
-    <link rel="stylesheet" href="facturascan.css" />
+    <link rel="stylesheet" href="assets/css/pages/facturascan.css" />
 
     <!-- Favicon -->
     <link
@@ -110,7 +117,7 @@
           aria-label="Cumbre IA"
         >
             <img
-            src="assets/images/pitch.svg"
+            src="assets/images/common/pitch.svg"
             alt="Logo Cumbre IA"
             class="logo-svg"
             loading="eager"
@@ -316,8 +323,8 @@
 
         <div class="custom-document-cta">
           <p class="custom-question">¿Tenés algún otro tipo de documento?</p>
-          <a href="mailto:hola@cumbre.cloud" class="btn btn-secondary">
-            Consultanos
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-calendar-popup>
+            📅 Consultanos
           </a>
         </div>
       </div>
@@ -335,27 +342,27 @@
           <div class="screenshot-main glass-card">
             <img
               id="main-screenshot"
-              src="assets/images/facturascan_dashboard.png"
+              src="assets/images/facturascan/facturascan_dashboard.png"
               alt="FacturaScan Dashboard"
               loading="lazy"
             />
           </div>
 
           <div class="screenshots-thumbnails" id="screenshotsCarousel">
-            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan_dashboard.png" data-index="0">
-              <img src="assets/images/facturascan_dashboard.png" alt="Dashboard de FacturaScan mostrando métricas de procesamiento de facturas en tiempo real" loading="lazy" />
+            <button class="thumbnail-btn active" data-screenshot="assets/images/facturascan/facturascan_dashboard.png" data-index="0">
+              <img src="assets/images/facturascan/facturascan_dashboard.png" alt="Dashboard de FacturaScan mostrando métricas de procesamiento de facturas en tiempo real" loading="lazy" />
               <span>Dashboard</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_detalles.png" data-index="1">
-              <img src="assets/images/facturascan_detalles.png" alt="Vista de detalles de factura con datos extraídos automáticamente por IA" loading="lazy" />
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan/facturascan_detalles.png" data-index="1">
+              <img src="assets/images/facturascan/facturascan_detalles.png" alt="Vista de detalles de factura con datos extraídos automáticamente por IA" loading="lazy" />
               <span>Detalles</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_reportes.png" data-index="2">
-              <img src="assets/images/facturascan_reportes.png" alt="Reportes analíticos de FacturaScan con estadísticas de procesamiento" loading="lazy" />
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan/facturascan_reportes.png" data-index="2">
+              <img src="assets/images/facturascan/facturascan_reportes.png" alt="Reportes analíticos de FacturaScan con estadísticas de procesamiento" loading="lazy" />
               <span>Reportes</span>
             </button>
-            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan_login.png" data-index="3">
-              <img src="assets/images/facturascan_login.png" alt="Pantalla de inicio de sesión de FacturaScan con autenticación segura" loading="lazy" />
+            <button class="thumbnail-btn" data-screenshot="assets/images/facturascan/facturascan_login.png" data-index="3">
+              <img src="assets/images/facturascan/facturascan_login.png" alt="Pantalla de inicio de sesión de FacturaScan con autenticación segura" loading="lazy" />
               <span>Login</span>
             </button>
           </div>
@@ -511,7 +518,7 @@
             </div>
 
             <div class="final-cta-actions">
-              <a href="index.html#contacto" class="btn btn-primary btn-large cta-primary">
+              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large cta-primary" data-calendar-popup>
                 <i class="fi fi-rr-calendar"></i>
                 Agendar Sesión
               </a>
@@ -535,7 +542,7 @@
               <div class="footer__logo-container" aria-label="Cumbre IA">
                 <div class="mountain-icon">
                   <img
-                    src="assets/images/pitch.svg"
+                    src="assets/images/common/pitch.svg"
                     alt="Logo Cumbre IA"
                     class="logo-svg"
                     loading="eager"
@@ -653,7 +660,7 @@
     <!-- Google Calendar Scheduling Script -->
     <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 
-    <script src="script.js"></script>
-    <script src="facturascan.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/pages/facturascan.js"></script>
   </body>
 </html>

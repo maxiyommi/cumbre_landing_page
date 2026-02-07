@@ -17,21 +17,23 @@ Una landing page moderna y optimizada para Cumbre IA, empresa especializada en s
 
 ```
 cumbre_landing_page/
-├── index.html                    # Página principal (100% modular)
-├── servicios.html                # Página de servicios
-├── facturascan.html              # Página FacturaScan
-├── synthetic-audience.html       # Página Synthetic Audience
+├── index.html                    # Pagina principal (100% modular)
+├── servicios.html                # Pagina de servicios
+├── facturascan.html              # Pagina FacturaScan
+├── synthetic-audience.html       # Pagina Synthetic Audience
 ├── hub_max.html                  # Hub personal Max
 ├── hub_pau.html                  # Hub personal Paula
-├── style.css                     # Estilos legacy (solo para páginas secundarias)
-├── script.js                     # JavaScript funcional
-├── CNAME                         # Configuración dominio (cumbre.cloud)
-├── README.md                     # Esta documentación
-├── CLAUDE.md                     # Guía para Claude Code
-├── REFACTORING.md                # Documentación técnica de refactorización
-├── PHASE3_REPORT.md              # Reporte final de migración
+├── 404.html                      # Pagina de error 404
+├── favicon.ico                   # Favicon principal
+├── CNAME                         # Configuracion dominio (cumbre.cloud)
+├── README.md                     # Esta documentacion
+├── docs/
+│   ├── REFACTORING.md            # Documentacion tecnica de refactorizacion
+│   ├── PHASE3_REPORT.md          # Reporte final de migracion
+│   ├── MEJORAS_PROPUESTAS.md     # Propuestas de mejora
+│   └── SEO_KEYWORD_SUMMARY.md   # Resumen de keywords SEO
 ├── assets/
-│   ├── css/                      # ✨ ARQUITECTURA MODULAR
+│   ├── css/
 │   │   ├── main.css             # Archivo maestro (@imports)
 │   │   ├── base/
 │   │   │   ├── variables.css    # CSS custom properties
@@ -43,38 +45,49 @@ cumbre_landing_page/
 │   │   ├── components/
 │   │   │   ├── buttons.css      # Sistema de botones
 │   │   │   ├── cards.css        # Glass cards
-│   │   │   ├── header.css       # Navegación
+│   │   │   ├── header.css       # Navegacion
 │   │   │   ├── notifications.css # Toast notifications
 │   │   │   ├── service-card.css # Cards verticales de servicios
 │   │   │   ├── solucion-card.css # Cards horizontales de soluciones
-│   │   │   ├── carousel.css     # Carrusel de imágenes
+│   │   │   ├── carousel.css     # Carrusel de imagenes
 │   │   │   ├── scroll-progress.css # Indicador de scroll
 │   │   │   └── smart-banner.css # Banner lateral inteligente
-│   │   └── layouts/
-│   │       ├── hero.css         # Hero con video background
-│   │       ├── features.css     # Timeline "Tu Cumbre"
-│   │       ├── services.css     # Grid de servicios
-│   │       ├── soluciones.css   # Sección soluciones
-│   │       ├── faq.css          # FAQ acordeón
-│   │       ├── contact.css      # Contacto y calendario
-│   │       └── footer.css       # Footer con redes
-│   ├── js/                       # JavaScript modular (ES6)
-│   │   ├── main.js              # Entry point
+│   │   ├── layouts/
+│   │   │   ├── hero.css         # Hero con video background
+│   │   │   ├── features.css     # Timeline "Tu Cumbre"
+│   │   │   ├── services.css     # Grid de servicios
+│   │   │   ├── soluciones.css   # Seccion soluciones
+│   │   │   ├── faq.css          # FAQ acordeon
+│   │   │   ├── contact.css      # Contacto y calendario
+│   │   │   └── footer.css       # Footer con redes
+│   │   └── pages/
+│   │       ├── style.css        # Estilos legacy (paginas secundarias)
+│   │       ├── servicios.css    # Estilos pagina servicios
+│   │       ├── facturascan.css  # Estilos pagina FacturaScan
+│   │       ├── synthetic-audience.css # Estilos pagina Synthetic Audience
+│   │       └── hub.css          # Estilos paginas hub
+│   ├── js/
+│   │   ├── main.js              # Entry point (ES6 modules)
+│   │   ├── script.js            # JavaScript legacy (AILandingPage)
 │   │   ├── components/
-│   │   │   ├── Navigation.js    # Sistema de navegación
-│   │   │   └── VideoBackground.js # Optimización de video
-│   │   └── utils/
-│   │       └── helpers.js       # Utilidades (throttle, debounce)
-│   ├── images/                   # Imágenes optimizadas
-│   │   ├── pitch.svg            # Logo principal
-│   │   ├── robot.png            # Robot IA animado
-│   │   ├── cumbre.png           # Background footer
-│   │   └── ...                  # Otras imágenes
+│   │   │   ├── Navigation.js    # Sistema de navegacion
+│   │   │   └── VideoBackground.js # Optimizacion de video
+│   │   ├── utils/
+│   │   │   └── helpers.js       # Utilidades (throttle, debounce)
+│   │   └── pages/
+│   │       ├── servicios.js     # JS pagina servicios
+│   │       ├── facturascan.js   # JS pagina FacturaScan
+│   │       └── synthetic-audience.js # JS pagina Synthetic Audience
+│   ├── images/
+│   │   ├── common/              # Imagenes compartidas (logo, branding)
+│   │   ├── favicons/            # Favicons (SVG, PNG, apple-touch)
+│   │   ├── facturascan/         # Screenshots FacturaScan
+│   │   └── synthetic-audience/  # Screenshots Synthetic Audience
 │   ├── videos/
 │   │   └── video.mp4            # Video hero background (H.264)
-│   └── fonts/
-│       └── basetica-light.otf   # Fuente custom Baseltica
-└── *.backup                      # Backups de fases anteriores
+│   ├── fonts/
+│   │   └── basetica-light.otf   # Fuente custom Baseltica
+│   └── files/                   # Archivos descargables (PDFs)
 ```
 
 ## 🏗️ Arquitectura CSS Modular
@@ -94,6 +107,7 @@ Base       → Fundamentos (variables, reset, typography)
 Utilities  → Helpers y animations
 Components → Elementos reutilizables UI
 Layouts    → Secciones específicas de página
+Pages      → Estilos específicos por página secundaria
 ```
 
 ### Ventajas
@@ -114,10 +128,11 @@ cd cumbre_landing_page
 ### 2. Verificar estructura de assets
 ```bash
 # Los assets ya están en el repo, solo verificar:
-ls -la assets/css/    # Debe mostrar main.css y carpetas
-ls -la assets/images/ # Debe tener pitch.svg, robot.png, etc.
-ls -la assets/videos/ # Debe tener video.mp4
-ls -la assets/fonts/  # Debe tener basetica-light.otf
+ls -la assets/css/         # main.css + base/, utilities/, components/, layouts/, pages/
+ls -la assets/js/          # main.js, script.js + components/, utils/, pages/
+ls -la assets/images/      # common/, favicons/, facturascan/, synthetic-audience/
+ls -la assets/videos/      # video.mp4
+ls -la assets/fonts/       # basetica-light.otf
 ```
 
 ### 3. Servidor de desarrollo
@@ -268,7 +283,7 @@ Para activar el envío automático de leads a n8n, seguí estos pasos:
 
 **2. Configurar la URL en el código**
 
-Editá el archivo `servicios.js` en la línea 868:
+Editá el archivo `assets/js/pages/servicios.js` en la línea 868:
 
 ```javascript
 // ANTES (configuración de ejemplo)
@@ -335,7 +350,7 @@ curl -X POST https://tu-dominio.n8n.cloud/webhook/cumbre-pdf-leads \
 
 **6. Configuración Adicional (Opcional)**
 
-Si necesitás cambiar la URL del PDF, editá en `servicios.js` línea 871:
+Si necesitás cambiar la URL del PDF, editá en `assets/js/pages/servicios.js` línea 871:
 
 ```javascript
 // URL del PDF para descargar (Google Drive direct download link)
@@ -468,17 +483,25 @@ Usuario → Completa formulario → Click "Descargar PDF"
 
 | Métrica | Valor |
 |---------|-------|
-| **Archivos CSS modulares** | 22 |
-| **Total líneas CSS** | ~3,394 |
+| **Archivos CSS modulares** | 22 + 5 page-specific |
+| **Total líneas CSS** | ~3,394 (modular) |
 | **Reducción vs monolito** | 28% menos código |
-| **Archivos JavaScript** | 4 (modular) + 1 (legacy) |
+| **Archivos JavaScript** | 4 (modular) + 1 (legacy) + 3 (pages) |
 | **Breakpoints responsive** | 5 (mobile, tablet, desktop, large, 4K) |
-| **Componentes migratos** | 100% para index.html |
+| **Componentes migrados** | 100% para index.html |
 | **Performance score** | 90+ (Lighthouse) |
 
 ## 🔄 Historial de Versiones
 
-### Fase 3 (2025-11-29) - ACTUAL
+### Fase 4 (2026-02-07) - ACTUAL
+- ✅ Reorganización completa de estructura del proyecto
+- ✅ Documentación movida a `docs/`
+- ✅ CSS de páginas movidos a `assets/css/pages/`
+- ✅ JS movidos a `assets/js/` y `assets/js/pages/`
+- ✅ Imágenes organizadas en subdirectorios por categoría
+- ✅ Todas las referencias actualizadas (31 archivos movidos, 11 archivos editados)
+
+### Fase 3 (2025-11-29)
 - ✅ Migración CSS completa a arquitectura modular
 - ✅ 22 archivos CSS organizados
 - ✅ Eliminado style.css de index.html
@@ -494,8 +517,8 @@ Usuario → Completa formulario → Click "Descargar PDF"
 - ✅ Establecida arquitectura modular
 
 ### Versión Legacy
-- Single-file CSS (style.css - 4,711 líneas)
-- Single-file JS (script.js)
+- Single-file CSS (`assets/css/pages/style.css` - 4,711 líneas)
+- Single-file JS (`assets/js/script.js`)
 - Mantenido para páginas secundarias
 
 ## 🤝 Contribución
@@ -503,7 +526,7 @@ Usuario → Completa formulario → Click "Descargar PDF"
 ### Workflow
 1. Fork el proyecto
 2. Crear feature branch: `git checkout -b feature/nueva-funcionalidad`
-3. **IMPORTANTE**: Editar archivos modulares en `assets/css/`, NO `style.css`
+3. **IMPORTANTE**: Editar archivos modulares en `assets/css/`, NO `assets/css/pages/style.css`
 4. Seguir convenciones BEM para nombres de clases
 5. Usar variables CSS de `base/variables.css`
 6. Commit cambios: `git commit -m 'feat: Agregar nueva funcionalidad'`
@@ -529,8 +552,10 @@ test: Agregar o actualizar tests
 ## 📚 Documentación Adicional
 
 - **[CLAUDE.md](CLAUDE.md)**: Guía completa para Claude Code
-- **[REFACTORING.md](REFACTORING.md)**: Documentación técnica de la refactorización
-- **[PHASE3_REPORT.md](PHASE3_REPORT.md)**: Reporte final de migración CSS
+- **[docs/REFACTORING.md](docs/REFACTORING.md)**: Documentación técnica de la refactorización
+- **[docs/PHASE3_REPORT.md](docs/PHASE3_REPORT.md)**: Reporte final de migración CSS
+- **[docs/MEJORAS_PROPUESTAS.md](docs/MEJORAS_PROPUESTAS.md)**: Propuestas de mejora
+- **[docs/SEO_KEYWORD_SUMMARY.md](docs/SEO_KEYWORD_SUMMARY.md)**: Resumen de keywords SEO
 
 ## 📄 Licencia
 
@@ -543,7 +568,7 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 - 🌐 Website: [cumbre.cloud](https://cumbre.cloud)
 - 💼 LinkedIn: [@cumbre-ia](https://www.linkedin.com/company/cumbre-ia)
 - 📧 Email: hola@cumbre.cloud
-- 📱 WhatsApp: [Contactar](https://wa.me/...)
+- 📱 WhatsApp: 
 
 ---
 
@@ -560,7 +585,7 @@ python -m http.server 8000
 # 3. Abrir en navegador
 open http://localhost:8000
 
-# 4. Editar CSS modular (NO editar style.css para index.html)
+# 4. Editar CSS modular (NO editar assets/css/pages/style.css para index.html)
 code assets/css/components/buttons.css
 
 # 5. Ver cambios en tiempo real (refresh browser)
@@ -568,14 +593,12 @@ code assets/css/components/buttons.css
 
 ## 💡 Tips de Desarrollo
 
-- **CSS**: Siempre editar archivos en `assets/css/`, nunca `style.css`
+- **CSS**: Siempre editar archivos en `assets/css/`, nunca `assets/css/pages/style.css`
 - **Variables**: Usar custom properties de `base/variables.css`
 - **Naming**: Seguir BEM: `.component__element--modifier`
 - **Responsive**: Mobile-first, usar breakpoints estándar
 - **Performance**: Mantener archivos CSS < 500 líneas
 
 ---
-
-⚡ **Powered by [Mecantronic](https://mecantronic.com.ar/)**
 
 🏔️ **Alcanza la Cumbre Digital con IA**

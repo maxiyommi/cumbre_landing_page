@@ -9,12 +9,18 @@ Sitemap: https://cumbre.cloud/sitemap.xml
 Disallow: /.git/
 Disallow: /.vscode/
 Disallow: /CLAUDE.md
-Disallow: /REFACTORING.md
-Disallow: /PHASE3_REPORT.md
-Disallow: /PRODUCTION_CHECKLIST.md
 Disallow: /README.md
-Disallow: /MEJORAS_PROPUESTAS.md
 Disallow: /_headers
+Disallow: /docs/
+Disallow: /assets/files/
+
+# Páginas privadas
 Disallow: /hub_max.html
 Disallow: /hub_pau.html
-Disallow: /assets/files/
+
+# Permitir acceso a assets para renderizado (CSS, JS, imágenes)
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /assets/videos/
+Allow: /assets/fonts/

@@ -30,7 +30,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background: url("../../images/cumbre.png") center center / cover no-repeat;
+  background: url("../../images/common/cumbre.png") center center / cover no-repeat;
   opacity: 0.13;
   z-index: 0;
   pointer-events: none;
