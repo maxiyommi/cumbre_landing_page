@@ -71,6 +71,27 @@ html::-webkit-scrollbar {
   height: 0;
 }
 
+/* Calendar CTA - Mobile/Desktop toggle
+   !important needed to override .btn { display: inline-flex } from buttons.css
+   which loads later in the cascade */
+.calendar-cta--mobile {
+  display: none !important;
+}
+
+.calendar-cta--desktop {
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .calendar-cta--mobile {
+    display: inline-flex !important;
+  }
+
+  .calendar-cta--desktop {
+    display: none;
+  }
+}
+
 /* Hide scroll indicator when scrolled */
 .scroll-indicator.hidden {
   opacity: 0;
