@@ -29,11 +29,16 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
-    />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <!-- Flaticon icons (deferred — non-blocking) -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css" />
+    </noscript>
+
+    <!-- Critical CSS (only base styles needed for 404 page) -->
+    <link rel="stylesheet" href="assets/css/base/variables.css" />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
 
     <!-- Favicon -->
     <link

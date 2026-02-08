@@ -34,19 +34,17 @@
     <!-- Preconnect for external resources -->
     <link rel="preconnect" href="https://cdn-uicons.flaticon.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn-uicons.flaticon.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
+    <!-- Flaticon icons (deferred — non-blocking) -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css" />
+      <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+      <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css" />
+    </noscript>
 
     <title>Synthetic Audience Builder - Inteligencia Colectiva Simulada | Cumbre IA</title>
     <meta
@@ -95,8 +93,37 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
+    <!-- Critical CSS (above-the-fold — render-blocking, parallel via HTTP/2) -->
+    <link rel="stylesheet" href="assets/css/base/variables.css" />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/utilities/helpers.css" />
+    <link rel="stylesheet" href="assets/css/components/buttons.css" />
+    <link rel="stylesheet" href="assets/css/components/header.css" />
+
+    <!-- Deferred CSS (below-the-fold — non-blocking, loaded async) -->
+    <link rel="stylesheet" href="assets/css/utilities/animations.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/cards.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/notifications.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/service-card.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/solucion-card.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/carousel.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/scroll-progress.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/components/smart-banner.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/hero.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/features.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/services.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/soluciones.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/faq.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/contact.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/css/layouts/footer.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="assets/css/main.css" />
+      <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
+    </noscript>
+
+    <!-- Page-specific CSS (render-blocking) -->
     <link rel="stylesheet" href="assets/css/pages/synthetic-audience.css" />
 
     <!-- Favicon -->

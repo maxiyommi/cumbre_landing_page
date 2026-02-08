@@ -33,15 +33,15 @@
 @import url('./layouts/footer.css');
 
 /*
-  NOTA: Migración completada al 100%.
-  Todos los componentes principales han sido migrados a esta arquitectura modular.
+  NOTA: Este archivo se mantiene como referencia y fallback (<noscript>).
 
-  Componentes migrados en Fase 3:
-  - Soluciones section (layout + cards horizontales)
-  - Carousel de imágenes
-  - Scroll Progress indicator
-  - Smart Banner lateral con tab
+  En index.html, los @import fueron reemplazados por <link> tags directos
+  para eliminar el waterfall serial y mejorar el rendimiento mobile.
+  Los CSS se dividen en críticos (render-blocking) y diferidos (async).
+
+  Este archivo sigue siendo usado como fallback en <noscript> y puede ser
+  utilizado por otras páginas que necesiten cargar todos los estilos.
 
   Componentes de páginas secundarias (servicios.html, facturascan.html,
-  synthetic-audience.html) permanecen en assets/css/pages/style.css por ser específicos de esas páginas.
+  synthetic-audience.html) permanecen en assets/css/pages/style.css.
 */
