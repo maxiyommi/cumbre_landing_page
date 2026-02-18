@@ -834,7 +834,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.faq__question').forEach(button => {
         button.addEventListener('click', () => {
             const faqItem = button.closest('.faq__item');
-            faqItem.classList.toggle('open');
+            const isOpen = faqItem.classList.contains('open');
+
+            // Close all other items
+            document.querySelectorAll('.faq__item.open').forEach(item => {
+                if (item !== faqItem) item.classList.remove('open');
+            });
+
+            faqItem.classList.toggle('open', !isOpen);
 
             // GA4: Trackear qué preguntas interesan a los visitantes
             if (faqItem.classList.contains('open') && typeof gtag === 'function') {
@@ -849,51 +856,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Calendar CTA: en desktop dispara el widget del navbar (mismo modal),
-// en mobile abre en ventana nueva
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('[data-calendar-popup]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      if (window.innerWidth > 768) {
-        e.preventDefault();
-        var navbarWidget = document.querySelector('.header__nav-cta--desktop button, .header__nav-cta--desktop a');
-        if (navbarWidget) {
-          navbarWidget.click();
-        }
-      }
-    });
-  });
-});
 
 // GA4: Tracking de eventos clave
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Click en "Agendar Sesión Gratis" (mobile links directos)
-    document.querySelectorAll('a[href*="calendar.app.google"], a[href*="calendar.google.com"]').forEach(function(link) {
+    // 1. Click en "Sesión Gratis" (Calendly popup buttons)
+    document.querySelectorAll('a[onclick*="Calendly"], a[href*="calendly.com"]').forEach(function(link) {
         link.addEventListener('click', function() {
             if (typeof gtag === 'function') {
                 var section = link.closest('section, header, footer');
                 gtag('event', 'cta_agendar_sesion', {
                     event_category: 'CTA',
-                    event_label: 'Agendar Sesion Gratis',
-                    link_location: section ? section.className.split(' ')[0] : 'unknown'
-                });
-            }
-        });
-    });
-
-    // 2. Click en botones de Google Calendar scheduling (desktop modals)
-    //    Usa event delegation en los contenedores padre del widget
-    var calendarContainers = document.querySelectorAll(
-        '.header__nav-cta-wrapper, .features__cta--desktop, .contact__calendar-btn--desktop, .calendar-cta--desktop'
-    );
-    calendarContainers.forEach(function(container) {
-        container.addEventListener('click', function() {
-            if (typeof gtag === 'function') {
-                var section = container.closest('section, header, footer');
-                gtag('event', 'cta_agendar_sesion', {
-                    event_category: 'CTA',
-                    event_label: 'Agendar Sesion Gratis (Calendar Widget)',
-                    link_location: section ? section.className.split(' ')[0] : 'unknown'
+                    event_label: 'Sesion Gratis',
+                    link_location: section ? (section.id || section.className.split(' ')[1] || 'unknown') : 'unknown'
                 });
             }
         });
@@ -913,6 +887,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// GA4: Funnel completo de Calendly
+// Calendly emite postMessage events en cada paso del flujo de reserva.
+// Esto permite medir el funnel real: click CTA → popup → fecha → booking confirmado.
+window.addEventListener('message', function(e) {
+    if (typeof gtag !== 'function') return;
+    if (!e.data || !e.data.event) return;
+
+    if (e.data.event === 'calendly.event_type_viewed') {
+        gtag('event', 'calendly_popup_open', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Popup Opened'
+        });
+    }
+
+    if (e.data.event === 'calendly.date_and_time_selected') {
+        gtag('event', 'calendly_date_selected', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Date Selected'
+        });
+    }
+
+    if (e.data.event === 'calendly.event_scheduled') {
+        gtag('event', 'calendly_booking_complete', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Booking Confirmed'
+        });
+    }
+});
+
+// GA4: Section visibility tracking (mide drop-off en mobile)
+if ('IntersectionObserver' in window) {
+    var sectionsSeen = {};
+    var sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !sectionsSeen[entry.target.id]) {
+                sectionsSeen[entry.target.id] = true;
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_view', {
+                        event_category: 'Scroll Depth',
+                        event_label: entry.target.id
+                    });
+                }
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id]').forEach(function(section) {
+        sectionObserver.observe(section);
+    });
+}
 
 // Robot hover animations
 document.addEventListener('DOMContentLoaded', () => {
