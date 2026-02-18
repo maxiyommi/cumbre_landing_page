@@ -161,7 +161,7 @@ class SyntheticAudiencePage {
 
     // Observe all cards and sections (excluding example section)
     const animatedElements = document.querySelectorAll(
-      '.glass-card, .bento-card, .document-type-item'
+      '.glass-card, .bento-card, .doc-tag'
     );
 
     animatedElements.forEach((el, index) => {

@@ -107,8 +107,7 @@
 
 /* Toggle Icon */
 .faq__toggle {
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: 0.75rem;
   width: 24px;
   height: 24px;
   min-width: 24px;
@@ -117,17 +116,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 212, 255, 0.1);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  color: #00d4ff;
+  background: none;
+  transition: transform 0.3s ease;
+  color: rgba(255, 255, 255, 0.5);
   line-height: 1;
 }
 
 .faq__item.open .faq__toggle {
-  background: #00d4ff;
-  color: var(--bg-primary);
-  transform: rotate(45deg);
+  transform: rotate(90deg);
+  color: #00d4ff;
 }
 
 /* Answer */
@@ -156,4 +153,21 @@
   max-height: 1000px;
   padding: 0 1.75rem 1.5rem 1.75rem;
   opacity: 1;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .faq__question {
+    font-size: 1rem;
+    padding: 1.25rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .faq__answer {
+    padding: 0 1.25rem;
+  }
+
+  .faq__item.open .faq__answer {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
 }

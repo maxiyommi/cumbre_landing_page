@@ -179,4 +179,12 @@
   .solucion-card__btn {
     width: 100%;
   }
+
+  .solucion-carousel__slide--mobile-hide {
+    display: none;
+  }
+
+  .solucion-carousel__indicators {
+    display: none;
+  }
 }

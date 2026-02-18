@@ -168,21 +168,11 @@
   font-size: var(--font-size-sm);
 }
 
-/* Google Calendar Button in Header - Override styles */
-
-.header__nav-cta-wrapper button {
-  background-color: rgb(3, 155, 229) !important;
-  color: white !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  padding: 0.6rem 1.2rem !important;
-  font-size: 0.9rem !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.header__nav-cta-wrapper button:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4) !important;
+/* CTA icon alignment */
+.header__nav-cta-wrapper .btn i {
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
 
 /* Contact Dropdown */
@@ -406,6 +396,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     width: 100%;
     margin-top: 2rem;
     padding: 1rem 1.5rem;
@@ -416,6 +407,12 @@
     background: linear-gradient(45deg, #00d4ff, #0066ff);
     border-radius: var(--radius-lg, 0.75rem);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .header__nav-cta--mobile i {
+    display: flex;
+    align-items: center;
+    line-height: 1;
   }
 
   .header__nav-cta--mobile:hover {

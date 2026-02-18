@@ -168,7 +168,7 @@ class FacturaScanPage {
 
     // Observe all cards and sections
     const animatedElements = document.querySelectorAll(
-      '.glass-card, .how-it-works-step, .benefit-card, .document-type-item, .facturascan-stats'
+      '.glass-card, .how-it-works-step, .benefit-card, .doc-tag, .facturascan-stats'
     );
 
     animatedElements.forEach((el, index) => {

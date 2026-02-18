@@ -834,7 +834,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.faq__question').forEach(button => {
         button.addEventListener('click', () => {
             const faqItem = button.closest('.faq__item');
-            faqItem.classList.toggle('open');
+            const isOpen = faqItem.classList.contains('open');
+
+            // Close all other items
+            document.querySelectorAll('.faq__item.open').forEach(item => {
+                if (item !== faqItem) item.classList.remove('open');
+            });
+
+            faqItem.classList.toggle('open', !isOpen);
 
             // GA4: Trackear qué preguntas interesan a los visitantes
             if (faqItem.classList.contains('open') && typeof gtag === 'function') {
@@ -852,14 +859,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // GA4: Tracking de eventos clave
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Click en "Agendar Sesión Gratis" (Calendly popup buttons)
+    // 1. Click en "Sesión Gratis" (Calendly popup buttons)
     document.querySelectorAll('a[onclick*="Calendly"], a[href*="calendly.com"]').forEach(function(link) {
         link.addEventListener('click', function() {
             if (typeof gtag === 'function') {
                 var section = link.closest('section, header, footer');
                 gtag('event', 'cta_agendar_sesion', {
                     event_category: 'CTA',
-                    event_label: 'Agendar Sesion Gratis',
+                    event_label: 'Sesion Gratis',
                     link_location: section ? section.className.split(' ')[0] : 'unknown'
                 });
             }
