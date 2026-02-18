@@ -117,10 +117,10 @@
     <link rel="stylesheet" href="assets/css/layouts/faq.css" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="assets/css/layouts/contact.css" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="assets/css/layouts/footer.css" media="print" onload="this.media='all'" />
-    <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" media="print" onload="this.media='all'" />
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="assets/css/main.css" />
-      <link rel="stylesheet" href="https://calendar.google.com/calendar/scheduling-button-script.css" />
+      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
     </noscript>
 
     <!-- Page-specific CSS (render-blocking) -->
@@ -160,29 +160,18 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="index.html#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Mobile: Direct link to Google Calendar -->
-          <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
-             target="_blank"
-             rel="noopener noreferrer"
+          <a href=""
+             onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
              class="header__nav-cta--mobile">
             📅 Agendar Sesión Gratis
           </a>
         </nav>
-        <!-- Desktop: Google Calendar Modal -->
         <div class="header__nav-cta-wrapper header__nav-cta--desktop">
-          <script>
-            (function () {
-              var target = document.currentScript;
-              window.addEventListener("load", function () {
-                calendar.schedulingButton.load({
-                  url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
-                  color: "#039BE5",
-                  label: "📅 Agendar Sesión Gratis",
-                  target,
-                });
-              });
-            })();
-          </script>
+          <a href=""
+             onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
+             class="btn btn-primary">
+            📅 Agendar Sesión Gratis
+          </a>
         </div>
       </div>
     </header>
@@ -410,7 +399,7 @@
             <span style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">👥 Evaluación de talento</span>
             <span style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">🔬 Investigación cualitativa</span>
           </div>
-          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large custom-use-case-btn" data-calendar-popup>
+          <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;" class="btn btn-primary btn-large custom-use-case-btn">
             <i class="fi fi-rr-messages"></i>
             Consultanos por otros casos de uso
           </a>
@@ -1013,7 +1002,7 @@
             </div>
 
             <div class="final-cta-actions">
-              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large cta-primary" data-calendar-popup>
+              <a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;" class="btn btn-primary btn-large cta-primary">
                 <i class="fi fi-rr-calendar"></i>
                 Agendar demo gratuita
               </a>
@@ -1174,8 +1163,8 @@
       </div>
     </nav>
 
-    <!-- Google Calendar Scheduling Script -->
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+    <!-- Calendly Widget Script -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/pages/synthetic-audience.js"></script>

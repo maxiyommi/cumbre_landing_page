@@ -849,50 +849,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Calendar CTA: en desktop dispara el widget del navbar (mismo modal),
-// en mobile abre en ventana nueva
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('[data-calendar-popup]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      if (window.innerWidth > 768) {
-        e.preventDefault();
-        var navbarWidget = document.querySelector('.header__nav-cta--desktop button, .header__nav-cta--desktop a');
-        if (navbarWidget) {
-          navbarWidget.click();
-        }
-      }
-    });
-  });
-});
 
 // GA4: Tracking de eventos clave
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Click en "Agendar Sesión Gratis" (mobile links directos)
-    document.querySelectorAll('a[href*="calendar.app.google"], a[href*="calendar.google.com"]').forEach(function(link) {
+    // 1. Click en "Agendar Sesión Gratis" (Calendly popup buttons)
+    document.querySelectorAll('a[onclick*="Calendly"], a[href*="calendly.com"]').forEach(function(link) {
         link.addEventListener('click', function() {
             if (typeof gtag === 'function') {
                 var section = link.closest('section, header, footer');
                 gtag('event', 'cta_agendar_sesion', {
                     event_category: 'CTA',
                     event_label: 'Agendar Sesion Gratis',
-                    link_location: section ? section.className.split(' ')[0] : 'unknown'
-                });
-            }
-        });
-    });
-
-    // 2. Click en botones de Google Calendar scheduling (desktop modals)
-    //    Usa event delegation en los contenedores padre del widget
-    var calendarContainers = document.querySelectorAll(
-        '.header__nav-cta-wrapper, .features__cta--desktop, .contact__calendar-btn--desktop, .calendar-cta--desktop'
-    );
-    calendarContainers.forEach(function(container) {
-        container.addEventListener('click', function() {
-            if (typeof gtag === 'function') {
-                var section = container.closest('section, header, footer');
-                gtag('event', 'cta_agendar_sesion', {
-                    event_category: 'CTA',
-                    event_label: 'Agendar Sesion Gratis (Calendar Widget)',
                     link_location: section ? section.className.split(' ')[0] : 'unknown'
                 });
             }

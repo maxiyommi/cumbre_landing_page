@@ -132,9 +132,9 @@
       <link rel="stylesheet" href="assets/css/main.css" />
     </noscript>
 
-    <!-- Google Calendar Scheduling CSS (deferred) -->
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet" /></noscript>
+    <!-- Calendly Widget CSS (deferred) -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" /></noscript>
 
     <!-- Schema.org Structured Data - Organization -->
     <script type="application/ld+json">
@@ -367,29 +367,18 @@
           <a href="facturascan.html" class="header__nav-link">FacturaScan</a>
           <a href="synthetic-audience.html" class="header__nav-link">Synthetic Audience</a>
           <a href="#faq" class="header__nav-link">Preguntas Frecuentes</a>
-          <!-- Mobile: Direct link to Google Calendar -->
-          <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
-             target="_blank"
-             rel="noopener noreferrer"
+          <a href=""
+             onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
              class="header__nav-cta--mobile">
             📅 Agendar Sesión Gratis
           </a>
         </nav>
-        <!-- Desktop: Google Calendar Modal -->
         <div class="header__nav-cta-wrapper header__nav-cta--desktop">
-          <script>
-            (function () {
-              var target = document.currentScript;
-              window.addEventListener("load", function () {
-                calendar.schedulingButton.load({
-                  url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
-                  color: "#039BE5",
-                  label: "📅 Agendar Sesión Gratis",
-                  target,
-                });
-              });
-            })();
-          </script>
+          <a href=""
+             onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
+             class="btn btn-primary">
+            📅 Agendar Sesión Gratis
+          </a>
         </div>
       </div>
     </header>
@@ -445,9 +434,8 @@
 
           <div class="hero__actions">
             <a
-              href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
-              target="_blank"
-              rel="noopener noreferrer"
+              href=""
+              onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
               class="btn btn-primary btn-lg hero__cta-mobile"
             >
               Agendar Sesión Gratis
@@ -642,32 +630,11 @@
             Te acompañamos paso a paso hasta que veas tu negocio en la cima
           </p>
 
-          <!-- Mobile: Direct link to Google Calendar -->
-          <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="btn btn-primary btn-lg features__cta features__cta--mobile">
+          <a href=""
+             onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
+             class="btn btn-primary btn-lg features__cta">
             📅 Agendar Sesión Gratis
           </a>
-
-          <!-- Desktop: Google Calendar Modal -->
-          <div class="features__cta--desktop">
-            <!-- Google Calendar Appointment Scheduling begin -->
-            <script>
-              (function () {
-                var target = document.currentScript;
-                window.addEventListener("load", function () {
-                  calendar.schedulingButton.load({
-                    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
-                    color: "#039BE5",
-                    label: "📅 Agendar Sesión Gratis",
-                    target,
-                  });
-                });
-              })();
-            </script>
-            <!-- end Google Calendar Appointment Scheduling -->
-          </div>
         </div>
       </div>
     </section>
@@ -986,32 +953,11 @@
               Sesión de 30 minutos por videollamada
             </p>
 
-            <!-- Mobile: Direct link to Google Calendar -->
-            <a href="https://calendar.app.google/Pk9pzY3NLjWY9JeP7"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="btn btn-primary btn-lg contact__calendar-btn contact__calendar-btn--mobile">
+            <a href=""
+               onclick="Calendly.initPopupWidget({url:'https://calendly.com/cumbre_ia/30min'});return false;"
+               class="btn btn-primary btn-lg contact__calendar-btn">
               📅 Agendar Sesión Gratis
             </a>
-
-            <!-- Desktop: Google Calendar Modal -->
-            <div class="contact__calendar-btn--desktop">
-              <!-- Google Calendar Appointment Scheduling begin -->
-              <script>
-                (function () {
-                  var target = document.currentScript;
-                  window.addEventListener("load", function () {
-                    calendar.schedulingButton.load({
-                      url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2IcV3lhVFsfTMPlwZvCuGx2_2AapRFVqcSe9VnLVt1BcfUiMBw5TC9isGBrrYtHnsHwyx-0tTD?gv=true",
-                      color: "#039BE5",
-                      label: "📅 Agendar Sesión Gratis",
-                      target,
-                    });
-                  });
-                })();
-              </script>
-              <!-- end Google Calendar Appointment Scheduling -->
-            </div>
           </div>
         </div>
       </div>
@@ -1197,11 +1143,8 @@
       </div>
     </nav>
 
-    <!-- Google Calendar Scheduling Script -->
-    <script
-      src="https://calendar.google.com/calendar/scheduling-button-script.js"
-      async
-    ></script>
+    <!-- Calendly Widget Script -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
     <script src="assets/js/script.js"></script>
   </body>
