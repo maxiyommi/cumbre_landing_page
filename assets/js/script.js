@@ -867,7 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 gtag('event', 'cta_agendar_sesion', {
                     event_category: 'CTA',
                     event_label: 'Sesion Gratis',
-                    link_location: section ? section.className.split(' ')[0] : 'unknown'
+                    link_location: section ? (section.id || section.className.split(' ')[1] || 'unknown') : 'unknown'
                 });
             }
         });
@@ -887,6 +887,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// GA4: Funnel completo de Calendly
+// Calendly emite postMessage events en cada paso del flujo de reserva.
+// Esto permite medir el funnel real: click CTA → popup → fecha → booking confirmado.
+window.addEventListener('message', function(e) {
+    if (typeof gtag !== 'function') return;
+    if (!e.data || !e.data.event) return;
+
+    if (e.data.event === 'calendly.event_type_viewed') {
+        gtag('event', 'calendly_popup_open', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Popup Opened'
+        });
+    }
+
+    if (e.data.event === 'calendly.date_and_time_selected') {
+        gtag('event', 'calendly_date_selected', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Date Selected'
+        });
+    }
+
+    if (e.data.event === 'calendly.event_scheduled') {
+        gtag('event', 'calendly_booking_complete', {
+            event_category: 'Calendly Funnel',
+            event_label: 'Booking Confirmed'
+        });
+    }
+});
+
+// GA4: Section visibility tracking (mide drop-off en mobile)
+if ('IntersectionObserver' in window) {
+    var sectionsSeen = {};
+    var sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !sectionsSeen[entry.target.id]) {
+                sectionsSeen[entry.target.id] = true;
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_view', {
+                        event_category: 'Scroll Depth',
+                        event_label: entry.target.id
+                    });
+                }
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id]').forEach(function(section) {
+        sectionObserver.observe(section);
+    });
+}
 
 // Robot hover animations
 document.addEventListener('DOMContentLoaded', () => {
